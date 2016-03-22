@@ -1,0 +1,14 @@
+.topbar {
+  .navbar-inverse {
+    border-radius: 0;
+    border: none;
+    background: #353446;
+    color: #fff;
+    .navbar-brand {
+      color: #fff;
+    }
+    .navbar-nav > li > a {
+      color: #fff;
+    }
+  }
+}

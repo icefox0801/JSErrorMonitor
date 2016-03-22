@@ -1,0 +1,16 @@
+/* Base Application Styles */
+body {
+  font-size: 13px;
+}
+
+button:focus,a:focus {
+  outline: none!important;
+}
+
+.index {
+  background: url(../images/double_lined.png) repeat;
+}
+
+.main {
+  padding-left: 90px;
+}

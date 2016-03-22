@@ -1,0 +1,17 @@
+.data-list {
+  .list-group-item-heading {
+    font-weight: normal;
+    .glyphicon {
+      margin-right: 5px;
+    }
+    a,.glyphicon {
+      vertical-align: middle;
+    }
+  }
+  .page-url {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-right: 50px;
+  }
+}
