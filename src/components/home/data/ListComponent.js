@@ -10,18 +10,21 @@ class ListComponent extends React.Component {
   render() {
     const results = [
       {
+        id: 'e12ea5d71d',
         name: 'Error: An Error Occurred!',
         date: '2016-03-22 16:26:09',
         url: 'http://bj.58.com/zptaobao/?PGTID=0d100000-0000-1128-816e-1e8d49ca2ea8&ClickID=1',
         count: 551
       },
       {
+        id: 'e12ea5d71e',
         name: '对象不支持此属性或方法',
         date: '2016-03-22 16:26:09',
         url: 'http://bj.58.com/zptaobao/?PGTID=0d100000-0000-1128-816e-1e8d49ca2ea8&ClickID=1',
         count: 551
       },
       {
+        id: 'e12ea5d71f',
         name: 'Error: An Error Occurred!',
         date: '2016-03-22 16:26:09',
         url: 'http://bj.58.com/zptaobao/?PGTID=0d100000-0000-1128-816e-1e8d49ca2ea8&ClickID=1',
@@ -30,7 +33,7 @@ class ListComponent extends React.Component {
     ];
 
     return (
-      <Panel header={<p><span>最近的错误</span><a className="pull-right" href="#">更多</a></p>} className="data-list">
+      <Panel header={<p><span>最近的错误</span><a className="pull-right" href="#">更多</a></p>} className="home-data-list">
         <ListGroup fill>
           {results.map(function (result) {
             return (

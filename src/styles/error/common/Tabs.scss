@@ -1,0 +1,41 @@
+// 标签样式
+#error-common-tabs {
+  margin-bottom: 20px;
+
+  .nav {
+    padding-left: 20px;
+  }
+
+  li {
+    margin-bottom: 0;
+
+    a {
+      background: none;
+      border: 0;
+      border-bottom: 3px solid transparent;
+      color: #666;
+      cursor: pointer;
+
+      &:hover {
+        border-bottom: 3px solid #1a8cff;
+      }
+    }
+  }
+
+  .active {
+
+    a {
+      border-bottom: 3px solid #1a8cff;
+    }
+  }
+
+  .tabs-title {
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+
+  .badge {
+    vertical-align: middle;
+  }
+}

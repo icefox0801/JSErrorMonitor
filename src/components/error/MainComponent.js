@@ -7,7 +7,9 @@ require('styles/error/Main.scss');
 class MainComponent extends React.Component {
   render() {
     return (
-      <div className="main-component">
+      <div className="error-main">
+
+        {this.props.children}
       </div>
     );
   }

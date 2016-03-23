@@ -1,20 +1,34 @@
 'use strict';
 
 import React from 'react';
-import { Router, Route, IndexRoute, Redirect } from 'react-router';
+import { Router, Route, IndexRedirect, Redirect, browserHistory } from 'react-router';
 import App from './App';
 import Home from './home/MainComponent';
 import Error from './error/MainComponent';
+import ErrorList from './error/ListComponent';
+import ErrorListPage from './error/list/PageComponent';
+import ErrorListError from './error/list/ErrorComponent';
+import ErrorListBrowser from './error/list/BrowserComponent';
+import ErrorListSystem from './error/list/SystemComponent';
+import ErrorDetail from './error/DetailComponent';
 
 let AppRouter = (
-  <Router>
+  <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={Home} />
+      <IndexRedirect to="/home" />
       <Route path="home" component={Home} />
-      <Route path="error" component={Error} />
-      <Redirect from="charts" to="home" />
-      <Redirect from="statistics" to="home"/>
-      <Redirect from="extras" to="home"/>
+      <Route path="error" component={Error} >
+        <IndexRedirect to="/error/list" />
+        <Route path="list" component={ErrorList}>
+          <IndexRedirect to="/error/list/all" />
+          <Route path="all" component={ErrorListError} />
+          <Route path="page" component={ErrorListPage} />
+          <Route path="browser" component={ErrorListBrowser} />
+          <Route path="system" component={ErrorListSystem} />
+        </Route>
+        <Route path="detail/:errorId" component={ErrorDetail} />
+      </Route>
+      <Redirect from="*" to="home" />
     </Route>
   </Router>
 );

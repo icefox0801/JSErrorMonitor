@@ -1,9 +1,8 @@
 'use strict';
 
 import React from 'react';
-import { Nav, NavItem, Glyphicon, Navbar } from 'react-bootstrap';
+import { Nav, NavItem, Glyphicon } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Link } from 'react-router';
 
 require('styles/common/Sidenav.scss');
 
@@ -26,21 +25,24 @@ class SidenavComponent extends React.Component {
   render() {
     return (
       <aside className="sidebar">
-        <Nav bgStyle="stacked" activeKey={this.state.key} onSelect={this.handleSelect}>
-          <LinkContainer to="/home" eventKey={1}>
+        <Nav bgStyle="stacked">
+          <LinkContainer to="/home">
             <NavItem><Glyphicon glyph="home" /><span>首页</span></NavItem>
           </LinkContainer>
-          <LinkContainer to="/error" eventKey={2}>
+          <LinkContainer to="/error">
             <NavItem><Glyphicon glyph="info-sign" /><span>错误</span></NavItem>
           </LinkContainer>
-          <LinkContainer to="/charts" eventKey={3}>
+          <LinkContainer to="/charts">
             <NavItem><Glyphicon glyph="signal" />图表</NavItem>
           </LinkContainer>
           <LinkContainer to="/statistics">
-            <NavItem eventKey={4}><Glyphicon glyph="th-list" />统计</NavItem>
+            <NavItem><Glyphicon glyph="th-list" />统计</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/filter">
+            <NavItem><Glyphicon glyph="glass" />过滤</NavItem>
           </LinkContainer>
           <LinkContainer to="/extras">
-            <NavItem eventKey={5}><Glyphicon glyph="star" />其他</NavItem>
+            <NavItem><Glyphicon glyph="star" />其他</NavItem>
           </LinkContainer>
         </Nav>
       </aside>
