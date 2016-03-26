@@ -1,14 +1,30 @@
-.topbar {
+#topbar {
+
   .navbar-inverse {
-    border-radius: 0;
-    border: none;
     background: #353446;
+    border: 0;
+    border-radius: 0;
     color: #fff;
+
     .navbar-brand {
       color: #fff;
     }
+
     .navbar-nav > li > a {
       color: #fff;
     }
+  }
+
+  .active:after {
+    border: 6px solid transparent;
+    border-bottom-color: #fff;
+    bottom: 0;
+    content: '';
+    display: block;
+    height: 0;
+    left: 50%;
+    margin-left: -5px;
+    position: absolute;
+    width: 0;
   }
 }

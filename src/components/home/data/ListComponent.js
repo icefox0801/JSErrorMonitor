@@ -40,7 +40,7 @@ class ListComponent extends React.Component {
               <ListGroupItem>
                 <h4 className="list-group-item-heading">
                   <Glyphicon glyph="info-sign" className="text-danger" />
-                  <Link to="home" className="text-danger">{result.name}</Link>
+                  <Link to={`/error/detail/${result.id}`} className="text-danger">{result.name}</Link>
                   <span className="label label-warning pull-right">{result.count}</span>
                 </h4>
                 <p className="list-group-item-text text-primary page-url">

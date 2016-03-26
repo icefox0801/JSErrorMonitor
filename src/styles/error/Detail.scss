@@ -1,0 +1,89 @@
+// 错误详情页样式
+#error-detail {
+
+  margin-bottom: 50px;
+
+  .error-detail-header {
+
+    h4 {
+      margin: 0;
+      margin-bottom: 10px;
+    }
+
+    .glyphicon {
+      margin-right: 2px;
+
+    }
+  }
+
+  .error-detail-status {
+
+    .label {
+      font-size: 70%;
+      margin-right: 5px;
+      position: relative;
+      top: -3px;
+    }
+  }
+
+  h4 {
+
+    .glyphicon {
+      top: 3px;
+    }
+  }
+
+  p {
+
+    .glyphicon {
+      top: 2px;
+    }
+  }
+
+  .error-detail-tags {
+    overflow: hidden;
+
+    dl {
+      background: #f5f5f5;
+      border-left: 3px solid #808080;
+      float: left;
+      margin-bottom: 0;
+      margin-right: 20px;
+      padding: 5px 15px;
+    }
+
+    dl:last-child {
+      margin-bottom: 0;
+    }
+
+    dt,
+    dd {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .label {
+      display: block;
+      font-size: 90%;
+      font-weight: normal;
+      float: left;
+      margin-right: 10px;
+    }
+  }
+
+  .error-detail-meta {
+    margin-right: 10px;
+  }
+
+  .error-detail-browsers {
+    list-style-type: none;
+    margin-bottom: 0;
+    overflow: hidden;
+    padding-left: 0;
+
+    li {
+      float: left;
+      margin-right: 2px;
+    }
+  }
+}

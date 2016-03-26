@@ -1,5 +1,16 @@
+// 错误列表样式
 #error-list {
   margin-top: 10px;
+
+  h2 {
+    float: left;
+    margin: 0;
+
+    .btn-group {
+      margin-left: 10px;
+      top: -3px;
+    }
+  }
 
   .panel {
     margin-bottom: 0;

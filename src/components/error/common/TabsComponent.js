@@ -17,6 +17,12 @@ class TabsComponent extends React.Component {
               <span className="badge">400</span>
             </NavItem>
           </LinkContainer>
+          <LinkContainer to="/error/list/archive">
+            <NavItem>
+              <span className="tabs-title">归档</span>
+              <span className="badge">178</span>
+            </NavItem>
+          </LinkContainer>
           <LinkContainer to="/error/list/page">
             <NavItem>
               <span className="tabs-title">页面</span>

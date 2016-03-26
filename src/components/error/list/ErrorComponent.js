@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import { Panel, ListGroup, ListGroupItem, DropdownButton, MenuItem, Row, Col, Label, Pagination } from 'react-bootstrap';
+import { Panel, ListGroup, ListGroupItem, DropdownButton, MenuItem, Row, Col, Label, Pagination, Alert, Input, Button, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 require('styles/error/list/Error.scss');
@@ -34,34 +34,68 @@ class ErrorComponent extends React.Component {
 
     const header = (
       <Row>
-        <Col md={5}>错误</Col>
-        <Col md={2}>日期</Col>
+        <Col md={6}>错误</Col>
         <Col md={2}>浏览器</Col>
         <Col md={2}>操作系统</Col>
-        <Col md={1}>数量</Col>
+        <Col md={2}>日期</Col>
       </Row>
     );
+
+    const searchButton = (
+      <Button bsStyle="primary"><Glyphicon glyph="search" />&nbsp;搜索</Button>
+    );
     return (
-      <div className="container-fluid">
-        <form action="" className="form-horizontal">
-          <DropdownButton bsStyle="primary" title="选择日期" id="dropdown-size-medium">
-            <MenuItem header>选择日期</MenuItem>
-            <MenuItem eventKey="2">Another action</MenuItem>
-            <MenuItem eventKey="3">Something else here</MenuItem>
-            <MenuItem eventKey="4">Separated link</MenuItem>
-          </DropdownButton>
+      <div className="container-fluid" id="error-list-error">
+        <form action="" className="form-inline">
+          <Row>
+            <Col md={2}>
+              <div className="form-group">
+                <label htmlFor="">数量：</label>
+                <DropdownButton title="每页数量" id="dropdown-page-number">
+                  <MenuItem header>选择每页数量：</MenuItem>
+                  <MenuItem eventKey="2">20个</MenuItem>
+                  <MenuItem eventKey="3">50个</MenuItem>
+                  <MenuItem eventKey="4">100个</MenuItem>
+                </DropdownButton>
+              </div>
+            </Col>
+            <Col md={2}>
+              <div className="form-group">
+                <label htmlFor="">浏览器：</label>
+                <DropdownButton title="浏览器" id="dropdown-browser-type">
+                  <MenuItem header>选择浏览器：</MenuItem>
+                  <MenuItem eventKey="2" className="checkbox">
+                    <label><input type="checkbox" />&nbsp;Internet Explorer</label>
+                  </MenuItem>
+                  <MenuItem eventKey="3" className="checkbox">
+                    <label><input type="checkbox" />&nbsp;Google Chrome</label>
+                  </MenuItem>
+                  <MenuItem eventKey="4" className="checkbox">
+                    <label><input type="checkbox" />&nbsp;Mozilla Firefox</label>
+                  </MenuItem>
+                  <MenuItem eventKey="5" className="checkbox">
+                    <label><input type="checkbox" />&nbsp;Opera</label>
+                  </MenuItem>
+                </DropdownButton>
+              </div>
+            </Col>
+            <Col md={8}>
+              <div className="form-group">
+                <label htmlFor="">关键词：</label>
+                <Input type="text" buttonAfter={searchButton} />
+              </div>
+            </Col>
+          </Row>
         </form>
+
         <Panel header={header} id="error-list-error">
           <ListGroup fill>
             {results.map(function (result) {
               return (
                 <ListGroupItem>
                   <Row>
-                    <Col md={5}>
+                    <Col md={6}>
                       <p><Link to={`/error/detail/${result.id}`} className="text-danger">{result.name}</Link></p>
-                    </Col>
-                    <Col md={2}>
-                      <p className="text-muted">{result.date}</p>
                     </Col>
                     <Col md={2}>
                       <p><Label bsStyle="default">Internet Explorere 8</Label></p>
@@ -69,8 +103,8 @@ class ErrorComponent extends React.Component {
                     <Col md={2}>
                       <p><Label bsStyle="info">Window XP with SP1</Label></p>
                     </Col>
-                    <Col md={1}>
-                      <span>{result.count}</span>
+                    <Col md={2}>
+                      <p className="text-muted">{result.date}</p>
                     </Col>
                   </Row>
                 </ListGroupItem>

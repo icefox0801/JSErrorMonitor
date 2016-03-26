@@ -1,0 +1,17 @@
+.error-detail-info {
+
+  blockquote {
+    border-left: 3px solid #8a6d3b;
+    font-size: 14px;
+    margin: 10px 0 0;
+    padding: 0 15px;
+  }
+}
+
+.error-detail-stack {
+  padding: 15px 0 5px 10px;
+
+  .glyphicon {
+    margin-right: 5px;
+  }
+}
