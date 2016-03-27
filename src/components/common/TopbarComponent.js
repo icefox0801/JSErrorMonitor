@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { dateRange } from '../../constants/dropdown';
+import DropdownComponent from './DropdownComponent';
 
 require('styles/common/Topbar.scss');
 
@@ -28,14 +30,7 @@ class TopbarComponent extends React.Component {
                 <MenuItem>二手</MenuItem>
                 <MenuItem>发布</MenuItem>
               </NavDropdown>
-              <NavDropdown title="最近7天的错误日志" id="navDropDown">
-                <MenuItem header>选择时间范围</MenuItem>
-                <MenuItem>1小时</MenuItem>
-                <MenuItem>24小时</MenuItem>
-                <MenuItem>7天</MenuItem>
-                <MenuItem>1个月</MenuItem>
-                <MenuItem>1年</MenuItem>
-              </NavDropdown>
+              <DropdownComponent type="nav" list={dateRange.list} id="dropdown-date-range" placeholder={dateRange.placeholder} />
             </Nav>
             <Nav pullRight>
               <NavDropdown title="用户" id="navDropDown">

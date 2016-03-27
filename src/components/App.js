@@ -2,6 +2,7 @@ require('normalize.css');
 require('styles/App.css');
 
 import React from 'react';
+import { connect } from 'react-redux';
 import SidenavComponent from './common/SidenavComponent';
 import TopbarComponent from './common/TopbarComponent';
 
@@ -24,4 +25,4 @@ class AppComponent extends React.Component {
 AppComponent.defaultProps = {
 };
 
-export default AppComponent;
+export default connect()(AppComponent);

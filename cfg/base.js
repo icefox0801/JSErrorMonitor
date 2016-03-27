@@ -21,6 +21,9 @@ module.exports = {
   },
   devServer: {
     contentBase: './src/',
+    proxy: {
+      '/api/*': 'http://localhost:8088/'
+    },
     historyApiFallback: true,
     hot: true,
     port: defaultSettings.port,

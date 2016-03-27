@@ -1,36 +1,23 @@
 'use strict';
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { Panel, ListGroup, ListGroupItem, DropdownButton, MenuItem, Row, Col, Label, Pagination, Alert, Input, Button, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
+
+import DropdownComponent from '../../common/DropdownComponent';
+import { pageNum } from '../../../constants/dropdown';
+
+import { fetchAchievedErrorList } from '../../../actions';
 
 require('styles/error/list/Error.scss');
 
 class ErrorComponent extends React.Component {
-  render() {
-    const results = [
-      {
-        id: 'e12ea5d71d',
-        name: 'Error: An Error Occurred!',
-        date: '2016-03-22 16:26:09',
-        url: 'http://bj.58.com/zptaobao/?PGTID=0d100000-0000-1128-816e-1e8d49ca2ea8&ClickID=1',
-        count: 551
-      },
-      {
-        id: 'e12ea5d71e',
-        name: '对象不支持此属性或方法',
-        date: '2016-03-22 16:26:09',
-        url: 'http://bj.58.com/zptaobao/?PGTID=0d100000-0000-1128-816e-1e8d49ca2ea8&ClickID=1',
-        count: 551
-      },
-      {
-        id: 'e12ea5d71f',
-        name: 'Error: An Error Occurred!',
-        date: '2016-03-22 16:26:09',
-        url: 'http://bj.58.com/zptaobao/?PGTID=0d100000-0000-1128-816e-1e8d49ca2ea8&ClickID=1',
-        count: 551
-      }
-    ];
+  componentDidMount () {
+    const { dispatch } = this.props;
+    dispatch(fetchAchievedErrorList());
+  }
+  render () {
 
     const header = (
       <Row>
@@ -48,18 +35,13 @@ class ErrorComponent extends React.Component {
       <div className="container-fluid" id="error-list-error">
         <form action="" className="form-inline">
           <Row>
-            <Col md={2}>
+            <Col md={3}>
               <div className="form-group">
-                <label htmlFor="">数量：</label>
-                <DropdownButton title="每页数量" id="dropdown-page-number">
-                  <MenuItem header>选择每页数量：</MenuItem>
-                  <MenuItem eventKey="2">20个</MenuItem>
-                  <MenuItem eventKey="3">50个</MenuItem>
-                  <MenuItem eventKey="4">100个</MenuItem>
-                </DropdownButton>
+                <label htmlFor="">每页数量：</label>
+                <DropdownComponent list={pageNum.list} placeholder={pageNum.placeholder} id="dropdown-page-number" />
               </div>
             </Col>
-            <Col md={2}>
+            <Col md={3}>
               <div className="form-group">
                 <label htmlFor="">浏览器：</label>
                 <DropdownButton title="浏览器" id="dropdown-browser-type">
@@ -79,32 +61,29 @@ class ErrorComponent extends React.Component {
                 </DropdownButton>
               </div>
             </Col>
-            <Col md={8}>
-              <div className="form-group">
-                <label htmlFor="">关键词：</label>
-                <Input type="text" buttonAfter={searchButton} />
-              </div>
+            <Col md={6}>
+              <Input label="关键词：" type="text" buttonAfter={searchButton} />
             </Col>
           </Row>
         </form>
 
         <Panel header={header} id="error-list-error">
           <ListGroup fill>
-            {results.map(function (result) {
+            {this.props.jsError.all.map(function (jsError) {
               return (
                 <ListGroupItem>
                   <Row>
                     <Col md={6}>
-                      <p><Link to={`/error/detail/${result.id}`} className="text-danger">{result.name}</Link></p>
+                      <p><Link to={`/error/detail/${jsError._id}`} className="text-danger">{jsError.message}</Link></p>
                     </Col>
                     <Col md={2}>
-                      <p><Label bsStyle="default">Internet Explorere 8</Label></p>
+                      <p><Label bsStyle="default">{jsError.browser.name}</Label></p>
                     </Col>
                     <Col md={2}>
-                      <p><Label bsStyle="info">Window XP with SP1</Label></p>
+                      <p><Label bsStyle="info">{jsError.os.name}</Label></p>
                     </Col>
                     <Col md={2}>
-                      <p className="text-muted">{result.date}</p>
+                      <p className="text-muted">{jsError.fromNow}</p>
                     </Col>
                   </Row>
                 </ListGroupItem>
@@ -118,10 +97,23 @@ class ErrorComponent extends React.Component {
   }
 }
 
+ErrorComponent.propTypes = {
+  dispatch: React.PropTypes.func.isRequired
+};
+
 ErrorComponent.displayName = 'ErrorListErrorComponent';
+
+function mapStateToProps(state) {
+  const { jsError, routing } = state;
+
+  return {
+    jsError,
+    routing
+  }
+}
 
 // Uncomment properties you need
 // ErrorComponent.propTypes = {};
 // ErrorComponent.defaultProps = {};
 
-export default ErrorComponent;
+export default connect(mapStateToProps)(ErrorComponent);
