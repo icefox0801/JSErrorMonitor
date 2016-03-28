@@ -19,10 +19,10 @@ class MainComponent extends React.Component {
           </Row>
           <Row>
             <Col md={6}>
-              <ListComponent />
+              <ListComponent title="最多的错误" type="most" />
             </Col>
             <Col md={6}>
-              <ListComponent />
+              <ListComponent title="最近的错误" type="latest" />
             </Col>
           </Row>
         </Grid>

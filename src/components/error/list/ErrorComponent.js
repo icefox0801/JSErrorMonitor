@@ -8,14 +8,14 @@ import { Link } from 'react-router';
 import DropdownComponent from '../../common/DropdownComponent';
 import { pageNum } from '../../../constants/dropdown';
 
-import { fetchAchievedErrorList } from '../../../actions';
+import { fetchArchiveErrorList } from '../../../actions';
 
 require('styles/error/list/Error.scss');
 
 class ErrorComponent extends React.Component {
   componentDidMount () {
     const { dispatch } = this.props;
-    dispatch(fetchAchievedErrorList());
+    dispatch(fetchArchiveErrorList());
   }
   render () {
 
@@ -69,21 +69,21 @@ class ErrorComponent extends React.Component {
 
         <Panel header={header} id="error-list-error">
           <ListGroup fill>
-            {this.props.jsError.all.map(function (jsError) {
+            {this.props.jsError.all.map(function (error) {
               return (
                 <ListGroupItem>
                   <Row>
                     <Col md={6}>
-                      <p><Link to={`/error/detail/${jsError._id}`} className="text-danger">{jsError.message}</Link></p>
+                      <p><Link to={`/error/detail/${error._id}`} className="text-danger"><Label bsStyle="danger">{error.status}</Label>{error.message}</Link></p>
                     </Col>
                     <Col md={2}>
-                      <p><Label bsStyle="default">{jsError.browser.name}</Label></p>
+                      <p><Label bsStyle="default">{error.browser.name}</Label></p>
                     </Col>
                     <Col md={2}>
-                      <p><Label bsStyle="info">{jsError.os.name}</Label></p>
+                      <p><Label bsStyle="info">{error.os.name}</Label></p>
                     </Col>
                     <Col md={2}>
-                      <p className="text-muted">{jsError.fromNow}</p>
+                      <p className="text-muted">{error.fromNow}</p>
                     </Col>
                   </Row>
                 </ListGroupItem>

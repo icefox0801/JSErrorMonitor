@@ -7,6 +7,15 @@
       margin-right: 5px;
     }
 
+    a {
+      display: inline-block;
+      margin-right: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 85%;
+    }
+
     a,
     .glyphicon {
       vertical-align: middle;
@@ -14,6 +23,7 @@
   }
 
   .page-url {
+    margin-bottom: 5px;
     overflow: hidden;
     padding-right: 50px;
     text-overflow: ellipsis;

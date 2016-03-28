@@ -17,7 +17,7 @@ exports.pageNum = {
   ]
 };
 
-exports.dateRange = {
+exports.timeRange = {
   title: '时间范围',
   placeholder: '请选择时间范围',
   list: [
@@ -40,6 +40,41 @@ exports.dateRange = {
     {
       key: 24 * 365,
       value: '1年'
+    }
+  ]
+};
+
+exports.business = {
+  title: '业务线',
+  placeholder: '请选择业务线',
+  list: [
+    {
+      key: 'all',
+      value: '全部'
+    },
+    {
+      key: 'house',
+      value: '房产'
+    },
+    {
+      key: 'job',
+      value: '招聘'
+    },
+    {
+      key: 'ershou',
+      value: '二手'
+    },
+    {
+      key: 'post',
+      value: '发布'
+    },
+    {
+      key: 'info',
+      value: '黄页'
+    },
+    {
+      key: 'extra',
+      value: '其他'
     }
   ]
 };

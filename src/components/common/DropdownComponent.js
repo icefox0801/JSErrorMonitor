@@ -9,7 +9,6 @@ class DropdownComponent extends React.Component {
   constructor(props) {
     super(props);
 
-    var idx = -1;
     var key = -1;
     var text = props.placeholder;
 
@@ -43,22 +42,20 @@ class DropdownComponent extends React.Component {
   }
 
   render() {
-    if(this.props.type === 'nav') {
+    const { list, type, placeholder } = this.props;
+
+    if(type === 'nav') {
       return (
         <NavDropdown title={this.state.text} onSelect={(e, k) => this.handleSelect(e, k)} activeKey={this.state.key} id={this.props.id}>
-          <MenuItem header>{this.props.placeholder}：</MenuItem>
-          {this.props.list.map((item, idx) => {
-            return (<MenuItem eventKey={item.key}>{item.value}</MenuItem>);
-          })}
+          <MenuItem header>{placeholder}：</MenuItem>
+          {list.map(item => (<MenuItem eventKey={item.key}>{item.value}</MenuItem>))}
         </NavDropdown>
       );
     } else {
       return (
         <DropdownButton title={this.state.text} onSelect={(e, k) => this.handleSelect(e, k)} activeKey={this.state.key} id={this.props.id}>
-          <MenuItem header>{this.props.placeholder}：</MenuItem>
-          {this.props.list.map((item, idx) => {
-            return (<MenuItem eventKey={item.key}>{item.value}</MenuItem>);
-          })}
+          <MenuItem header>{placeholder}：</MenuItem>
+          {list.map(item => (<MenuItem eventKey={item.key}>{item.value}</MenuItem>))}
         </DropdownButton>
       );
     }
@@ -82,7 +79,8 @@ DropdownComponent.defaultProps = {
   title: '',
   placeholder: '',
   required: true,
-  activeKey: ''
+  activeKey: '',
+  linkTo: ''
 };
 
 export default DropdownComponent;

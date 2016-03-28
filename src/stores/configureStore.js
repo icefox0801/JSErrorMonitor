@@ -4,7 +4,7 @@ import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
-import { jsErrorReducer } from '../reducers'
+import { jsErrorReducer, chartReducer } from '../reducers'
 
 const createStoreWithMiddleWare = compose(
   applyMiddleware(
@@ -18,6 +18,7 @@ export default function configureStore(history, initialState) {
 
   const reducer = combineReducers({
     jsError: jsErrorReducer,
+    chart: chartReducer,
     routing: routerReducer
   });
 

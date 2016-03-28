@@ -2,12 +2,33 @@
 
 import { combineReducers } from 'redux';
 
-import { ACHIEVED_ERROR_LIST } from '../actions';
+import { ARCHIVE_ERROR_LIST, MOST_ERROR_LIST, LATEST_ERROR_LIST } from '../actions';
 
-function errorList(state = [], action) {
+function mostErrorList(state = [], action) {
 
   switch(action.type) {
-    case ACHIEVED_ERROR_LIST:
+    case MOST_ERROR_LIST:
+      return Object.assign([], state, action.most);
+    default:
+      return state;
+  }
+
+}
+
+function latestErrorList(state = [], action) {
+
+  switch(action.type) {
+    case LATEST_ERROR_LIST:
+      return Object.assign([], state, action.latest);
+    default:
+      return state;
+  }
+}
+
+function allErrorList(state = [], action) {
+
+  switch(action.type) {
+    case ARCHIVE_ERROR_LIST:
       return Object.assign([], state, action.list);
     default:
       return state;
@@ -16,7 +37,9 @@ function errorList(state = [], action) {
 }
 
 const jsErrorReducer = combineReducers ({
-  all: errorList
+  all: allErrorList,
+  most: mostErrorList,
+  latest: latestErrorList
 });
 
 export default jsErrorReducer;

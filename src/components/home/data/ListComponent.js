@@ -2,51 +2,37 @@
 
 import React from 'react';
 import { Glyphicon, Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
+
+import { fetchMostErrorList, fetchLatestErrorList } from '../../../actions';
 
 require('styles/home/data/List.scss');
 
 class ListComponent extends React.Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(this.props.type === 'most' ? fetchMostErrorList() : fetchLatestErrorList());
+  }
   render() {
-    const results = [
-      {
-        id: 'e12ea5d71d',
-        name: 'Error: An Error Occurred!',
-        date: '2016-03-22 16:26:09',
-        url: 'http://bj.58.com/zptaobao/?PGTID=0d100000-0000-1128-816e-1e8d49ca2ea8&ClickID=1',
-        count: 551
-      },
-      {
-        id: 'e12ea5d71e',
-        name: '对象不支持此属性或方法',
-        date: '2016-03-22 16:26:09',
-        url: 'http://bj.58.com/zptaobao/?PGTID=0d100000-0000-1128-816e-1e8d49ca2ea8&ClickID=1',
-        count: 551
-      },
-      {
-        id: 'e12ea5d71f',
-        name: 'Error: An Error Occurred!',
-        date: '2016-03-22 16:26:09',
-        url: 'http://bj.58.com/zptaobao/?PGTID=0d100000-0000-1128-816e-1e8d49ca2ea8&ClickID=1',
-        count: 551
-      }
-    ];
+
+    const list = this.props.jsError[this.props.type];
 
     return (
-      <Panel header={<p><span>最近的错误</span><a className="pull-right" href="#">更多</a></p>} className="home-data-list">
+      <Panel header={<p><span>{this.props.title}</span><Link to="/error/list/achieve" className="pull-right">更多</Link></p>} className="home-data-list">
         <ListGroup fill>
-          {results.map(function (result) {
+          {list.map(function (error) {
             return (
               <ListGroupItem>
                 <h4 className="list-group-item-heading">
                   <Glyphicon glyph="info-sign" className="text-danger" />
-                  <Link to={`/error/detail/${result.id}`} className="text-danger">{result.name}</Link>
-                  <span className="label label-warning pull-right">{result.count}</span>
+                  <Link to={`/error/detail/${error.id}`} className="text-danger">{error.message}</Link>
+                  <span className="label label-warning pull-right">{error.count}</span>
                 </h4>
                 <p className="list-group-item-text text-primary page-url">
-                  <a href={result.url} target="_blank">{result.url}</a>
+                  <a href={error.url || 'javascript:void(0)'} target="_blank">{error.url || '无'}</a>
                 </p>
-                <p className="list-group-item-text text-muted">{result.date}</p>
+                <p className="list-group-item-text text-muted">{error.latest} - {error.earliest}</p>
               </ListGroupItem>
             );
           })}
@@ -56,10 +42,18 @@ class ListComponent extends React.Component {
   }
 }
 
-ListComponent.displayName = 'ErrorDataListComponent';
+ListComponent.displayName = 'HomeDataListComponent';
 
 // Uncomment properties you need
 // ListComponent.propTypes = {};
 // ListComponent.defaultProps = {};
 
-export default ListComponent;
+function mapStateToProps(state) {
+  const { jsError } = state;
+
+  return {
+    jsError
+  };
+}
+
+export default connect(mapStateToProps)(ListComponent);

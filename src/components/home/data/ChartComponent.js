@@ -3,11 +3,23 @@
 import React from 'react';
 import { Panel } from 'react-bootstrap';
 import ReactHighcharts from 'react-highcharts';
+import { connect } from 'react-redux';
+
+import { fetchErrorTrendChart } from '../../../actions';
 
 require('styles/home/data/Chart.scss');
 
 class ChartComponent extends React.Component {
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchErrorTrendChart());
+  }
+
   render() {
+
+    const { trend } = this.props.chart;
+
     const config = {
       chart: {
         type: 'column',
@@ -19,7 +31,7 @@ class ChartComponent extends React.Component {
       },
 
       xAxis: {
-        categories: ['3-10', '3-11', '3-12', '3-13', '3-14', '3-15', '3-16', '3-17', '3-18', '3-19', '3-20', '3-21', '3-22', '3-23', '3-24']
+        categories: trend.x
       },
 
       yAxis: {
@@ -33,9 +45,10 @@ class ChartComponent extends React.Component {
       series: [{
         name: 'JS错误',
         showInLegend: false,
-        data: [0, 0, 25, 10, 4, 7, 0, 1, 1, 30, 0, 1, 0, 0, 10]
+        data: trend.y
       }]
     };
+
     return (
       <Panel header={<p>近期页面错误趋势</p>}>
         <div id="data-chart">
@@ -46,10 +59,18 @@ class ChartComponent extends React.Component {
   }
 }
 
-ChartComponent.displayName = 'ErrorDataChartComponent';
+ChartComponent.displayName = 'HomeDataChartComponent';
 
 // Uncomment properties you need
 // ChartComponent.propTypes = {};
 // ChartComponent.defaultProps = {};
 
-export default ChartComponent;
+function mapStateToProps(state) {
+  const { chart } = state;
+
+  return {
+    chart
+  };
+}
+
+export default connect(mapStateToProps)(ChartComponent);

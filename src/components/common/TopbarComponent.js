@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
-import { dateRange } from '../../constants/dropdown';
+import { timeRange, business } from '../../constants/dropdown';
 import DropdownComponent from './DropdownComponent';
 
 require('styles/common/Topbar.scss');
@@ -22,15 +22,8 @@ class TopbarComponent extends React.Component {
               <NavItem active>PC端</NavItem>
               <NavItem>M端</NavItem>
               <NavItem>App</NavItem>
-              <NavDropdown title="招聘" id="navDropDown">
-                <MenuItem header>选择业务线</MenuItem>
-                <MenuItem>全部</MenuItem>
-                <MenuItem>房产</MenuItem>
-                <MenuItem>招聘</MenuItem>
-                <MenuItem>二手</MenuItem>
-                <MenuItem>发布</MenuItem>
-              </NavDropdown>
-              <DropdownComponent type="nav" list={dateRange.list} id="dropdown-date-range" placeholder={dateRange.placeholder} />
+              <DropdownComponent type="nav" list={business.list} id="dropdown-business" placeholder={business.placeholder} />
+              <DropdownComponent type="nav" list={timeRange.list} id="dropdown-time-range" placeholder={timeRange.placeholder} />
             </Nav>
             <Nav pullRight>
               <NavDropdown title="用户" id="navDropDown">
