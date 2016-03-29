@@ -5,15 +5,16 @@ import { Panel } from 'react-bootstrap';
 import ReactHighcharts from 'react-highcharts';
 import { connect } from 'react-redux';
 
-import { fetchErrorTrendChart } from '../../../actions';
+import { chart } from '../../../actions';
 
 require('styles/home/data/Chart.scss');
 
 class ChartComponent extends React.Component {
 
   componentDidMount() {
+
     const { dispatch } = this.props;
-    dispatch(fetchErrorTrendChart());
+    dispatch(chart.fetchErrorTrendChart());
   }
 
   render() {

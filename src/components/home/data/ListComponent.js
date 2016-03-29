@@ -5,28 +5,29 @@ import { Glyphicon, Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import { fetchMostErrorList, fetchLatestErrorList } from '../../../actions';
+import { jsError } from '../../../actions';
 
 require('styles/home/data/List.scss');
 
 class ListComponent extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(this.props.type === 'most' ? fetchMostErrorList() : fetchLatestErrorList());
+    dispatch(this.props.type === 'most' ? jsError.fetchMostErrorList() : jsError.fetchLatestErrorList());
   }
   render() {
 
     const list = this.props.jsError[this.props.type];
+    const type = this.props.type;
 
     return (
-      <Panel header={<p><span>{this.props.title}</span><Link to="/error/list/achieve" className="pull-right">更多</Link></p>} className="home-data-list">
+      <Panel header={<p><span>{this.props.title}</span><Link to="/error/list/archive" className="pull-right">更多</Link></p>} className="home-data-list">
         <ListGroup fill>
-          {list.map(function (error) {
+          {list.map(function (error, idx) {
             return (
-              <ListGroupItem>
+              <ListGroupItem key={`${type}-${idx}`}>
                 <h4 className="list-group-item-heading">
                   <Glyphicon glyph="info-sign" className="text-danger" />
-                  <Link to={`/error/detail/${error.id}`} className="text-danger">{error.message}</Link>
+                  <Link to={`/error/detail/${error._id}`} className="text-danger">{error.message}</Link>
                   <span className="label label-warning pull-right">{error.count}</span>
                 </h4>
                 <p className="list-group-item-text text-primary page-url">

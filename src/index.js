@@ -4,4 +4,4 @@ import AppRouter from './components/Router';
 import 'bootstrap/dist/css/bootstrap.css';
 
 // Render the main component into the dom
-ReactDOM.render(AppRouter, document.body);
+ReactDOM.render(AppRouter, document.getElementById('app'));

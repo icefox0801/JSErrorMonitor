@@ -48,14 +48,14 @@ class DropdownComponent extends React.Component {
       return (
         <NavDropdown title={this.state.text} onSelect={(e, k) => this.handleSelect(e, k)} activeKey={this.state.key} id={this.props.id}>
           <MenuItem header>{placeholder}：</MenuItem>
-          {list.map(item => (<MenuItem eventKey={item.key}>{item.value}</MenuItem>))}
+          {list.map(item => (<MenuItem eventKey={item.key} key={item.key}>{item.value}</MenuItem>))}
         </NavDropdown>
       );
     } else {
       return (
         <DropdownButton title={this.state.text} onSelect={(e, k) => this.handleSelect(e, k)} activeKey={this.state.key} id={this.props.id}>
           <MenuItem header>{placeholder}：</MenuItem>
-          {list.map(item => (<MenuItem eventKey={item.key}>{item.value}</MenuItem>))}
+          {list.map(item => (<MenuItem eventKey={item.key} key={item.key}>{item.value}</MenuItem>))}
         </DropdownButton>
       );
     }

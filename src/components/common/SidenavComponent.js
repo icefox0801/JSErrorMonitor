@@ -35,9 +35,6 @@ class SidenavComponent extends React.Component {
           <LinkContainer to="/charts">
             <NavItem><Glyphicon glyph="signal" />图表</NavItem>
           </LinkContainer>
-          <LinkContainer to="/statistics">
-            <NavItem><Glyphicon glyph="th-list" />统计</NavItem>
-          </LinkContainer>
           <LinkContainer to="/filter">
             <NavItem><Glyphicon glyph="glass" />过滤</NavItem>
           </LinkContainer>

@@ -2,20 +2,19 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Panel, ListGroup, ListGroupItem, DropdownButton, MenuItem, Row, Col, Label, Pagination, Alert, Input, Button, Glyphicon } from 'react-bootstrap';
+import { Panel, ListGroup, ListGroupItem, Row, Col, Label, Pagination, Input, Button, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 import DropdownComponent from '../../common/DropdownComponent';
-import { pageNum } from '../../../constants/dropdown';
-
-import { fetchArchiveErrorList } from '../../../actions';
+import { pageNum, browser } from '../../../constants/dropdown';
+import { jsError } from '../../../actions';
 
 require('styles/error/list/Error.scss');
 
 class ErrorComponent extends React.Component {
   componentDidMount () {
     const { dispatch } = this.props;
-    dispatch(fetchArchiveErrorList());
+    dispatch(jsError.fetchAllErrorList());
   }
   render () {
 
@@ -31,6 +30,9 @@ class ErrorComponent extends React.Component {
     const searchButton = (
       <Button bsStyle="primary"><Glyphicon glyph="search" />&nbsp;搜索</Button>
     );
+
+    const { all } = this.props.jsError;
+
     return (
       <div className="container-fluid" id="error-list-error">
         <form action="" className="form-inline">
@@ -44,21 +46,7 @@ class ErrorComponent extends React.Component {
             <Col md={3}>
               <div className="form-group">
                 <label htmlFor="">浏览器：</label>
-                <DropdownButton title="浏览器" id="dropdown-browser-type">
-                  <MenuItem header>选择浏览器：</MenuItem>
-                  <MenuItem eventKey="2" className="checkbox">
-                    <label><input type="checkbox" />&nbsp;Internet Explorer</label>
-                  </MenuItem>
-                  <MenuItem eventKey="3" className="checkbox">
-                    <label><input type="checkbox" />&nbsp;Google Chrome</label>
-                  </MenuItem>
-                  <MenuItem eventKey="4" className="checkbox">
-                    <label><input type="checkbox" />&nbsp;Mozilla Firefox</label>
-                  </MenuItem>
-                  <MenuItem eventKey="5" className="checkbox">
-                    <label><input type="checkbox" />&nbsp;Opera</label>
-                  </MenuItem>
-                </DropdownButton>
+                <DropdownComponent list={browser.list} placeholder={browser.placeholder} id="dropdown-browser" />
               </div>
             </Col>
             <Col md={6}>
@@ -69,12 +57,12 @@ class ErrorComponent extends React.Component {
 
         <Panel header={header} id="error-list-error">
           <ListGroup fill>
-            {this.props.jsError.all.map(function (error) {
+            {all.map(function (error) {
               return (
-                <ListGroupItem>
+                <ListGroupItem key={error._id}>
                   <Row>
                     <Col md={6}>
-                      <p><Link to={`/error/detail/${error._id}`} className="text-danger"><Label bsStyle="danger">{error.status}</Label>{error.message}</Link></p>
+                      <p><Link to={`/error/detail/${error._id}`} className="text-danger"><strong>『{error.status === 'open' ? '未解决' : '已解决'}』</strong>{error.message}</Link></p>
                     </Col>
                     <Col md={2}>
                       <p><Label bsStyle="default">{error.browser.name}</Label></p>
@@ -104,11 +92,10 @@ ErrorComponent.propTypes = {
 ErrorComponent.displayName = 'ErrorListErrorComponent';
 
 function mapStateToProps(state) {
-  const { jsError, routing } = state;
+  const { jsError } = state;
 
   return {
-    jsError,
-    routing
+    jsError
   }
 }
 

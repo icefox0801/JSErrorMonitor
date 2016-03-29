@@ -6,4 +6,4 @@ moment.locale('zh-cn');
 
 export default function (date) {
   return moment(date).fromNow();
-};
+}

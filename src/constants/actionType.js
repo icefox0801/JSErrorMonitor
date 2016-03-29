@@ -1,0 +1,8 @@
+'use strict';
+
+export const ALL_ERROR_LIST = 'ALL_ERROR_LIST';
+export const ARCHIVE_ERROR_LIST = 'ARCHIVE_ERROR_LIST';
+export const MOST_ERROR_LIST = 'MOST_ERROR_LIST';
+export const LATEST_ERROR_LIST = 'LATEST_ERROR_LIST';
+
+export const ERROR_TREND_CHART = 'ERROR_TREND_CHART';

@@ -1,3 +1,9 @@
-.archive-component {
-  border: 1px dashed #f00;
+// 归档列表样式
+#error-list-archive {
+  p {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

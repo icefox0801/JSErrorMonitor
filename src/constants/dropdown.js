@@ -17,6 +17,37 @@ exports.pageNum = {
   ]
 };
 
+exports.browser = {
+  title: '浏览器',
+  placeholder: '请选择浏览器',
+  list: [
+    {
+      key: 'all',
+      value: '全部'
+    },
+    {
+      key: 'IE',
+      value: 'Internet Explorer'
+    },
+    {
+      key: 'Chrome',
+      value: 'Google Chrome'
+    },
+    {
+      key: 'Firefox',
+      value: 'Mozilla Firefox'
+    },
+    {
+      key: 'Opera',
+      value: 'Opera'
+    },
+    {
+      key: 'Safari',
+      value: 'Safari'
+    }
+  ]
+};
+
 exports.timeRange = {
   title: '时间范围',
   placeholder: '请选择时间范围',

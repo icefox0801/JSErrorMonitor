@@ -2,7 +2,7 @@
 
 import { combineReducers } from 'redux';
 
-import { ERROR_TREND_CHART } from '../actions';
+import { ERROR_TREND_CHART } from '../constants/actionType';
 
 function errorTrend(state = {}, action) {
 

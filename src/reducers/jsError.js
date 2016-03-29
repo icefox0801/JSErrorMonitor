@@ -2,7 +2,7 @@
 
 import { combineReducers } from 'redux';
 
-import { ARCHIVE_ERROR_LIST, MOST_ERROR_LIST, LATEST_ERROR_LIST } from '../actions';
+import { ALL_ERROR_LIST, ARCHIVE_ERROR_LIST, MOST_ERROR_LIST, LATEST_ERROR_LIST } from '../constants/actionType';
 
 function mostErrorList(state = [], action) {
 
@@ -28,6 +28,17 @@ function latestErrorList(state = [], action) {
 function allErrorList(state = [], action) {
 
   switch(action.type) {
+    case ALL_ERROR_LIST:
+      return Object.assign([], state, action.list);
+    default:
+      return state;
+  }
+
+}
+
+function archiveErrorList(state = [], action) {
+
+  switch(action.type) {
     case ARCHIVE_ERROR_LIST:
       return Object.assign([], state, action.list);
     default:
@@ -38,6 +49,7 @@ function allErrorList(state = [], action) {
 
 const jsErrorReducer = combineReducers ({
   all: allErrorList,
+  archive: archiveErrorList,
   most: mostErrorList,
   latest: latestErrorList
 });
