@@ -13,8 +13,8 @@ require('styles/error/list/Archive.scss');
 
 class ArchiveComponent extends React.Component {
   componentDidMount () {
-    const { dispatch } = this.props;
-    dispatch(jsError.fetchArchiveErrorList());
+    const { dispatch, params } = this.props;
+    dispatch(jsError.fetchArchiveErrorList(params));
   }
   render () {
 
@@ -32,7 +32,7 @@ class ArchiveComponent extends React.Component {
       <Button bsStyle="primary"><Glyphicon glyph="search" />&nbsp;搜索</Button>
     );
 
-    const { archive } = this.props.jsError;
+    const { archives } = this.props.jsError;
 
     return (
       <div className="container-fluid" id="error-list-error">
@@ -58,24 +58,24 @@ class ArchiveComponent extends React.Component {
 
         <Panel header={header} id="error-list-archive">
           <ListGroup fill>
-            {archive.map(function (error, idx) {
+            {archives.list.map(function (archive, idx) {
               return (
-                <ListGroupItem key={error._id}>
+                <ListGroupItem key={archive._id}>
                   <Row>
                     <Col md={5}>
-                      <p><Link to={`/error/detail/${idx}`} className="text-danger"><strong>『{error.status === 'open' ? '未解决' : '已解决'}』</strong>{error.message}</Link></p>
+                      <p><Link to={`/error/detail/${idx}`} className="text-danger"><strong>『{archive.status === 'open' ? '未解决' : '已解决'}』</strong>{archive.message}</Link></p>
                     </Col>
                     <Col md={4}>
-                      <p><a href={error.url || 'javascript:void(0)'} target="_blank">{error.url || '无'}</a></p>
+                      <p><a href={archive.url || 'javascript:void(0)'} target="_blank">{archive.url || '无'}</a></p>
                     </Col>
                     <Col md={1}>
-                      <p className="text-muted">{error.earliest}</p>
+                      <p className="text-muted">{archive.earliest}</p>
                     </Col>
                     <Col md={1}>
-                      <p className="text-muted">{error.latest}</p>
+                      <p className="text-muted">{archive.latest}</p>
                     </Col>
                     <Col md={1}>
-                      <p><strong className="text-danger">{error.count}</strong></p>
+                      <p><strong className="text-danger">{archive.count}</strong></p>
                     </Col>
                   </Row>
                 </ListGroupItem>

@@ -35,7 +35,7 @@ class TabsComponent extends React.Component {
               <span className="badge">6</span>
             </NavItem>
           </LinkContainer>
-          <LinkContainer to="/error/list/system">
+          <LinkContainer to="/error/list/os">
             <NavItem>
               <span className="tabs-title">操作系统</span>
               <span className="badge">3</span>

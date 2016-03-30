@@ -1,10 +1,10 @@
 'use strict';
 import transformDate from '../utils/transformDate';
-import { MOST_ERROR_LIST, LATEST_ERROR_LIST, ALL_ERROR_LIST, ARCHIVE_ERROR_LIST } from '../constants/actionType';
+import * as types from '../constants/actionType';
 
 function mostErrorList (json) {
   return {
-    type: MOST_ERROR_LIST,
+    type: types.MOST_ERROR_LIST,
     most: json.result.map((jsError) => ({
       message: jsError._id.message,
       url: jsError._id.url,
@@ -17,7 +17,7 @@ function mostErrorList (json) {
 
 function latestErrorList (json) {
   return {
-    type: LATEST_ERROR_LIST,
+    type: types.LATEST_ERROR_LIST,
     latest: json.result.map((jsError) => ({
       message: jsError._id.message,
       url: jsError._id.url,
@@ -30,23 +30,36 @@ function latestErrorList (json) {
 
 function allErrorList (json) {
   return {
-    type: ALL_ERROR_LIST,
+    type: types.ALL_ERROR_LIST,
     list: json.result.map(jsError => Object.assign(jsError, {
       fromNow :transformDate(jsError.date)
-    }))
+    })),
+    meta: json.meta
   };
 }
 
 function archiveErrorList (json) {
   return {
-    type: ARCHIVE_ERROR_LIST,
-    list: json.result.map(jsError => ({
-      message: jsError._id.message,
-      url: jsError._id.url,
-      status: jsError.status || 'open',
-      count: jsError.count,
-      earliest: transformDate(jsError.earliest),
-      latest: transformDate(jsError.latest)
+    type: types.ARCHIVE_ERROR_LIST,
+    list: json.result.map(archive => ({
+      message: archive._id.message,
+      url: archive._id.url,
+      status: archive.status || 'open',
+      count: archive.count,
+      earliest: transformDate(archive.earliest),
+      latest: transformDate(archive.latest)
+    }))
+  };
+}
+
+function browserErrorList (json) {
+  return {
+    type: types.BROWSER_ERROR_LIST,
+    list: json.result.map(browser => ({
+      name: browser._id.name,
+      count: browser.count,
+      min: browser.min,
+      max: browser.max
     }))
   };
 }
@@ -72,7 +85,7 @@ export function fetchLatestErrorList (params) {
 export function fetchAllErrorList (params) {
   return dispatch => {
     //dispatch(loadingShow);
-    return fetch('/api/error/list/all')
+    return fetch('/api/error/list/all/' + params.page)
       .then(response => response.json())
       .then(json => dispatch(allErrorList(json)))
   };
@@ -82,8 +95,17 @@ export function fetchAllErrorList (params) {
 export function fetchArchiveErrorList (params) {
   return dispatch => {
     //dispatch(loadingShow);
-    return fetch('/api/error/list/archive')
+    return fetch('/api/error/list/archive/' + params.page)
       .then(response => response.json())
       .then(json => dispatch(archiveErrorList(json)))
+  };
+}
+
+export function fetchBrowserErrorList (params) {
+  return dispatch => {
+    //dispatch(loadingShow);
+    return fetch('/api/error/list/browser/' + params.page)
+      .then(response => response.json())
+      .then(json => dispatch(browserErrorList(json)))
   };
 }

@@ -2,9 +2,10 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Panel, ListGroup, ListGroupItem, Row, Col, Label, Pagination, Input, Button, Glyphicon } from 'react-bootstrap';
+import { Panel, ListGroup, ListGroupItem, Row, Col, Label, Input, Button, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
 
+import PaginationComponent from '../../common/PaginationComponent';
 import DropdownComponent from '../../common/DropdownComponent';
 import { pageNum, browser } from '../../../constants/dropdown';
 import { jsError } from '../../../actions';
@@ -13,11 +14,20 @@ require('styles/error/list/Error.scss');
 
 class ErrorComponent extends React.Component {
   componentDidMount () {
-    const { dispatch } = this.props;
-    dispatch(jsError.fetchAllErrorList());
+    const { dispatch, params } = this.props;
+    dispatch(jsError.fetchAllErrorList(params));
   }
-  render () {
 
+  componentDidUpdate (prevProps, prevState) {
+    const { dispatch, params } = this.props;
+
+    if(params.page != prevProps.params.page) {
+      dispatch(jsError.fetchAllErrorList(params));
+    }
+
+  }
+
+  render () {
     const header = (
       <Row>
         <Col md={6}>错误</Col>
@@ -32,6 +42,7 @@ class ErrorComponent extends React.Component {
     );
 
     const { all } = this.props.jsError;
+    const { params } = this.props;
 
     return (
       <div className="container-fluid" id="error-list-error">
@@ -57,7 +68,7 @@ class ErrorComponent extends React.Component {
 
         <Panel header={header} id="error-list-error">
           <ListGroup fill>
-            {all.map(function (error) {
+            {all.list.map(function (error) {
               return (
                 <ListGroupItem key={error._id}>
                   <Row>
@@ -79,7 +90,7 @@ class ErrorComponent extends React.Component {
             })}
           </ListGroup>
         </Panel>
-        <Pagination className="pull-right" prev next first last ellipsis boundaryLinks items={20} maxButtons={5} activePage={1} />
+        <PaginationComponent linkPrefix="/error/list/all/" page={params.page} total={all.meta.total} />
       </div>
     );
   }

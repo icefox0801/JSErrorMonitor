@@ -6,15 +6,15 @@ import createLogger from 'redux-logger';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import { jsErrorReducer, chartReducer } from '../reducers'
 
-const createStoreWithMiddleWare = compose(
-  applyMiddleware(
-    thunkMiddleware,
-    createLogger(),
-    routerMiddleware(history)
-  )
-)(createStore);
-
 export default function configureStore(history, initialState) {
+
+  const createStoreWithMiddleWare = compose(
+    applyMiddleware(
+      thunkMiddleware,
+      createLogger(),
+      routerMiddleware(history)
+    )
+  )(createStore);
 
   const reducer = combineReducers({
     jsError: jsErrorReducer,

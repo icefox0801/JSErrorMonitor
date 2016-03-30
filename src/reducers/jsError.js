@@ -2,12 +2,12 @@
 
 import { combineReducers } from 'redux';
 
-import { ALL_ERROR_LIST, ARCHIVE_ERROR_LIST, MOST_ERROR_LIST, LATEST_ERROR_LIST } from '../constants/actionType';
+import * as types from '../constants/actionType';
 
 function mostErrorList(state = [], action) {
 
   switch(action.type) {
-    case MOST_ERROR_LIST:
+    case types.MOST_ERROR_LIST:
       return Object.assign([], state, action.most);
     default:
       return state;
@@ -18,29 +18,49 @@ function mostErrorList(state = [], action) {
 function latestErrorList(state = [], action) {
 
   switch(action.type) {
-    case LATEST_ERROR_LIST:
+    case types.LATEST_ERROR_LIST:
       return Object.assign([], state, action.latest);
     default:
       return state;
   }
 }
 
-function allErrorList(state = [], action) {
+function allErrorList(state = { list: [], meta: {} }, action) {
 
   switch(action.type) {
-    case ALL_ERROR_LIST:
-      return Object.assign([], state, action.list);
+    case types.ALL_ERROR_LIST:
+      return Object.assign({}, state, {
+        list: action.list,
+        meta: action.meta
+      });
     default:
       return state;
   }
 
 }
 
-function archiveErrorList(state = [], action) {
+function archiveErrorList(state = { list: [], meta: {} }, action) {
 
   switch(action.type) {
-    case ARCHIVE_ERROR_LIST:
-      return Object.assign([], state, action.list);
+    case types.ARCHIVE_ERROR_LIST:
+      return Object.assign({}, state, {
+        list: action.list,
+        meta: action.meta
+      });
+    default:
+      return state;
+  }
+
+}
+
+function browserErrorList(state = { list: [], meta: {} }, action) {
+
+  switch(action.type) {
+    case types.BROWSER_ERROR_LIST:
+      return Object.assign({}, state, {
+        list: action.list,
+        meta: action.meta
+      });
     default:
       return state;
   }
@@ -49,7 +69,8 @@ function archiveErrorList(state = [], action) {
 
 const jsErrorReducer = combineReducers ({
   all: allErrorList,
-  archive: archiveErrorList,
+  archives: archiveErrorList,
+  browsers: browserErrorList,
   most: mostErrorList,
   latest: latestErrorList
 });

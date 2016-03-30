@@ -15,7 +15,7 @@ import ErrorListPage from './error/list/PageComponent';
 import ErrorListError from './error/list/ErrorComponent';
 import ErrorListArchive from './error/list/ArchiveComponent';
 import ErrorListBrowser from './error/list/BrowserComponent';
-import ErrorListSystem from './error/list/SystemComponent';
+import ErrorListOS from './error/list/OsComponent';
 import ErrorDetail from './error/DetailComponent';
 
 const store = configureStore(browserHistory);
@@ -33,11 +33,26 @@ let AppRouter = (
           <IndexRedirect to="/error/list" />
           <Route path="list" component={ErrorList}>
             <IndexRedirect to="/error/list/all" />
-            <Route path="all" component={ErrorListError} />
-            <Route path="archive" component={ErrorListArchive}/>
-            <Route path="page" component={ErrorListPage} />
-            <Route path="browser" component={ErrorListBrowser} />
-            <Route path="system" component={ErrorListSystem} />
+            <Route path="all">
+              <IndexRedirect to="/error/list/all/1" />
+              <Route path=":page" component={ErrorListError} />
+            </Route>
+            <Route path="archive">
+              <IndexRedirect to="/error/list/archive/1" />
+              <Route path=":page" component={ErrorListArchive} />
+            </Route>
+            <Route path="page">
+              <IndexRedirect to="/error/list/page/1" />
+              <Route path=":page" component={ErrorListPage} />
+            </Route>
+            <Route path="browser">
+              <IndexRedirect to="/error/list/browser/1" />
+              <Route path=":page" component={ErrorListBrowser} />
+            </Route>
+            <Route path="os">
+              <IndexRedirect to="/error/list/os/1" />
+              <Route path=":page" component={ErrorListOS} />
+            </Route>
           </Route>
           <Route path="detail/:errorId" component={ErrorDetail} />
         </Route>
