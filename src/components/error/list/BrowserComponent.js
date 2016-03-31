@@ -6,15 +6,15 @@ import { Panel, ListGroup, ListGroupItem, Row, Col, Pagination, Input, Button, G
 import { Link } from 'react-router';
 
 import DropdownComponent from '../../common/DropdownComponent';
-import { pageNum, timeRange } from '../../../constants/dropdown';
-import { jsError } from '../../../actions';
+import { pageSize, timeRange } from '../../../constants/dropdown';
+import { jsErrorAction } from '../../../actions';
 
 require('styles/error/list/Browser.scss');
 
 class BrowserComponent extends React.Component {
   componentDidMount () {
     const { dispatch, params } = this.props;
-    dispatch(jsError.fetchBrowserErrorList(params));
+    dispatch(jsErrorAction.fetchBrowserErrorList(params));
   }
   render () {
 
@@ -39,7 +39,7 @@ class BrowserComponent extends React.Component {
             <Col md={3}>
               <div className="form-group">
                 <label htmlFor="">每页数量：</label>
-                <DropdownComponent list={pageNum.list} placeholder={pageNum.placeholder} id="dropdown-page-number" />
+                <DropdownComponent list={pageSize.list} placeholder={pageSize.placeholder} id="dropdown-page-number" />
               </div>
             </Col>
             <Col md={3}>

@@ -1,4 +1,4 @@
-exports.pageNum = {
+exports.pageSize = {
   title: '页码数量',
   placeholder: '请选择页码数量',
   list: [
@@ -44,6 +44,41 @@ exports.browser = {
     {
       key: 'Safari',
       value: 'Safari'
+    },
+    {
+      key: 'else',
+      value: '其他'
+    }
+  ]
+};
+
+exports.os = {
+  title: '操作系统',
+  placeholder: '请选择操作系统',
+  list: [
+    {
+      key: 'all',
+      value: '全部'
+    },
+    {
+      key: 'windows',
+      value: 'Windows'
+    },
+    {
+      key: 'mac',
+      value: 'MAC OS X'
+    },
+    {
+      key: 'ios',
+      value: 'IOS'
+    },
+    {
+      key: 'android',
+      value: 'Android'
+    },
+    {
+      key: 'else',
+      value: '其他'
     }
   ]
 };

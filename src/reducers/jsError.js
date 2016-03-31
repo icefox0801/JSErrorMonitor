@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 
 import * as types from '../constants/actionType';
 
-function mostErrorList(state = [], action) {
+function listMostError(state = [], action) {
 
   switch(action.type) {
     case types.MOST_ERROR_LIST:
@@ -15,7 +15,7 @@ function mostErrorList(state = [], action) {
 
 }
 
-function latestErrorList(state = [], action) {
+function listLatestError(state = [], action) {
 
   switch(action.type) {
     case types.LATEST_ERROR_LIST:
@@ -25,7 +25,7 @@ function latestErrorList(state = [], action) {
   }
 }
 
-function allErrorList(state = { list: [], meta: {} }, action) {
+function listAllError(state = { list: [], meta: {} }, action) {
 
   switch(action.type) {
     case types.ALL_ERROR_LIST:
@@ -39,7 +39,7 @@ function allErrorList(state = { list: [], meta: {} }, action) {
 
 }
 
-function archiveErrorList(state = { list: [], meta: {} }, action) {
+function listArchiveError(state = { list: [], meta: {} }, action) {
 
   switch(action.type) {
     case types.ARCHIVE_ERROR_LIST:
@@ -53,7 +53,7 @@ function archiveErrorList(state = { list: [], meta: {} }, action) {
 
 }
 
-function browserErrorList(state = { list: [], meta: {} }, action) {
+function listBrowserError(state = { list: [], meta: {} }, action) {
 
   switch(action.type) {
     case types.BROWSER_ERROR_LIST:
@@ -68,11 +68,11 @@ function browserErrorList(state = { list: [], meta: {} }, action) {
 }
 
 const jsErrorReducer = combineReducers ({
-  all: allErrorList,
-  archives: archiveErrorList,
-  browsers: browserErrorList,
-  most: mostErrorList,
-  latest: latestErrorList
+  all: listAllError,
+  archives: listArchiveError,
+  browsers: listBrowserError,
+  most: listMostError,
+  latest: listLatestError
 });
 
 export default jsErrorReducer;

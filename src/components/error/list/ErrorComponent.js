@@ -1,30 +1,43 @@
 'use strict';
 
+import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Panel, ListGroup, ListGroupItem, Row, Col, Label, Input, Button, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
 
+
 import PaginationComponent from '../../common/PaginationComponent';
 import DropdownComponent from '../../common/DropdownComponent';
-import { pageNum, browser } from '../../../constants/dropdown';
-import { jsError } from '../../../actions';
+import { pageSize, browser, os } from '../../../constants/dropdown';
+import { jsErrorAction, filterAction } from '../../../actions';
 
 require('styles/error/list/Error.scss');
 
 class ErrorComponent extends React.Component {
+
   componentDidMount () {
-    const { dispatch, params } = this.props;
-    dispatch(jsError.fetchAllErrorList(params));
+    this.fetchErrorList();
   }
 
   componentDidUpdate (prevProps, prevState) {
-    const { dispatch, params } = this.props;
+    // 深度遍历对象是否相等
+    var flag = ['params', 'filter', 'global'].every(key => _.isEqual(this.props[key], prevProps[key]));
 
-    if(params.page != prevProps.params.page) {
-      dispatch(jsError.fetchAllErrorList(params));
-    }
+    if(!flag) this.fetchErrorList();
 
+    return !flag;
+  }
+
+  handleSelect (key, value) {
+    const { dispatch, filter, params } = this.props;
+    _.set(params, 'page', 1);
+    dispatch(filterAction.setFilterProps(key, value));
+  }
+
+  fetchErrorList () {
+    const { dispatch, params, filter } = this.props;
+    dispatch(jsErrorAction.fetchAllErrorList(Object.assign({}, params, filter)));
   }
 
   render () {
@@ -42,7 +55,7 @@ class ErrorComponent extends React.Component {
     );
 
     const { all } = this.props.jsError;
-    const { params } = this.props;
+    const { params, filter } = this.props;
 
     return (
       <div className="container-fluid" id="error-list-error">
@@ -51,7 +64,7 @@ class ErrorComponent extends React.Component {
             <Col md={3}>
               <div className="form-group">
                 <label htmlFor="">每页数量：</label>
-                <DropdownComponent list={pageNum.list} placeholder={pageNum.placeholder} id="dropdown-page-number" />
+                <DropdownComponent list={pageSize.list} placeholder={pageSize.placeholder} activeKey={filter.pageSize} id="dropdown-page-size" handleSelect={key => this.handleSelect('pageSize', key)}/>
               </div>
             </Col>
             <Col md={3}>
@@ -60,8 +73,14 @@ class ErrorComponent extends React.Component {
                 <DropdownComponent list={browser.list} placeholder={browser.placeholder} id="dropdown-browser" />
               </div>
             </Col>
-            <Col md={6}>
-              <Input label="关键词：" type="text" buttonAfter={searchButton} />
+            <Col md={3}>
+              <div className="form-group">
+                <label htmlFor="">操作系统：</label>
+                <DropdownComponent list={os.list} placeholder={os.placeholder} id="dropdown-os" />
+              </div>
+            </Col>
+            <Col md={3}>
+              <Input type="text" buttonAfter={searchButton} />
             </Col>
           </Row>
         </form>
@@ -103,15 +122,16 @@ ErrorComponent.propTypes = {
 ErrorComponent.displayName = 'ErrorListErrorComponent';
 
 function mapStateToProps(state) {
-  const { jsError } = state;
-
-  return {
-    jsError
-  }
+  const { jsError, filter } = state;
+  return { jsError, filter }
 }
 
 // Uncomment properties you need
-// ErrorComponent.propTypes = {};
-// ErrorComponent.defaultProps = {};
+ErrorComponent.propTypes = {};
+ErrorComponent.defaultProps = {
+  filter: {
+    pageSize: 20
+  }
+};
 
 export default connect(mapStateToProps)(ErrorComponent);

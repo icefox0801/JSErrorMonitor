@@ -1,14 +1,29 @@
 'use strict';
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { timeRange, business } from '../../constants/dropdown';
 import DropdownComponent from './DropdownComponent';
+import { globalAction } from '../../actions';
 
 require('styles/common/Topbar.scss');
 
 class TopbarComponent extends React.Component {
+
+  componentDidMount () {
+    const { dispatch } = this.props;
+    dispatch(globalAction.getGlobalProps());
+  }
+
+  handleSelect (key, value) {
+    const { dispatch } = this.props;
+    dispatch(globalAction.setGlobalProps(key, value))
+  }
+
   render() {
+    const { global } = this.props;
+
     return (
       <nav id="topbar">
         <Navbar inverse fluid>
@@ -22,8 +37,8 @@ class TopbarComponent extends React.Component {
               <NavItem active>PC端</NavItem>
               <NavItem>M端</NavItem>
               <NavItem>App</NavItem>
-              <DropdownComponent type="nav" list={business.list} id="dropdown-business" placeholder={business.placeholder} />
-              <DropdownComponent type="nav" list={timeRange.list} id="dropdown-time-range" placeholder={timeRange.placeholder} />
+              <DropdownComponent type="nav" list={business.list} id="dropdown-business" placeholder={business.placeholder} selectKey={global.business} handleSelect={key => this.handleSelect('business', key)} />
+              <DropdownComponent type="nav" list={timeRange.list} id="dropdown-time-range" placeholder={timeRange.placeholder} selectKey={global.timeRange} handleSelect={key => this.handleSelect('timeRange', key)}/>
             </Nav>
             <Nav pullRight>
               <NavDropdown title="用户" id="navDropDown">
@@ -41,6 +56,17 @@ TopbarComponent.displayName = 'CommonTopbarComponent';
 
 // Uncomment properties you need
 // TopbarComponent.propTypes = {};
-// TopbarComponent.defaultProps = {};
+TopbarComponent.defaultProps = {
+  global: {
+    timeRange: 24,
+    business: 'all',
+    platform: 'pc'
+  }
+};
 
-export default TopbarComponent;
+function mapStateToProps(state) {
+  const { global } = state;
+  return { global };
+}
+
+export default connect(mapStateToProps)(TopbarComponent);

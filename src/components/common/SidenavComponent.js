@@ -32,6 +32,9 @@ class SidenavComponent extends React.Component {
           <LinkContainer to="/error">
             <NavItem><Glyphicon glyph="info-sign" /><span>错误</span></NavItem>
           </LinkContainer>
+          <LinkContainer to="/live">
+            <NavItem><Glyphicon glyph="time" />实时</NavItem>
+          </LinkContainer>
           <LinkContainer to="/charts">
             <NavItem><Glyphicon glyph="signal" />图表</NavItem>
           </LinkContainer>

@@ -1,8 +1,9 @@
 'use strict';
 import transformDate from '../utils/transformDate';
 import * as types from '../constants/actionType';
+import packOptions from '../utils/packOptions';
 
-function mostErrorList (json) {
+function listMostError (json) {
   return {
     type: types.MOST_ERROR_LIST,
     most: json.result.map((jsError) => ({
@@ -15,7 +16,7 @@ function mostErrorList (json) {
   };
 }
 
-function latestErrorList (json) {
+function listLatestError (json) {
   return {
     type: types.LATEST_ERROR_LIST,
     latest: json.result.map((jsError) => ({
@@ -28,7 +29,7 @@ function latestErrorList (json) {
   };
 }
 
-function allErrorList (json) {
+function listAllError (json) {
   return {
     type: types.ALL_ERROR_LIST,
     list: json.result.map(jsError => Object.assign(jsError, {
@@ -38,7 +39,7 @@ function allErrorList (json) {
   };
 }
 
-function archiveErrorList (json) {
+function listArchiveError (json) {
   return {
     type: types.ARCHIVE_ERROR_LIST,
     list: json.result.map(archive => ({
@@ -52,7 +53,7 @@ function archiveErrorList (json) {
   };
 }
 
-function browserErrorList (json) {
+function listBrowserError (json) {
   return {
     type: types.BROWSER_ERROR_LIST,
     list: json.result.map(browser => ({
@@ -69,7 +70,7 @@ export function fetchMostErrorList (params) {
     //dispatch(loadingShow);
     return fetch('/api/error/list/most')
       .then(response => response.json())
-      .then(json => dispatch(mostErrorList(json)))
+      .then(json => dispatch(listMostError(json)))
   };
 }
 
@@ -78,16 +79,16 @@ export function fetchLatestErrorList (params) {
     //dispatch(loadingShow);
     return fetch('/api/error/list/latest')
       .then(response => response.json())
-      .then(json => dispatch(latestErrorList(json)))
+      .then(json => dispatch(listLatestError(json)))
   };
 }
 
 export function fetchAllErrorList (params) {
   return dispatch => {
     //dispatch(loadingShow);
-    return fetch('/api/error/list/all/' + params.page)
+    return packOptions(params).then(options => fetch('/api/error/list/all/' + params.page, options))
       .then(response => response.json())
-      .then(json => dispatch(allErrorList(json)))
+      .then(json => dispatch(listAllError(json)))
   };
 }
 
@@ -97,7 +98,7 @@ export function fetchArchiveErrorList (params) {
     //dispatch(loadingShow);
     return fetch('/api/error/list/archive/' + params.page)
       .then(response => response.json())
-      .then(json => dispatch(archiveErrorList(json)))
+      .then(json => dispatch(listArchiveError(json)))
   };
 }
 
@@ -106,6 +107,6 @@ export function fetchBrowserErrorList (params) {
     //dispatch(loadingShow);
     return fetch('/api/error/list/browser/' + params.page)
       .then(response => response.json())
-      .then(json => dispatch(browserErrorList(json)))
+      .then(json => dispatch(listBrowserError(json)))
   };
 }

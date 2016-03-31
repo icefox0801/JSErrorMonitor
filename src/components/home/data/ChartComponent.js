@@ -3,38 +3,23 @@
 import React from 'react';
 import { Panel } from 'react-bootstrap';
 import ReactHighcharts from 'react-highcharts';
-import { connect } from 'react-redux';
-
-import { chart } from '../../../actions';
 
 require('styles/home/data/Chart.scss');
 
 class ChartComponent extends React.Component {
-
-  componentDidMount() {
-
-    const { dispatch } = this.props;
-    dispatch(chart.fetchErrorTrendChart());
-  }
-
   render() {
-
     const { trend } = this.props.chart;
-
     const config = {
       chart: {
         type: 'column',
         height: 200
       },
-
       title: {
         text: ''
       },
-
       xAxis: {
         categories: trend.x
       },
-
       yAxis: {
         allowDecimals: false,
         min: 0,
@@ -42,7 +27,6 @@ class ChartComponent extends React.Component {
           text: '错误数量'
         }
       },
-
       series: [{
         name: 'JS错误',
         showInLegend: false,
@@ -64,14 +48,13 @@ ChartComponent.displayName = 'HomeDataChartComponent';
 
 // Uncomment properties you need
 // ChartComponent.propTypes = {};
-// ChartComponent.defaultProps = {};
+ChartComponent.defaultProps = {
+  chart: {
+    trend: {
+      x: [],
+      y: []
+    }
+  }
+};
 
-function mapStateToProps(state) {
-  const { chart } = state;
-
-  return {
-    chart
-  };
-}
-
-export default connect(mapStateToProps)(ChartComponent);
+export default ChartComponent;

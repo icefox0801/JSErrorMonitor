@@ -2,23 +2,14 @@
 
 import React from 'react';
 import { Glyphicon, Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { Link } from 'react-router';
-
-import { jsError } from '../../../actions';
 
 require('styles/home/data/List.scss');
 
 class ListComponent extends React.Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(this.props.type === 'most' ? jsError.fetchMostErrorList() : jsError.fetchLatestErrorList());
-  }
+
   render() {
-
-    const list = this.props.jsError[this.props.type];
-    const type = this.props.type;
-
+    const { list, type } = this.props;
     return (
       <Panel header={<p><span>{this.props.title}</span><Link to="/error/list/archive" className="pull-right">更多</Link></p>} className="home-data-list">
         <ListGroup fill>
@@ -49,12 +40,4 @@ ListComponent.displayName = 'HomeDataListComponent';
 // ListComponent.propTypes = {};
 // ListComponent.defaultProps = {};
 
-function mapStateToProps(state) {
-  const { jsError } = state;
-
-  return {
-    jsError
-  };
-}
-
-export default connect(mapStateToProps)(ListComponent);
+export default ListComponent;

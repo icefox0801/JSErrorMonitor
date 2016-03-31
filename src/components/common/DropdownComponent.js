@@ -1,5 +1,6 @@
 'use strict';
 
+import _ from 'lodash';
 import React from 'react';
 import { NavDropdown, DropdownButton, MenuItem } from 'react-bootstrap';
 
@@ -8,7 +9,16 @@ require('styles/common/Dropdown.scss');
 class DropdownComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = this.getActive(this.props);
+  }
 
+  componentWillReceiveProps (nextProps) {
+
+    if(this.props.type == 'nav') this.setState(this.getActive(nextProps));
+
+  }
+
+  getActive (props) {
     var key = -1;
     var text = props.placeholder;
 
@@ -17,8 +27,8 @@ class DropdownComponent extends React.Component {
       text = props.list[0].value;
     }
 
-    if(props.activeKey) {
-      var obj = props.list.filter(item => item.key == props.activeKey)[0];
+    if(props.selectKey) {
+      var obj = props.list.filter(item => item.key == props.selectKey)[0];
 
       if(obj) {
         key = obj.key;
@@ -27,18 +37,13 @@ class DropdownComponent extends React.Component {
 
     }
 
-    this.state = {
-      text,
-      key
-    };
+    return { text, key };
   }
 
   handleSelect (event, key) {
     const text = this.props.list.filter(item => item.key == key)[0].value;
-    this.setState({
-      key,
-      text
-    });
+    this.setState({ key, text });
+    if(_.isFunction(this.props.handleSelect)) this.props.handleSelect(key);
   }
 
   render() {
