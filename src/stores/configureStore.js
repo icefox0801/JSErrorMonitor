@@ -19,6 +19,7 @@ export default function configureStore(history, initialState) {
   const reducer = combineReducers({
     global: reducers.global,
     filter: reducers.filter,
+    status: reducers.status,
     jsError: reducers.jsError,
     chart: reducers.chart,
     routing: routerReducer

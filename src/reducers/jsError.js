@@ -26,7 +26,6 @@ function listLatestError(state = [], action) {
 }
 
 function listAllError(state = { list: [], meta: {} }, action) {
-
   switch(action.type) {
     case types.ALL_ERROR_LIST:
       return Object.assign({}, state, {

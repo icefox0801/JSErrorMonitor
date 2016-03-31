@@ -6,10 +6,10 @@ import { connect } from 'react-redux';
 import { Panel, ListGroup, ListGroupItem, Row, Col, Label, Input, Button, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
 
-
-import PaginationComponent from '../../common/PaginationComponent';
 import DropdownComponent from '../../common/DropdownComponent';
-import { pageSize, browser, os } from '../../../constants/dropdown';
+import RangeComponent from '../common/RangeComponent';
+import PaginationComponent from '../common/PaginationComponent';
+import * as dropdown from '../../../constants/dropdown';
 import { jsErrorAction, filterAction } from '../../../actions';
 
 require('styles/error/list/Error.scss');
@@ -22,28 +22,28 @@ class ErrorComponent extends React.Component {
 
   componentDidUpdate (prevProps, prevState) {
     // 深度遍历对象是否相等
-    var flag = ['params', 'filter', 'global'].every(key => _.isEqual(this.props[key], prevProps[key]));
+    var flag = ['params', 'filter', 'global', 'status'].every(key => _.isEqual(this.props[key], prevProps[key]));
 
     if(!flag) this.fetchErrorList();
-
-    return !flag;
   }
 
   handleSelect (key, value) {
-    const { dispatch, filter, params } = this.props;
+    const { dispatch, params } = this.props;
     _.set(params, 'page', 1);
     dispatch(filterAction.setFilterProps(key, value));
   }
 
   fetchErrorList () {
-    const { dispatch, params, filter } = this.props;
-    dispatch(jsErrorAction.fetchAllErrorList(Object.assign({}, params, filter)));
+    const { dispatch, params, filter, status } = this.props;
+    dispatch(jsErrorAction.fetchAllErrorList(Object.assign({}, params, filter, status)));
   }
 
   render () {
+    const { all } = this.props.jsError;
+    const { params, filter } = this.props;
     const header = (
       <Row>
-        <Col md={6}>错误</Col>
+        <Col md={6}>错误{all.list.length ? <RangeComponent meta={all.meta} /> : ''}</Col>
         <Col md={2}>浏览器</Col>
         <Col md={2}>操作系统</Col>
         <Col md={2}>日期</Col>
@@ -54,9 +54,6 @@ class ErrorComponent extends React.Component {
       <Button bsStyle="primary"><Glyphicon glyph="search" />&nbsp;搜索</Button>
     );
 
-    const { all } = this.props.jsError;
-    const { params, filter } = this.props;
-
     return (
       <div className="container-fluid" id="error-list-error">
         <form action="" className="form-inline">
@@ -64,19 +61,19 @@ class ErrorComponent extends React.Component {
             <Col md={3}>
               <div className="form-group">
                 <label htmlFor="">每页数量：</label>
-                <DropdownComponent list={pageSize.list} placeholder={pageSize.placeholder} activeKey={filter.pageSize} id="dropdown-page-size" handleSelect={key => this.handleSelect('pageSize', key)}/>
+                <DropdownComponent list={dropdown.pageSize.list} placeholder={dropdown.pageSize.placeholder} activeKey={filter.pageSize} id="dropdown-page-size" handleSelect={key => this.handleSelect('pageSize', key)}/>
               </div>
             </Col>
             <Col md={3}>
               <div className="form-group">
                 <label htmlFor="">浏览器：</label>
-                <DropdownComponent list={browser.list} placeholder={browser.placeholder} id="dropdown-browser" />
+                <DropdownComponent list={dropdown.browser.list} placeholder={dropdown.browser.placeholder} id="dropdown-browser" />
               </div>
             </Col>
             <Col md={3}>
               <div className="form-group">
                 <label htmlFor="">操作系统：</label>
-                <DropdownComponent list={os.list} placeholder={os.placeholder} id="dropdown-os" />
+                <DropdownComponent list={dropdown.os.list} placeholder={dropdown.os.placeholder} id="dropdown-os" />
               </div>
             </Col>
             <Col md={3}>
@@ -87,7 +84,9 @@ class ErrorComponent extends React.Component {
 
         <Panel header={header} id="error-list-error">
           <ListGroup fill>
-            {all.list.map(function (error) {
+            {!all.list.length ?
+              <ListGroupItem key={0} bsStyle="warning">没有符合条件的结果</ListGroupItem> :
+              all.list.map(function (error) {
               return (
                 <ListGroupItem key={error._id}>
                   <Row>
@@ -109,7 +108,9 @@ class ErrorComponent extends React.Component {
             })}
           </ListGroup>
         </Panel>
-        <PaginationComponent linkPrefix="/error/list/all/" page={params.page} total={all.meta.total} />
+        {all.list.length ?
+          <PaginationComponent linkPrefix="/error/list/all/" page={params.page} total={all.meta.total} /> :
+          ''}
       </div>
     );
   }
@@ -122,8 +123,8 @@ ErrorComponent.propTypes = {
 ErrorComponent.displayName = 'ErrorListErrorComponent';
 
 function mapStateToProps(state) {
-  const { jsError, filter } = state;
-  return { jsError, filter }
+  const { jsError, filter, global, status } = state;
+  return { jsError, filter, global, status }
 }
 
 // Uncomment properties you need
@@ -131,6 +132,12 @@ ErrorComponent.propTypes = {};
 ErrorComponent.defaultProps = {
   filter: {
     pageSize: 20
+  },
+  jsError: {
+    all: {
+      list: [],
+      meta: {}
+    }
   }
 };
 

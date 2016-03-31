@@ -65,19 +65,21 @@ function listBrowserError (json) {
   };
 }
 
-export function fetchMostErrorList (params) {
+export function fetchMostErrorList () {
   return dispatch => {
     //dispatch(loadingShow);
-    return fetch('/api/error/list/most')
+    return packOptions()
+      .then(options => fetch('/api/error/list/most', options))
       .then(response => response.json())
       .then(json => dispatch(listMostError(json)))
   };
 }
 
-export function fetchLatestErrorList (params) {
+export function fetchLatestErrorList () {
   return dispatch => {
     //dispatch(loadingShow);
-    return fetch('/api/error/list/latest')
+    return packOptions()
+      .then(options => fetch('/api/error/list/latest', options))
       .then(response => response.json())
       .then(json => dispatch(listLatestError(json)))
   };
@@ -86,7 +88,8 @@ export function fetchLatestErrorList (params) {
 export function fetchAllErrorList (params) {
   return dispatch => {
     //dispatch(loadingShow);
-    return packOptions(params).then(options => fetch('/api/error/list/all/' + params.page, options))
+    return packOptions(params)
+      .then(options => fetch('/api/error/list/all/' + params.page, options))
       .then(response => response.json())
       .then(json => dispatch(listAllError(json)))
   };

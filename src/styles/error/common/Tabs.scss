@@ -27,6 +27,10 @@
     a {
       border-bottom: 3px solid #1a8cff;
     }
+
+    .badge {
+      display: inline-block;
+    }
   }
 
   .tabs-title {
@@ -36,6 +40,7 @@
   }
 
   .badge {
+    display: none;
     vertical-align: middle;
   }
 }

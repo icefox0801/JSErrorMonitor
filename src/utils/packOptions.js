@@ -1,7 +1,7 @@
 'use strict';
 
 const packOptions = function (params) {
-    var promise = new Promise(function (resolve, reject) {
+  return new Promise(function (resolve, reject) {
 
     try {
       var urlParams = {};
@@ -18,7 +18,7 @@ const packOptions = function (params) {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(Object.assign({}, params, globalParams))
+        body: JSON.stringify(Object.assign({}, params || {}, globalParams))
       };
       resolve(options);
     } catch (err) {
@@ -26,8 +26,6 @@ const packOptions = function (params) {
     }
 
   });
-
-  return promise;
 };
 
 export default packOptions;

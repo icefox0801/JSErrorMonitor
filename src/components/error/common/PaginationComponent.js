@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { Pagination } from 'react-bootstrap';
 
-require('styles/common/Pagination.scss');
+require('styles/error/common/Pagination.scss');
 
 class PaginationComponent extends React.Component {
 
@@ -24,7 +24,7 @@ class PaginationComponent extends React.Component {
   }
 }
 
-PaginationComponent.displayName = 'CommonPaginationComponent';
+PaginationComponent.displayName = 'ErrorCommonPaginationComponent';
 
 // Uncomment properties you need
 // PaginationComponent.propTypes = {};

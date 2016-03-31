@@ -1,20 +1,22 @@
 'use strict';
 
 import React from 'react';
-import { Nav, NavItem } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Nav, NavItem, Glyphicon } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 require('styles/error/common/Tabs.scss');
 
 class TabsComponent extends React.Component {
   render() {
+    const { jsError } = this.props;
     return (
       <nav id="error-common-tabs">
         <Nav bsStyle="tabs">
           <LinkContainer to="/error/list/all">
             <NavItem>
               <span className="tabs-title">全部</span>
-              <span className="badge">400</span>
+              <span className="badge">{jsError.all.meta.count || 0}</span>
             </NavItem>
           </LinkContainer>
           <LinkContainer to="/error/list/archive">
@@ -53,4 +55,9 @@ TabsComponent.displayName = 'ErrorCommonTabsComponent';
 // TabsComponent.propTypes = {};
 // TabsComponent.defaultProps = {};
 
-export default TabsComponent;
+function mapStateToProps(state) {
+  const { jsError } = state;
+  return { jsError }
+}
+
+export default connect(mapStateToProps)(TabsComponent);
