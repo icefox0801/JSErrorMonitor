@@ -3,12 +3,13 @@
 import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Panel, ListGroup, ListGroupItem, Row, Col, Label, Input, Button, Glyphicon } from 'react-bootstrap';
+import { Panel, ListGroup, ListGroupItem, Row, Col, Label, Button, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 import DropdownComponent from '../../common/DropdownComponent';
 import RangeComponent from '../common/RangeComponent';
 import PaginationComponent from '../common/PaginationComponent';
+import SearchComponent from '../common/SearchComponent';
 import * as dropdown from '../../../constants/dropdown';
 import { jsErrorAction, filterAction } from '../../../actions';
 
@@ -33,6 +34,11 @@ class ErrorComponent extends React.Component {
     dispatch(filterAction.setFilterProps(key, value));
   }
 
+  handleSearch (value) {
+    debugger;
+    this.handleSelect('keyword', value);
+  }
+
   fetchErrorList () {
     const { dispatch, params, filter, status } = this.props;
     dispatch(jsErrorAction.fetchAllErrorList(Object.assign({}, params, filter, status)));
@@ -49,11 +55,6 @@ class ErrorComponent extends React.Component {
         <Col md={2}>日期</Col>
       </Row>
     );
-
-    const searchButton = (
-      <Button bsStyle="primary"><Glyphicon glyph="search" />&nbsp;搜索</Button>
-    );
-
     return (
       <div className="container-fluid" id="error-list-error">
         <form action="" className="form-inline">
@@ -67,17 +68,17 @@ class ErrorComponent extends React.Component {
             <Col md={3}>
               <div className="form-group">
                 <label htmlFor="">浏览器：</label>
-                <DropdownComponent list={dropdown.browser.list} placeholder={dropdown.browser.placeholder} id="dropdown-browser" />
+                <DropdownComponent list={dropdown.browser.list} activeKey={filter.browser} placeholder={dropdown.browser.placeholder} id="dropdown-browser" handleSelect={key => this.handleSelect('browser', key)}/>
               </div>
             </Col>
             <Col md={3}>
               <div className="form-group">
                 <label htmlFor="">操作系统：</label>
-                <DropdownComponent list={dropdown.os.list} placeholder={dropdown.os.placeholder} id="dropdown-os" />
+                <DropdownComponent list={dropdown.os.list} activeKey={filter.os} placeholder={dropdown.os.placeholder} handleSelect={key => this.handleSelect('os', key)} id="dropdown-os" />
               </div>
             </Col>
             <Col md={3}>
-              <Input type="text" buttonAfter={searchButton} />
+              <SearchComponent handleSearch={value => this.handleSearch(value)}/>
             </Col>
           </Row>
         </form>
@@ -131,7 +132,10 @@ function mapStateToProps(state) {
 ErrorComponent.propTypes = {};
 ErrorComponent.defaultProps = {
   filter: {
-    pageSize: 20
+    pageSize: 20,
+    browser: 'all',
+    os: 'all',
+    keyword: ''
   },
   jsError: {
     all: {

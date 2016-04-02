@@ -26,7 +26,6 @@ class StatusToggleComponent extends React.Component {
   }
 
   render() {
-    const { status } = this.props;
     const statusList = [{
       key: 'open',
       value: '未解决',
@@ -42,7 +41,7 @@ class StatusToggleComponent extends React.Component {
     }];
     return (
       <ButtonGroup bsSize="xsmall">
-        {statusList.map(item => (<Button active={this.state.active === item.key} key={item.key} bsStyle={this.state.active === item.key ? item.bsStyle : 'default'} onClick={e => this.handleSelect(item.key)}>{item.value}</Button>))}
+        {statusList.map(item => (<Button active={this.state.active === item.key} key={item.key} bsStyle={this.state.active === item.key ? item.bsStyle : 'default'} onClick={() => this.handleSelect(item.key)}>{item.value}</Button>))}
       </ButtonGroup>
     );
   }

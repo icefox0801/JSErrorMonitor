@@ -17,6 +17,8 @@ import ErrorListArchive from './error/list/ArchiveComponent';
 import ErrorListBrowser from './error/list/BrowserComponent';
 import ErrorListOS from './error/list/OsComponent';
 import ErrorDetail from './error/DetailComponent';
+import Live from './live/MainComponent';
+import Chart from './chart/MainComponent';
 
 const store = configureStore(browserHistory);
 
@@ -56,6 +58,8 @@ let AppRouter = (
           </Route>
           <Route path="detail/:errorId" component={ErrorDetail} />
         </Route>
+        <Route path="live" component={Live} />
+        <Route path="chart" component={Chart} />
         <Redirect from="*" to="home" />
       </Route>
     </Router>

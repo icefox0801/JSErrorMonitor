@@ -4,7 +4,6 @@ const packOptions = function (params) {
   return new Promise(function (resolve, reject) {
 
     try {
-      var urlParams = {};
       var globalParams = {};
       var options = {};
       const business = localStorage.getItem('business');
@@ -12,7 +11,6 @@ const packOptions = function (params) {
       const platform = localStorage.getItem('platform');
       globalParams = { business, timeRange, platform };
 
-      urlParams = Object.assign({}, params, globalParams);
       options = {
         method: 'POST',
         headers: {

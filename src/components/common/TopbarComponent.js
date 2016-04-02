@@ -1,5 +1,6 @@
 'use strict';
 
+import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
@@ -17,7 +18,8 @@ class TopbarComponent extends React.Component {
   }
 
   handleSelect (key, value) {
-    const { dispatch } = this.props;
+    const { dispatch, params } = this.props;
+    _.set(params, 'page', 1);
     dispatch(globalAction.setGlobalProps(key, value))
   }
 
@@ -34,9 +36,9 @@ class TopbarComponent extends React.Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
-              <NavItem active>PC端</NavItem>
-              <NavItem>M端</NavItem>
-              <NavItem>App</NavItem>
+              <NavItem active={global.platform === 'pc'} key="pc" onClick={() => this.handleSelect('platform', 'pc')}>PC端</NavItem>
+              <NavItem active={global.platform === 'm'} key="m" onSelect={() => this.handleSelect('platform', 'm')}>M端</NavItem>
+              <NavItem active={global.platform === 'app'} key="app" onSelect={() => this.handleSelect('platform', 'app')}>App</NavItem>
               <DropdownComponent type="nav" list={business.list} id="dropdown-business" placeholder={business.placeholder} selectKey={global.business} handleSelect={key => this.handleSelect('business', key)} />
               <DropdownComponent type="nav" list={timeRange.list} id="dropdown-time-range" placeholder={timeRange.placeholder} selectKey={global.timeRange} handleSelect={key => this.handleSelect('timeRange', key)}/>
             </Nav>
@@ -65,8 +67,8 @@ TopbarComponent.defaultProps = {
 };
 
 function mapStateToProps(state) {
-  const { global } = state;
-  return { global };
+  const { global, params } = state;
+  return { global, params };
 }
 
 export default connect(mapStateToProps)(TopbarComponent);

@@ -20,9 +20,9 @@ export function getGlobalProps () {
   var promise = new Promise(function (resolve, reject) {
 
     try {
-      const timeRange = localStorage.getItem('timeRange');
-      const business = localStorage.getItem('business');
-      const platform = localStorage.getItem('platform');
+      const timeRange = localStorage.getItem('timeRange') || 168;
+      const business = localStorage.getItem('business') || 'all';
+      const platform = localStorage.getItem('platform') || 'pc';
       resolve({ timeRange, business, platform })
     } catch (err) {
       reject(err);

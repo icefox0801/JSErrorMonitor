@@ -65,7 +65,7 @@ exports.os = {
       value: 'Windows'
     },
     {
-      key: 'mac',
+      key: 'MAC OS X',
       value: 'MAC OS X'
     },
     {
