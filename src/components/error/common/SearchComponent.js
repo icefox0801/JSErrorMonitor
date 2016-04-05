@@ -1,29 +1,27 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Input, Button, Glyphicon } from 'react-bootstrap';
 
 require('styles/error/common/Search.scss');
 
 class SearchComponent extends React.Component {
 
-  handleClick (event) {
+  handleClick () {
     const { handleSearch } = this.props;
-    console.log(this.getDOMNode());
-    handleSearch(value);
-  }
 
-  handleKeyPress (event) {
-    const { handleSearch } = this.props;
-    handleSearch(event.target.value);
+    console.log(this.refs.searchInput);
+    const value = this.refs.searchInput.getValue();
+    handleSearch(value);
   }
 
   render() {
     const searchButton = (
-      <Button bsStyle="primary" onclick={event => this.handleClick(event)}><Glyphicon glyph="search" />&nbsp;搜索</Button>
+      <Button bsStyle="primary" onClick={() => this.handleClick()}><Glyphicon glyph="search" />&nbsp;搜索</Button>
     );
     return (
-      <Input type="text" buttonAfter={searchButton} onkeypress={event => this.handleKeyPress(event)} />
+      <Input type="text" buttonAfter={searchButton} ref="searchInput" />
     );
   }
 }

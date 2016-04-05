@@ -34,14 +34,9 @@ class ErrorComponent extends React.Component {
     dispatch(filterAction.setFilterProps(key, value));
   }
 
-  handleSearch (value) {
-    debugger;
-    this.handleSelect('keyword', value);
-  }
-
   fetchErrorList () {
     const { dispatch, params, filter, status } = this.props;
-    dispatch(jsErrorAction.fetchAllErrorList(Object.assign({}, params, filter, status)));
+    dispatch(jsErrorAction.fetchAllErrorList(Object.assign({}, params, filter, {status: status})));
   }
 
   render () {
@@ -57,7 +52,7 @@ class ErrorComponent extends React.Component {
     );
     return (
       <div className="container-fluid" id="error-list-error">
-        <form action="" className="form-inline">
+        <div className="form-inline">
           <Row>
             <Col md={3}>
               <div className="form-group">
@@ -78,10 +73,10 @@ class ErrorComponent extends React.Component {
               </div>
             </Col>
             <Col md={3}>
-              <SearchComponent handleSearch={value => this.handleSearch(value)}/>
+              <SearchComponent handleSearch={value => this.handleSelect('keyword', value)}/>
             </Col>
           </Row>
-        </form>
+        </div>
 
         <Panel header={header} id="error-list-error">
           <ListGroup fill>

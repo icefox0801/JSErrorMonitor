@@ -99,7 +99,8 @@ export function fetchAllErrorList (params) {
 export function fetchArchiveErrorList (params) {
   return dispatch => {
     //dispatch(loadingShow);
-    return fetch('/api/error/list/archive/' + params.page)
+    return packOptions()
+      .then(options => fetch('/api/error/list/archive/' + params.page, options))
       .then(response => response.json())
       .then(json => dispatch(listArchiveError(json)))
   };

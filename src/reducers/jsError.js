@@ -8,7 +8,7 @@ function listMostError(state = [], action) {
 
   switch(action.type) {
     case types.MOST_ERROR_LIST:
-      return Object.assign([], state, action.most);
+      return Object.assign([], action.most);
     default:
       return state;
   }
@@ -19,7 +19,7 @@ function listLatestError(state = [], action) {
 
   switch(action.type) {
     case types.LATEST_ERROR_LIST:
-      return Object.assign([], state, action.latest);
+      return Object.assign([], action.latest);
     default:
       return state;
   }
