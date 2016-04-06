@@ -2,13 +2,20 @@
 
 import * as types from '../constants/actionType';
 
-function filterReducer (state = {}, action) {
-  switch(action.type) {
+function filterReducer(state = {}, action) {
+  var nextState = {};
+  switch (action.type) {
     case types.FILTER_SET:
-      return Object.assign({}, state, action.filter);
+      nextState = Object.assign({}, state, action.filter);
+      break;
+    case types.FILTER_RESET:
+      nextState = {};
+      break;
     default:
-      return state;
+      nextState = state;
+      break;
   }
+  return nextState;
 }
 
 export default filterReducer;

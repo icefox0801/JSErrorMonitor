@@ -47,14 +47,8 @@ let AppRouter = (
               <IndexRedirect to="/error/list/page/1" />
               <Route path=":page" component={ErrorListPage} />
             </Route>
-            <Route path="browser">
-              <IndexRedirect to="/error/list/browser/1" />
-              <Route path=":page" component={ErrorListBrowser} />
-            </Route>
-            <Route path="os">
-              <IndexRedirect to="/error/list/os/1" />
-              <Route path=":page" component={ErrorListOS} />
-            </Route>
+            <Route path="browser" component={ErrorListBrowser} />
+            <Route path="os" component={ErrorListOS} />
           </Route>
           <Route path="detail/:errorId" component={ErrorDetail} />
         </Route>

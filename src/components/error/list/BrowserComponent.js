@@ -1,81 +1,76 @@
 'use strict';
 
+import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Panel, ListGroup, ListGroupItem, Row, Col, Pagination, Input, Button, Glyphicon } from 'react-bootstrap';
+import { Panel, ListGroup, ListGroupItem, Row, Col, Accordion, Alert } from 'react-bootstrap';
 import { Link } from 'react-router';
 
-import DropdownComponent from '../../common/DropdownComponent';
-import { pageSize, timeRange } from '../../../constants/dropdown';
-import { jsErrorAction } from '../../../actions';
+import { jsErrorAction, filterAction } from '../../../actions';
 
 require('styles/error/list/Browser.scss');
 
 class BrowserComponent extends React.Component {
   componentDidMount () {
-    const { dispatch, params } = this.props;
-    dispatch(jsErrorAction.fetchBrowserErrorList(params));
+    const { dispatch } = this.props;
+    dispatch(filterAction.resetFilterProps());
+    this.fetchErrorList();
   }
+
+  componentDidUpdate (prevProps, prevState) {
+    // 深度遍历对象是否相等
+    var flag = ['params', 'filter', 'global', 'status'].every(key => _.isEqual(this.props[key], prevProps[key]));
+
+    if(!flag) this.fetchErrorList();
+  }
+
+  fetchErrorList () {
+    const { dispatch, params, filter, status } = this.props;
+    dispatch(jsErrorAction.fetchBrowserErrorList(Object.assign({}, params, filter, {status: status})));
+  }
+
   render () {
-
-    const header = (
-      <Row>
-        <Col md={5}>浏览器</Col>
-        <Col md={5}>版本范围</Col>
-        <Col md={2}>数量</Col>
-      </Row>
-    );
-
-    const searchButton = (
-      <Button bsStyle="primary"><Glyphicon glyph="search" />&nbsp;搜索</Button>
-    );
-
     const { browsers } = this.props.jsError;
-
     return (
       <div className="container-fluid" id="error-list-error">
-        <form action="" className="form-inline">
-          <Row>
-            <Col md={3}>
-              <div className="form-group">
-                <label htmlFor="">每页数量：</label>
-                <DropdownComponent list={pageSize.list} placeholder={pageSize.placeholder} id="dropdown-page-number" />
-              </div>
-            </Col>
-            <Col md={3}>
-              <div className="form-group">
-                <label htmlFor="">时间范围：</label>
-                <DropdownComponent list={timeRange.list} placeholder={timeRange.placeholder} id="dropdown-time-range" />
-              </div>
-            </Col>
-            <Col md={6}>
-              <Input label="关键词：" type="text" buttonAfter={searchButton} />
-            </Col>
-          </Row>
-        </form>
-
-        <Panel header={header} id="error-list-archive">
-          <ListGroup fill>
-            {browsers.list.map(function (browser, idx) {
-              return (
-                <ListGroupItem key={browser._id}>
-                  <Row>
-                    <Col md={5}>
-                      <p><Link to={`/error/detail/${idx}`} className="text-primary">{browser.name}</Link></p>
-                    </Col>
-                    <Col md={5}>
-                      <p>{browser.min} - {browser.max}</p>
-                    </Col>
-                    <Col md={2}>
-                      <p><strong className="text-danger">{browser.count}</strong></p>
-                    </Col>
-                  </Row>
-                </ListGroupItem>
+        <Accordion defaultActiveKey={0}>
+          {!browsers.list.length ?
+            <Alert bsStyle="warning">没有符合条件的结果</Alert> :
+            browsers.list.map(function (browser, idx) {
+              var header = (
+                <Row>
+                  <Col md={5}>{browser.name}</Col>
+                  <Col md={5}>{browser.min} - {browser.max}</Col>
+                  <Col md={2}><strong className="text-danger">{browser.count}</strong></Col>
+                </Row>
               );
-            })}
-          </ListGroup>
-        </Panel>
-        <Pagination className="pull-right" prev next first last ellipsis boundaryLinks items={20} maxButtons={5} activePage={1} />
+
+              return (
+                <Panel header={header} eventKey={idx} bsStyle="default" key={`browser_${idx}`}>
+                  <ListGroup fill>
+                    {browser.versions && browser.versions.map(function (version, idx) {
+                      return (
+                        <ListGroupItem key={version._id}>
+                          <Row>
+                            <Col md={5}>
+                              <p><Link to={`/error/detail/${idx}`} className="text-primary">{version.name}</Link></p>
+                            </Col>
+                            <Col md={5}>
+                              <p>版本：{version.version}</p>
+                            </Col>
+                            <Col md={2}>
+                              <p><strong className="text-danger">{version.count}</strong></p>
+                            </Col>
+                          </Row>
+                        </ListGroupItem>
+                      );
+                    })}
+                  </ListGroup>
+                </Panel>
+              );
+            })
+          }
+        </Accordion>
       </div>
     );
   }
@@ -84,15 +79,19 @@ class BrowserComponent extends React.Component {
 BrowserComponent.displayName = 'ErrorListBrowserComponent';
 
 // Uncomment properties you need
-// BrowserComponent.propTypes = {};
-// BrowserComponent.defaultProps = {};
+BrowserComponent.propTypes = {};
+BrowserComponent.defaultProps = {
+  filter: {},
+  jsError: {
+    browsers: {
+      list: []
+    }
+  }
+};
 
 function mapStateToProps(state) {
-  const { jsError } = state;
-
-  return {
-    jsError
-  }
+  const { jsError, filter, global, status } = state;
+  return { jsError, filter, global, status }
 }
 
 export default connect(mapStateToProps)(BrowserComponent);

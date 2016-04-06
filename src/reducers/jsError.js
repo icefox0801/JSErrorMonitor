@@ -66,10 +66,25 @@ function listBrowserError(state = { list: [], meta: {} }, action) {
 
 }
 
+function listOSError(state = { list: [], meta: {} }, action) {
+
+  switch(action.type) {
+    case types.OS_ERROR_LIST:
+      return Object.assign({}, state, {
+        list: action.list,
+        meta: action.meta
+      });
+    default:
+      return state;
+  }
+
+}
+
 const jsErrorReducer = combineReducers ({
   all: listAllError,
   archives: listArchiveError,
   browsers: listBrowserError,
+  os: listOSError,
   most: listMostError,
   latest: listLatestError
 });

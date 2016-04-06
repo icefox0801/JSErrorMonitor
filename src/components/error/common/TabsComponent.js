@@ -22,7 +22,7 @@ class TabsComponent extends React.Component {
           <LinkContainer to="/error/list/archive">
             <NavItem>
               <span className="tabs-title">归档</span>
-              <span className="badge">178</span>
+              <span className="badge">{jsError.archives.meta.count || 0}</span>
             </NavItem>
           </LinkContainer>
           <LinkContainer to="/error/list/page">
@@ -34,13 +34,13 @@ class TabsComponent extends React.Component {
           <LinkContainer to="/error/list/browser">
             <NavItem>
               <span className="tabs-title">浏览器</span>
-              <span className="badge">6</span>
+              <span className="badge">{jsError.browsers.meta.count || 0}</span>
             </NavItem>
           </LinkContainer>
           <LinkContainer to="/error/list/os">
             <NavItem>
               <span className="tabs-title">操作系统</span>
-              <span className="badge">3</span>
+              <span className="badge">{jsError.os.meta.count || 0}</span>
             </NavItem>
           </LinkContainer>
         </Nav>

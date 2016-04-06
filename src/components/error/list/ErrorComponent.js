@@ -16,9 +16,13 @@ import { jsErrorAction, filterAction } from '../../../actions';
 require('styles/error/list/Error.scss');
 
 class ErrorComponent extends React.Component {
-
   componentDidMount () {
     this.fetchErrorList();
+  }
+
+  componentWillUnmount () {
+    const { dispatch } = this.props;
+    dispatch(filterAction.resetFilterProps());
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -44,7 +48,7 @@ class ErrorComponent extends React.Component {
     const { params, filter } = this.props;
     const header = (
       <Row>
-        <Col md={6}>错误{all.list.length ? <RangeComponent meta={all.meta} /> : ''}</Col>
+        <Col md={6}>错误<RangeComponent meta={all.meta} /></Col>
         <Col md={2}>浏览器</Col>
         <Col md={2}>操作系统</Col>
         <Col md={2}>日期</Col>
@@ -83,25 +87,28 @@ class ErrorComponent extends React.Component {
             {!all.list.length ?
               <ListGroupItem key={0} bsStyle="warning">没有符合条件的结果</ListGroupItem> :
               all.list.map(function (error) {
-              return (
-                <ListGroupItem key={error._id}>
-                  <Row>
-                    <Col md={6}>
-                      <p><Link to={`/error/detail/${error._id}`} className="text-danger"><strong>『{error.status === 'open' ? '未解决' : '已解决'}』</strong>{error.message}</Link></p>
-                    </Col>
-                    <Col md={2}>
-                      <p><Label bsStyle="default">{error.browser.name}</Label></p>
-                    </Col>
-                    <Col md={2}>
-                      <p><Label bsStyle="info">{error.os.name}</Label></p>
-                    </Col>
-                    <Col md={2}>
-                      <p className="text-muted">{error.fromNow}</p>
-                    </Col>
-                  </Row>
-                </ListGroupItem>
-              );
-            })}
+                return (
+                  <ListGroupItem key={error._id}>
+                    <Row>
+                      <Col md={6}>
+                        <p><Link to={`/error/detail/${error._id}`}
+                                 className="text-danger"><strong>『{error.status === 'open' ? '未解决' : '已解决'}』</strong>{error.message}
+                        </Link></p>
+                      </Col>
+                      <Col md={2}>
+                        <p><Label bsStyle="default">{error.browser.name}</Label></p>
+                      </Col>
+                      <Col md={2}>
+                        <p><Label bsStyle="info">{error.os.name}</Label></p>
+                      </Col>
+                      <Col md={2}>
+                        <p className="text-muted">{error.fromNow}</p>
+                      </Col>
+                    </Row>
+                  </ListGroupItem>
+                );
+              })
+            }
           </ListGroup>
         </Panel>
         {all.list.length ?

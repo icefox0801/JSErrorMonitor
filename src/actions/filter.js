@@ -10,12 +10,24 @@ function setFilter (params) {
   }
 }
 
+function resetFilter () {
+  return {
+    type: types.FILTER_RESET
+  }
+}
+
 export function setFilterProps (key, value) {
-  var param = {};
-  _.set(param, key, value);
+  var params = {};
+  _.set(params, key, value);
 
   return dispatch => {
-    //dispatch(loadingShow);
-    return dispatch(setFilter(param));
+    return dispatch(setFilter(params));
   };
+}
+
+export function resetFilterProps () {
+
+  return dispatch => {
+    return dispatch(resetFilter());
+  }
 }

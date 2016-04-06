@@ -10,6 +10,11 @@ class RangeComponent extends React.Component {
     const { current, pageSize, count } = this.props.meta;
     const startIndex = (current - 1) * pageSize + 1;
     const endIndex = _.min([startIndex + pageSize - 1, count]);
+
+    if(count == 0) return (
+      <small />
+    );
+
     return (
       startIndex === endIndex ?
       <small className="text-muted">&nbsp;#{startIndex}</small> :
