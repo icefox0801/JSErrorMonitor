@@ -1,3 +1,13 @@
-.page-component {
-  border: 1px dashed #f00;
+// 页面列表样式
+#error-list-page {
+  p {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .form-inline {
+    margin-bottom: 20px;
+  }
 }

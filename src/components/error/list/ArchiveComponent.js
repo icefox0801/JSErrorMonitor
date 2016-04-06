@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Panel, ListGroup, ListGroupItem, Row, Col, Input, Button, Glyphicon } from 'react-bootstrap';
+import { Panel, ListGroup, ListGroupItem, Row, Col, Input, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 import DropdownComponent from '../../common/DropdownComponent';
@@ -55,11 +55,9 @@ class ArchiveComponent extends React.Component {
         <Col md={1}>数量</Col>
       </Row>
     );
-    const searchButton = (
-      <Button bsStyle="primary"><Glyphicon glyph="search" />&nbsp;搜索</Button>
-    );
+
     return (
-      <div className="container-fluid" id="error-list-error">
+      <div className="container-fluid" id="error-list-archive">
         <form action="" className="form-inline">
           <Row>
             <Col md={6}>
@@ -74,7 +72,7 @@ class ArchiveComponent extends React.Component {
           </Row>
         </form>
 
-        <Panel header={header} id="error-list-archive">
+        <Panel header={header} >
           <ListGroup fill>
             {!archives.list.length ?
               <ListGroupItem key={0} bsStyle="warning">没有符合条件的结果</ListGroupItem> :

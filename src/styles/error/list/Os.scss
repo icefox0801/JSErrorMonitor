@@ -1,3 +1,12 @@
-.os-component {
-  border: 1px dashed #f00;
+// 操作系统列表样式
+#error-list-os {
+  margin-top: 10px;
+
+  p {
+    margin: 0;
+  }
+
+  .form-inline {
+    margin-bottom: 20px;
+  }
 }

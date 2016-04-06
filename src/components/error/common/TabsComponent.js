@@ -28,7 +28,7 @@ class TabsComponent extends React.Component {
           <LinkContainer to="/error/list/page">
             <NavItem>
               <span className="tabs-title">页面</span>
-              <span className="badge">30</span>
+              <span className="badge">{jsError.pages.meta.count || 0}</span>
             </NavItem>
           </LinkContainer>
           <LinkContainer to="/error/list/browser">

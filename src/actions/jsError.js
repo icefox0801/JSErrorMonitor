@@ -44,6 +44,17 @@ function listArchiveError (json) {
   };
 }
 
+function listPageError (json) {
+  return {
+    type: types.PAGE_ERROR_LIST,
+    list: json.result.map(archive => Object.assign({}, archive, {
+      earliest: transformDate(archive.earliest),
+      latest: transformDate(archive.latest)
+    })),
+    meta: json.meta
+  };
+}
+
 function listBrowserError (json) {
   return {
     type: types.BROWSER_ERROR_LIST,
@@ -98,6 +109,16 @@ export function fetchArchiveErrorList (params) {
       .then(options => fetch('/api/error/list/archive/' + params.page, options))
       .then(response => response.json())
       .then(json => dispatch(listArchiveError(json)));
+  };
+}
+
+export function fetchPageErrorList (params) {
+  return dispatch => {
+    //dispatch(loadingShow);
+    return packOptions(params)
+      .then(options => fetch('/api/error/list/page/' + params.page, options))
+      .then(response => response.json())
+      .then(json => dispatch(listPageError(json)));
   };
 }
 

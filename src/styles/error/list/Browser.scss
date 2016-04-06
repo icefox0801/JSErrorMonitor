@@ -1,3 +1,12 @@
-.browser-component {
-  border: 1px dashed #f00;
+// 浏览器列表样式
+#error-list-browser {
+  margin-top: 10px;
+
+  p {
+    margin: 0;
+  }
+
+  .form-inline {
+    margin-bottom: 20px;
+  }
 }

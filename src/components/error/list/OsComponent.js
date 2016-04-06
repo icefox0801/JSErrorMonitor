@@ -32,7 +32,7 @@ class OsComponent extends React.Component {
   render () {
     const { os } = this.props.jsError;
     return (
-      <div className="container-fluid" id="error-list-error">
+      <div className="container-fluid" id="error-list-os">
         <Accordion defaultActiveKey={0}>
           {!os.list.length ?
             <Alert bsStyle="warning">没有符合条件的结果</Alert> :
@@ -40,7 +40,7 @@ class OsComponent extends React.Component {
               var header = (
                 <Row>
                   <Col md={5}>{system.name}</Col>
-                  <Col md={5}>{system.min} - {system.max}</Col>
+                  <Col md={5}><small className="text-muted">版本范围：{system.min} - {system.max}</small></Col>
                   <Col md={2}><strong className="text-danger">{system.count}</strong></Col>
                 </Row>
               );
@@ -56,7 +56,7 @@ class OsComponent extends React.Component {
                               <p><Link to={`/error/detail/${idx}`} className="text-primary">{version.name}</Link></p>
                             </Col>
                             <Col md={5}>
-                              <p>版本：{version.version}</p>
+                              <p className="text-muted">版本：{version.version}</p>
                             </Col>
                             <Col md={2}>
                               <p><strong className="text-danger">{version.count}</strong></p>

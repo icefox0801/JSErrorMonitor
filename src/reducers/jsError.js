@@ -52,6 +52,20 @@ function listArchiveError(state = { list: [], meta: {} }, action) {
 
 }
 
+function listPageError(state = { list: [], meta: {} }, action) {
+
+  switch(action.type) {
+    case types.PAGE_ERROR_LIST:
+      return Object.assign({}, state, {
+        list: action.list,
+        meta: action.meta
+      });
+    default:
+      return state;
+  }
+
+}
+
 function listBrowserError(state = { list: [], meta: {} }, action) {
 
   switch(action.type) {
@@ -83,6 +97,7 @@ function listOSError(state = { list: [], meta: {} }, action) {
 const jsErrorReducer = combineReducers ({
   all: listAllError,
   archives: listArchiveError,
+  pages: listPageError,
   browsers: listBrowserError,
   os: listOSError,
   most: listMostError,
