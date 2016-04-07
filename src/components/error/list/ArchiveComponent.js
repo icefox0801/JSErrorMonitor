@@ -1,8 +1,9 @@
 'use strict';
 
 import React from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
-import { Panel, ListGroup, ListGroupItem, Row, Col, Input, Glyphicon } from 'react-bootstrap';
+import { Panel, ListGroup, ListGroupItem, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 import DropdownComponent from '../../common/DropdownComponent';
@@ -81,7 +82,7 @@ class ArchiveComponent extends React.Component {
                   <ListGroupItem key={archive._id}>
                     <Row>
                       <Col md={5}>
-                        <p><Link to={`/error/detail/${idx}`} className="text-danger"><strong>『{archive.status === 'open' ? '未解决' : '已解决'}』</strong>{archive.message}
+                        <p><Link to={`/error/detail/${archive._id}`} className="text-danger"><strong>『{archive.status === 'open' ? '未解决' : '已解决'}』</strong>{archive.message}
                         </Link></p>
                       </Col>
                       <Col md={4}>

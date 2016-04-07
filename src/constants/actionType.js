@@ -18,4 +18,6 @@ export const OS_ERROR_LIST = 'OS_ERROR_LIST';
 export const MOST_ERROR_LIST = 'MOST_ERROR_LIST';
 export const LATEST_ERROR_LIST = 'LATEST_ERROR_LIST';
 
+export const ERROR_DETAIL = 'ERROR_DETAIL';
+
 export const ERROR_TREND_CHART = 'ERROR_TREND_CHART';

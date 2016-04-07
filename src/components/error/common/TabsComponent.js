@@ -13,12 +13,6 @@ class TabsComponent extends React.Component {
     return (
       <nav id="error-common-tabs">
         <Nav bsStyle="tabs">
-          <LinkContainer to="/error/list/all">
-            <NavItem>
-              <span className="tabs-title">全部</span>
-              <span className="badge">{jsError.all.meta.count || 0}</span>
-            </NavItem>
-          </LinkContainer>
           <LinkContainer to="/error/list/archive">
             <NavItem>
               <span className="tabs-title">归档</span>
@@ -29,6 +23,12 @@ class TabsComponent extends React.Component {
             <NavItem>
               <span className="tabs-title">页面</span>
               <span className="badge">{jsError.pages.meta.count || 0}</span>
+            </NavItem>
+          </LinkContainer>
+          <LinkContainer to="/error/list/all">
+            <NavItem>
+              <span className="tabs-title">全部</span>
+              <span className="badge">{jsError.all.meta.count || 0}</span>
             </NavItem>
           </LinkContainer>
           <LinkContainer to="/error/list/browser">

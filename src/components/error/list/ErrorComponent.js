@@ -3,7 +3,7 @@
 import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Panel, ListGroup, ListGroupItem, Row, Col, Label, Button, Glyphicon } from 'react-bootstrap';
+import { Panel, ListGroup, ListGroupItem, Row, Col, Label } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 import DropdownComponent from '../../common/DropdownComponent';
@@ -96,10 +96,10 @@ class ErrorComponent extends React.Component {
                         </Link></p>
                       </Col>
                       <Col md={2}>
-                        <p><Label bsStyle="default">{error.browser.name}</Label></p>
+                        <p><Label bsStyle="default">{error.browser.family}</Label></p>
                       </Col>
                       <Col md={2}>
-                        <p><Label bsStyle="info">{error.os.name}</Label></p>
+                        <p><Label bsStyle="info">{error.os.family}</Label></p>
                       </Col>
                       <Col md={2}>
                         <p className="text-muted">{error.fromNow}</p>

@@ -35,13 +35,13 @@ class SidenavComponent extends React.Component {
           <LinkContainer to="/live">
             <NavItem><Glyphicon glyph="time" />实时</NavItem>
           </LinkContainer>
-          <LinkContainer to="/charts">
+          <LinkContainer to="/chart">
             <NavItem><Glyphicon glyph="signal" />图表</NavItem>
           </LinkContainer>
           <LinkContainer to="/filter">
             <NavItem><Glyphicon glyph="glass" />过滤</NavItem>
           </LinkContainer>
-          <LinkContainer to="/extras">
+          <LinkContainer to="/extra">
             <NavItem><Glyphicon glyph="star" />其他</NavItem>
           </LinkContainer>
         </Nav>

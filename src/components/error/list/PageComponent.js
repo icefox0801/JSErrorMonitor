@@ -1,9 +1,9 @@
 'use strict';
 
 import React from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
-import { Panel, ListGroup, ListGroupItem, Row, Col, Input, Glyphicon } from 'react-bootstrap';
-import { Link } from 'react-router';
+import { Panel, ListGroup, ListGroupItem, Row, Col } from 'react-bootstrap';
 
 import DropdownComponent from '../../common/DropdownComponent';
 import PaginationComponent from '../common/PaginationComponent';

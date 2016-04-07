@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Input, Button, Glyphicon } from 'react-bootstrap';
 
 require('styles/error/common/Search.scss');
@@ -10,8 +9,6 @@ class SearchComponent extends React.Component {
 
   handleClick () {
     const { handleSearch } = this.props;
-
-    console.log(this.refs.searchInput);
     const value = this.refs.searchInput.getValue();
     handleSearch(value);
   }

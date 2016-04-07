@@ -21,6 +21,7 @@ export default function configureStore(history, initialState) {
     filter: reducers.filter,
     status: reducers.status,
     jsError: reducers.jsError,
+    info: reducers.info,
     chart: reducers.chart,
     routing: routerReducer
   });

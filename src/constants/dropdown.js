@@ -1,3 +1,5 @@
+'use strict';
+
 exports.pageSize = {
   title: '页码数量',
   placeholder: '请选择页码数量',

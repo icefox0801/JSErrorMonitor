@@ -34,7 +34,7 @@ let AppRouter = (
         <Route path="error" component={Error} >
           <IndexRedirect to="/error/list" />
           <Route path="list" component={ErrorList}>
-            <IndexRedirect to="/error/list/all" />
+            <IndexRedirect to="/error/list/archive" />
             <Route path="all">
               <IndexRedirect to="/error/list/all/1" />
               <Route path=":page" component={ErrorListError} />
@@ -50,7 +50,7 @@ let AppRouter = (
             <Route path="browser" component={ErrorListBrowser} />
             <Route path="os" component={ErrorListOS} />
           </Route>
-          <Route path="detail/:errorId" component={ErrorDetail} />
+          <Route path="detail/:archiveId" component={ErrorDetail} />
         </Route>
         <Route path="live" component={Live} />
         <Route path="chart" component={Chart} />

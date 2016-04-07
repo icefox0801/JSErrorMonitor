@@ -39,7 +39,7 @@ class OsComponent extends React.Component {
             os.list.map(function (system, idx) {
               var header = (
                 <Row>
-                  <Col md={5}>{system.name}</Col>
+                  <Col md={5}>{system.family}</Col>
                   <Col md={5}><small className="text-muted">版本范围：{system.min} - {system.max}</small></Col>
                   <Col md={2}><strong className="text-danger">{system.count}</strong></Col>
                 </Row>
@@ -53,7 +53,7 @@ class OsComponent extends React.Component {
                         <ListGroupItem key={version._id}>
                           <Row>
                             <Col md={5}>
-                              <p><Link to={`/error/detail/${idx}`} className="text-primary">{version.name}</Link></p>
+                              <p><Link to={`/error/detail/${idx}`} className="text-primary">{version.family}</Link></p>
                             </Col>
                             <Col md={5}>
                               <p className="text-muted">版本：{version.version}</p>
@@ -94,4 +94,4 @@ function mapStateToProps(state) {
   return { jsError, filter, global, status }
 }
 
-export default connect(mapStateToProps)(OsComponent);;
+export default connect(mapStateToProps)(OsComponent);

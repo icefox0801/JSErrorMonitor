@@ -13,21 +13,24 @@ class ListComponent extends React.Component {
     return (
       <Panel header={<p><span>{this.props.title}</span><Link to="/error/list/archive" className="pull-right">更多</Link></p>} className="home-data-list">
         <ListGroup fill>
-          {list.map(function (error, idx) {
-            return (
-              <ListGroupItem key={`${type}-${idx}`}>
-                <h4 className="list-group-item-heading">
-                  <Glyphicon glyph="info-sign" className="text-danger" />
-                  <Link to={`/error/detail/${error._id}`} className="text-danger">{error.message}</Link>
-                  <span className="label label-warning pull-right">{error.count}</span>
-                </h4>
-                <p className="list-group-item-text text-primary page-url">
-                  <a href={error.url || 'javascript:void(0)'} target="_blank">{error.url || '无'}</a>
-                </p>
-                <p className="list-group-item-text text-muted">{error.latest} - {error.earliest}</p>
-              </ListGroupItem>
-            );
-          })}
+          {!list.length ?
+            <ListGroupItem key={0} bsStyle="warning">没有符合条件的结果</ListGroupItem> :
+            list.map(function (archive, idx) {
+              return (
+                <ListGroupItem key={`${type}-${idx}`}>
+                  <h4 className="list-group-item-heading">
+                    <Glyphicon glyph="info-sign" className="text-danger"/>
+                    <Link to={`/error/detail/${archive._id}`} className="text-danger">{archive.message}</Link>
+                    <span className="label label-warning pull-right">{archive.count}</span>
+                  </h4>
+                  <p className="list-group-item-text text-primary page-url">
+                    <a href={archive.url || 'javascript:void(0)'} target="_blank">{archive.url || '无'}</a>
+                  </p>
+                  <p className="list-group-item-text text-muted">{archive.latest} - {archive.earliest}</p>
+                </ListGroupItem>
+              )
+            })
+          }
         </ListGroup>
       </Panel>
     );

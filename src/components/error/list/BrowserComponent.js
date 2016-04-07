@@ -39,7 +39,7 @@ class BrowserComponent extends React.Component {
             browsers.list.map(function (browser, idx) {
               var header = (
                 <Row>
-                  <Col md={5}>{browser.name}</Col>
+                  <Col md={5}>{browser.family}</Col>
                   <Col md={5}><small className="text-muted">版本范围：{browser.min} - {browser.max}</small></Col>
                   <Col md={2}><strong className="text-danger">{browser.count}</strong></Col>
                 </Row>
@@ -53,7 +53,7 @@ class BrowserComponent extends React.Component {
                         <ListGroupItem key={version._id}>
                           <Row>
                             <Col md={5}>
-                              <p><Link to={`/error/detail/${idx}`} className="text-primary">{version.name}</Link></p>
+                              <p><Link to={`/error/detail/${idx}`} className="text-primary">{version.family}</Link></p>
                             </Col>
                             <Col md={5}>
                               <p className="text-muted">版本：{version.version}</p>
