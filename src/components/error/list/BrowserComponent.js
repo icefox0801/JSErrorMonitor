@@ -16,8 +16,8 @@ class BrowserComponent extends React.Component {
     dispatch(filterAction.resetFilterProps());
     this.fetchErrorList();
   }
-
-  componentDidUpdate (prevProps, prevState) {
+  // prevProps, prevState
+  componentDidUpdate (prevProps) {
     // 深度遍历对象是否相等
     var flag = ['params', 'filter', 'global', 'status'].every(key => _.isEqual(this.props[key], prevProps[key]));
 

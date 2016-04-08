@@ -3,9 +3,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Glyphicon, Label, Button } from 'react-bootstrap'
-import ListComponent from './detail/ListComponent'
+
 import { infoAction } from '../../actions';
 import * as iconType from '../../constants/iconType';
+
+import ListComponent from './detail/ListComponent';
+import StatusDropdownComponent from './common/StatusDropdownComponent';
 
 require('styles/error/Detail.scss');
 
@@ -16,13 +19,20 @@ class DetailComponent extends React.Component {
     dispatch(infoAction.fetchErrorDetail(routeParams.archiveId));
   }
 
+  updateStatus (status) {
+    const { dispatch, routeParams } = this.props;
+    dispatch(infoAction.updateErrorStatus(routeParams.archiveId, status));
+  }
+
   render() {
     const { abstract, list } = this.props.info;
     return (
       <div id="error-detail">
         <div className="error-detail-header container-fluid">
           <h4>
-            <span className="error-detail-status"><Label bsStyle={abstract.status === 'open' ? 'danger': 'success'}>{abstract.status === 'open' ? '未解决': '已解决'}</Label>#254：</span>
+            <span className="error-detail-status">
+              <StatusDropdownComponent status={abstract.status} handleSelect={status => this.updateStatus(status)} />
+              <span>#{abstract.orderId}：</span></span>
             <span className={abstract.status === 'open' ? 'text-warning': 'text-muted'}>{abstract.message}</span>
           </h4>
           <p className="text-muted">

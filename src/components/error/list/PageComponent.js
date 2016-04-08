@@ -23,8 +23,8 @@ class PageComponent extends React.Component {
     const { dispatch } = this.props;
     dispatch(filterAction.resetFilterProps());
   }
-
-  componentDidUpdate (prevProps, prevState) {
+  // prevProps, prevState
+  componentDidUpdate (prevProps) {
     // 深度遍历对象是否相等
     var flag = ['params', 'filter', 'global', 'status'].every(key => _.isEqual(this.props[key], prevProps[key]));
 
@@ -75,7 +75,7 @@ class PageComponent extends React.Component {
           <ListGroup fill>
             {!pages.list.length ?
               <ListGroupItem key={0} bsStyle="warning">没有符合条件的结果</ListGroupItem> :
-              pages.list.map(function (archive, idx) {
+              pages.list.map(function (archive) {
                 return (
                   <ListGroupItem key={archive._id}>
                     <Row>

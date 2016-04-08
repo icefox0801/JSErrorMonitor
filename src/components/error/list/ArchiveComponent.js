@@ -11,6 +11,7 @@ import PaginationComponent from '../common/PaginationComponent';
 import RangeComponent from '../common/RangeComponent';
 import SearchComponent from '../common/SearchComponent';
 import * as dropdown from '../../../constants/dropdown';
+import * as statusMap from '../../../constants/statusMap';
 import { jsErrorAction, filterAction } from '../../../actions';
 
 require('styles/error/list/Archive.scss');
@@ -25,8 +26,8 @@ class ArchiveComponent extends React.Component {
     const { dispatch } = this.props;
     dispatch(filterAction.resetFilterProps());
   }
-
-  componentDidUpdate (prevProps, prevState) {
+  // prevProps, prevState
+  componentDidUpdate (prevProps) {
     // 深度遍历对象是否相等
     var flag = ['params', 'filter', 'global', 'status'].every(key => _.isEqual(this.props[key], prevProps[key]));
 
@@ -77,13 +78,17 @@ class ArchiveComponent extends React.Component {
           <ListGroup fill>
             {!archives.list.length ?
               <ListGroupItem key={0} bsStyle="warning">没有符合条件的结果</ListGroupItem> :
-              archives.list.map(function (archive, idx) {
+              archives.list.map(function (archive) {
                 return (
                   <ListGroupItem key={archive._id}>
                     <Row>
                       <Col md={5}>
-                        <p><Link to={`/error/detail/${archive._id}`} className="text-danger"><strong>『{archive.status === 'open' ? '未解决' : '已解决'}』</strong>{archive.message}
-                        </Link></p>
+                        <p>
+                          <Link to={`/error/detail/${archive._id}`} className={statusMap.textClassName[archive.status]}>
+                            <strong>『{statusMap.text[archive.status]}』</strong>
+                            <span>{archive.message}</span>
+                          </Link>
+                        </p>
                       </Col>
                       <Col md={4}>
                         <p><a href={archive.url || 'javascript:void(0)'} target="_blank">{archive.url || '无'}</a></p>

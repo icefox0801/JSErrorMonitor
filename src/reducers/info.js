@@ -9,6 +9,9 @@ function infoReducer (state = { abstract: { browsers: [],  os: [] }, list: [] },
         list: action.list,
         abstract: action.abstract
       });
+    case types.ERROR_UPDATE:
+      let abstract = Object.assign({}, state.abstract, action.props);
+      return Object.assign({}, state, { abstract });
     default:
       return state;
   }

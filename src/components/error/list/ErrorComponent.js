@@ -11,6 +11,7 @@ import RangeComponent from '../common/RangeComponent';
 import PaginationComponent from '../common/PaginationComponent';
 import SearchComponent from '../common/SearchComponent';
 import * as dropdown from '../../../constants/dropdown';
+import * as statusMap from '../../../constants/statusMap';
 import { jsErrorAction, filterAction } from '../../../actions';
 
 require('styles/error/list/Error.scss');
@@ -24,8 +25,8 @@ class ErrorComponent extends React.Component {
     const { dispatch } = this.props;
     dispatch(filterAction.resetFilterProps());
   }
-
-  componentDidUpdate (prevProps, prevState) {
+  // prevProps, prevState
+  componentDidUpdate (prevProps) {
     // 深度遍历对象是否相等
     var flag = ['params', 'filter', 'global', 'status'].every(key => _.isEqual(this.props[key], prevProps[key]));
 
@@ -91,9 +92,12 @@ class ErrorComponent extends React.Component {
                   <ListGroupItem key={error._id}>
                     <Row>
                       <Col md={6}>
-                        <p><Link to={`/error/detail/${error._id}`}
-                                 className="text-danger"><strong>『{error.status === 'open' ? '未解决' : '已解决'}』</strong>{error.message}
-                        </Link></p>
+                        <p>
+                          <Link to={`/error/detail/${error._id}`} className={statusMap.textClassName[error.status]}>
+                            <strong>『{statusMap.text[error.status]}』</strong>
+                            <span>{error.message}</span>
+                          </Link>
+                        </p>
                       </Col>
                       <Col md={2}>
                         <p><Label bsStyle="default">{error.browser.family}</Label></p>

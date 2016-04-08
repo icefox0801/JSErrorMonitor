@@ -13,11 +13,33 @@ function getErrorDetail (json) {
   };
 }
 
+function setErrorProps (json) {
+  return {
+    type: types.ERROR_UPDATE,
+    props: json.result
+  };
+}
+
 export function fetchErrorDetail (id) {
   return dispatch => {
     //dispatch(loadingShow);
     return fetch(`/api/error/detail/${id}`)
       .then(response => response.json())
       .then(json => dispatch(getErrorDetail(json)));
+  }
+}
+
+export function updateErrorStatus (id, status) {
+  return dispatch => {
+    //dispatch(loadingShow);
+    return fetch(`/api/error/detail/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ status })
+    })
+      .then(response => response.json())
+      .then(json => dispatch(setErrorProps(json)));
   }
 }

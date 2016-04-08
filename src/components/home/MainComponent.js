@@ -14,8 +14,8 @@ import { chartAction, jsErrorAction } from '../../actions';
 require('styles/home/Main.scss');
 
 class MainComponent extends React.Component {
-
-  componentDidUpdate (prevProps, prevState) {
+  // prevProps, prevState
+  componentDidUpdate (prevProps) {
     const { global } = this.props;
     // 深度遍历对象是否相等
     if(!_.isEqual(global, prevProps.global)) this.fetchData();
