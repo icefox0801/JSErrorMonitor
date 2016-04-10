@@ -11,14 +11,14 @@ class ChartComponent extends React.Component {
     const { trend } = this.props.chart;
     const config = {
       chart: {
-        type: 'column',
+        type: 'line',
         height: 200
       },
       title: {
         text: ''
       },
       xAxis: {
-        categories: trend.x
+        type: 'datetime'
       },
       yAxis: {
         allowDecimals: false,
@@ -30,7 +30,9 @@ class ChartComponent extends React.Component {
       series: [{
         name: 'JS错误',
         showInLegend: false,
-        data: trend.y
+        data: trend.plots,
+        pointStart: trend.meta.start,
+        pointInterval: trend.meta.interval
       }]
     };
 
@@ -51,8 +53,8 @@ ChartComponent.displayName = 'HomeDataChartComponent';
 ChartComponent.defaultProps = {
   chart: {
     trend: {
-      x: [],
-      y: []
+      plots: [],
+      meta: {}
     }
   }
 };
