@@ -29,8 +29,14 @@ class OsComponent extends React.Component {
     dispatch(jsErrorAction.fetchOSErrorList(Object.assign({}, params, filter, {status: status})));
   }
 
+  handleNavigate (os) {
+    const { dispatch } = this.props;
+    dispatch(filterAction.setFilterProps('os', os));
+  }
+
   render () {
     const { os } = this.props.jsError;
+    var self = this;
     return (
       <div className="container-fluid" id="error-list-os">
         <Accordion defaultActiveKey={0}>
@@ -48,23 +54,22 @@ class OsComponent extends React.Component {
               return (
                 <Panel header={header} eventKey={idx} bsStyle="default" key={`system_${idx}`}>
                   <ListGroup fill>
-                    {system.versions && system.versions.map(function (version, idx) {
-                      return (
-                        <ListGroupItem key={version._id}>
-                          <Row>
-                            <Col md={5}>
-                              <p><Link to={`/error/detail/${idx}`} className="text-primary">{version.family}</Link></p>
-                            </Col>
-                            <Col md={5}>
-                              <p className="text-muted">版本：{version.version}</p>
-                            </Col>
-                            <Col md={2}>
-                              <p><strong className="text-danger">{version.count}</strong></p>
-                            </Col>
-                          </Row>
-                        </ListGroupItem>
-                      );
-                    })}
+                    {system.versions && system.versions.map((version, idx) => (
+                      <ListGroupItem key={version._id}>
+                        <Row>
+                          <Col md={5}>
+                            <p><Link to="/error/list/all/1" className="text-primary" key={idx} onClick={evt => self.handleNavigate(version.family, evt)}>{version.family}</Link></p>
+                          </Col>
+                          <Col md={5}>
+                            <p className="text-muted">版本：{version.version}</p>
+                          </Col>
+                          <Col md={2}>
+                            <p><strong className="text-danger">{version.count}</strong></p>
+                          </Col>
+                        </Row>
+                      </ListGroupItem>
+                      )
+                    )}
                   </ListGroup>
                 </Panel>
               );

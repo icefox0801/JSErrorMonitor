@@ -62,19 +62,19 @@ class ErrorComponent extends React.Component {
             <Col md={3}>
               <div className="form-group">
                 <label htmlFor="">每页数量：</label>
-                <DropdownComponent list={dropdown.pageSize.list} placeholder={dropdown.pageSize.placeholder} activeKey={filter.pageSize} id="dropdown-page-size" handleSelect={key => this.handleSelect('pageSize', key)}/>
+                <DropdownComponent list={dropdown.pageSize.list} placeholder={dropdown.pageSize.placeholder} selectKey={filter.pageSize} id="dropdown-page-size" handleSelect={key => this.handleSelect('pageSize', key)}/>
               </div>
             </Col>
             <Col md={3}>
               <div className="form-group">
                 <label htmlFor="">浏览器：</label>
-                <DropdownComponent list={dropdown.browser.list} activeKey={filter.browser} placeholder={dropdown.browser.placeholder} id="dropdown-browser" handleSelect={key => this.handleSelect('browser', key)}/>
+                <DropdownComponent list={dropdown.browser.list} selectKey={filter.browser} placeholder={dropdown.browser.placeholder} id="dropdown-browser" handleSelect={key => this.handleSelect('browser', key)}/>
               </div>
             </Col>
             <Col md={3}>
               <div className="form-group">
                 <label htmlFor="">操作系统：</label>
-                <DropdownComponent list={dropdown.os.list} activeKey={filter.os} placeholder={dropdown.os.placeholder} handleSelect={key => this.handleSelect('os', key)} id="dropdown-os" />
+                <DropdownComponent list={dropdown.os.list} selectKey={filter.os} placeholder={dropdown.os.placeholder} handleSelect={key => this.handleSelect('os', key)} id="dropdown-os" />
               </div>
             </Col>
             <Col md={3}>

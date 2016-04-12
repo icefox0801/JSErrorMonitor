@@ -29,8 +29,14 @@ class BrowserComponent extends React.Component {
     dispatch(jsErrorAction.fetchBrowserErrorList(Object.assign({}, params, filter, {status: status})));
   }
 
+  handleNavigate (browser) {
+    const { dispatch } = this.props;
+    dispatch(filterAction.setFilterProps('browser', browser));
+  }
+
   render () {
     const { browsers } = this.props.jsError;
+    var self = this;
     return (
       <div className="container-fluid" id="error-list-browser">
         <Accordion defaultActiveKey={0}>
@@ -48,12 +54,11 @@ class BrowserComponent extends React.Component {
               return (
                 <Panel header={header} eventKey={idx} bsStyle="default" key={`browser_${idx}`}>
                   <ListGroup fill>
-                    {browser.versions && browser.versions.map(function (version, idx) {
-                      return (
+                    {browser.versions && browser.versions.map((version, idx) => (
                         <ListGroupItem key={version._id}>
                           <Row>
                             <Col md={5}>
-                              <p><Link to={`/error/detail/${idx}`} className="text-primary">{version.family}</Link></p>
+                              <p><Link to='/error/list/all/1' className="text-primary" key={idx} onClick={evt => self.handleNavigate(version.family, evt)}>{version.family}</Link></p>
                             </Col>
                             <Col md={5}>
                               <p className="text-muted">版本：{version.version}</p>
@@ -63,8 +68,8 @@ class BrowserComponent extends React.Component {
                             </Col>
                           </Row>
                         </ListGroupItem>
-                      );
-                    })}
+                      )
+                    )}
                   </ListGroup>
                 </Panel>
               );

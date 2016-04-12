@@ -48,6 +48,10 @@ exports.browser = {
       value: 'Safari'
     },
     {
+      key: 'Mobile Safari',
+      value: 'Mobile Safari'
+    },
+    {
       key: 'else',
       value: '其他'
     }
@@ -67,12 +71,12 @@ exports.os = {
       value: 'Windows'
     },
     {
-      key: 'MAC OS X',
-      value: 'MAC OS X'
+      key: 'Mac OS X',
+      value: 'Mac OS X'
     },
     {
-      key: 'ios',
-      value: 'IOS'
+      key: 'iOS',
+      value: 'iOS'
     },
     {
       key: 'android',
