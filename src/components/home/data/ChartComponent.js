@@ -8,7 +8,7 @@ require('styles/home/data/Chart.scss');
 
 class ChartComponent extends React.Component {
   render() {
-    const { trend } = this.props.chart;
+    const { data } = this.props;
     const config = {
       chart: {
         type: 'line',
@@ -30,9 +30,9 @@ class ChartComponent extends React.Component {
       series: [{
         name: 'JS错误',
         showInLegend: false,
-        data: trend.plots,
-        pointStart: trend.meta.start,
-        pointInterval: trend.meta.interval
+        data: data.plots,
+        pointStart: data.meta.start,
+        pointInterval: data.meta.interval
       }]
     };
 
@@ -51,11 +51,9 @@ ChartComponent.displayName = 'HomeDataChartComponent';
 // Uncomment properties you need
 // ChartComponent.propTypes = {};
 ChartComponent.defaultProps = {
-  chart: {
-    trend: {
-      plots: [],
-      meta: {}
-    }
+  data: {
+    plots: [],
+    meta: {}
   }
 };
 

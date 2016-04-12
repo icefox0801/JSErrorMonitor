@@ -2,7 +2,7 @@
 
 import React from 'react';
 import TabsComponent from './common/TabsComponent';
-import StatusToggleComponent from './common/StatusToggleComponent';
+import StatusToggleComponent from './../common/StatusToggleComponent';
 
 require('styles/error/List.scss');
 

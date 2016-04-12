@@ -5,9 +5,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ButtonGroup, Button } from 'react-bootstrap';
 
-import { statusAction } from '../../../actions';
+import { statusAction } from '../../actions';
 
-require('styles/error/common/StatusToggle.scss');
+require('styles/common/StatusToggle.scss');
 
 class StatusToggleComponent extends React.Component {
 
@@ -47,7 +47,7 @@ class StatusToggleComponent extends React.Component {
   }
 }
 
-StatusToggleComponent.displayName = 'ErrorCommonStatusToggleComponent';
+StatusToggleComponent.displayName = 'CommonStatusToggleComponent';
 
 // Uncomment properties you need
 // StatusToggleComponent.propTypes = {};

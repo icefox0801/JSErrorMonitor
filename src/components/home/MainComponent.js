@@ -37,7 +37,7 @@ class MainComponent extends React.Component {
         <Grid fluid>
           <Row>
             <Col md={12}>
-              <ChartComponent chart={chart}/>
+              <ChartComponent data={chart.trend}/>
             </Col>
           </Row>
           <Row>

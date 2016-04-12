@@ -19,6 +19,8 @@ import ErrorListOS from './error/list/OsComponent';
 import ErrorDetail from './error/DetailComponent';
 import Live from './live/MainComponent';
 import Chart from './chart/MainComponent';
+import ChartTrend from './chart/data/TrendComponent';
+import ChartCategory from './chart/data/CategoryComponent';
 
 const store = configureStore(browserHistory);
 
@@ -53,7 +55,11 @@ let AppRouter = (
           <Route path="detail/:archiveId" component={ErrorDetail} />
         </Route>
         <Route path="live" component={Live} />
-        <Route path="chart" component={Chart} />
+        <Route path="chart" component={Chart} >
+          <IndexRedirect to="/chart/trend" />
+          <Route path="trend" component={ChartTrend} />
+          <Route path="category" component={ChartCategory} />
+        </Route>
         <Redirect from="*" to="home" />
       </Route>
     </Router>

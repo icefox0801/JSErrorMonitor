@@ -4,6 +4,7 @@ import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Link } from 'react-router';
 import { timeRange, business } from '../../constants/dropdown';
 import DropdownComponent from './DropdownComponent';
 import { globalAction } from '../../actions';
@@ -31,7 +32,7 @@ class TopbarComponent extends React.Component {
         <Navbar inverse fluid>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="#">PWS</a>
+              <Link to="/home">PWS</Link>
             </Navbar.Brand>
           </Navbar.Header>
           <Navbar.Collapse>
