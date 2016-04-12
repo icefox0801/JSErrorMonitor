@@ -5,11 +5,34 @@ import { Panel } from 'react-bootstrap';
 import Highcharts from 'highcharts';
 import ReactHighcharts from 'react-highcharts';
 
+import PercentageToggleComponent from './PercentageToggleComponent';
+
 require('styles/chart/common/PieChart.scss');
 
 class PieChartComponent extends React.Component {
+
+  constructor (props) {
+    super(props);
+    const showType = 'percentage';
+    this.state = { showType };
+  }
+
+  handleChange (value) {
+    debugger;
+    this.setState({
+      showType: value
+    });
+  }
+
   render() {
     const { data, title } = this.props;
+    const dataStr = (this.state.showType === 'number' ? '{y}' : '{point.percentage:.1f}%');
+    const header = (
+      <div>
+        <span>{title}</span>
+        <PercentageToggleComponent handleChange={value => this.handleChange(value)} className="pull-right"/>
+      </div>
+    );
     const config = {
       chart: {
         type: 'pie',
@@ -19,7 +42,7 @@ class PieChartComponent extends React.Component {
         text: ''
       },
       tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        pointFormat: '{series.name}: <b>' + dataStr + '</b>'
       },
       plotOptions: {
         pie: {
@@ -27,10 +50,7 @@ class PieChartComponent extends React.Component {
           cursor: 'pointer',
           dataLabels: {
             enabled: true,
-            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-            style: {
-              color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-            }
+            format: '<b>{point.name}</b>: ' + dataStr
           }
         }
       },
@@ -38,34 +58,13 @@ class PieChartComponent extends React.Component {
         name: '比例',
         colorByPoint: true,
         data: data.plots
-        //[{
-        //  name: 'Microsoft Internet Explorer',
-        //  y: 56.33
-        //}, {
-        //  name: 'Chrome',
-        //  y: 24.03,
-        //  sliced: true,
-        //  selected: true
-        //}, {
-        //  name: 'Firefox',
-        //  y: 10.38
-        //}, {
-        //  name: 'Safari',
-        //  y: 4.77
-        //}, {
-        //  name: 'Opera',
-        //  y: 0.91
-        //}, {
-        //  name: 'Proprietary or Undetectable',
-        //  y: 0.2
-        //}]
       }]
     };
 
     return (
-      <Panel header={<p>{title}</p>}>
+      <Panel header={header}>
         <div>
-          <ReactHighcharts config={config} />
+          <ReactHighcharts config={config} showType={this.state.showType} />
         </div>
       </Panel>
     );
