@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Panel } from 'react-bootstrap';
+import moment from 'moment';
 import ReactHighcharts from 'react-highcharts';
 
 require('styles/chart/common/LineChart.scss');
@@ -27,8 +28,14 @@ class LineChartComponent extends React.Component {
           text: '错误数量'
         }
       },
+      tooltip: {
+        headerFormat: '',
+        pointFormatter: function () {
+          return `<span style="font-size: 10px">${moment(this.x).format('MM-DD HH:mm')} 至 ${moment(this.x).add(data.meta.interval, 'ms').format('MM-DD HH:mm')}</span><br/><span style="color:${this.color}">\u25CF</span> ${this.series.name}: <b>${this.y}</b><br/>`;
+        }
+      },
       series: [{
-        name: 'JS错误',
+        name: '错误数量',
         showInLegend: false,
         data: data.plots,
         pointStart: data.meta.start,

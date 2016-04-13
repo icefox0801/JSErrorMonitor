@@ -7,6 +7,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import PieChartComponent from '../common/PieChartComponent';
 
 import { chartAction } from '../../../actions';
+import * as dropdown from '../../../constants/dropdown';
 
 require('styles/chart/data/Category.scss');
 
@@ -31,24 +32,27 @@ class CategoryComponent extends React.Component {
   }
 
   render() {
-    const { chart } = this.props;
+    const { chart, global, status } = this.props;
+    const timeRangeText = _.chain(dropdown.timeRange.list).find({key: Number(global.timeRange)}).value().value;
+    const statusText = _.chain(dropdown.status.list).find({key: status}).value().value;
+    const chartTitle = `${timeRangeText}内${statusText}的错误`;
     return (
       <div id="chart-data-category">
         <Grid fluid>
           <Row>
             <Col md={6}>
-              <PieChartComponent data={chart.browser} title="按浏览器" />
+              <PieChartComponent data={chart.browser} title="按浏览器" chartTitle={chartTitle} />
             </Col>
             <Col md={6}>
-              <PieChartComponent data={chart.os} title="按操作系统" />
+              <PieChartComponent data={chart.os} title="按操作系统" chartTitle={chartTitle} />
             </Col>
           </Row>
           <Row>
             <Col md={6}>
-              <PieChartComponent data={chart.business} title="按业务线" />
+              <PieChartComponent data={chart.business} title="按业务线" chartTitle={chartTitle} />
             </Col>
             <Col md={6}>
-              <PieChartComponent data={chart.platform} title="按平台" />
+              <PieChartComponent data={chart.platform} title="按平台" chartTitle={chartTitle} />
             </Col>
           </Row>
         </Grid>

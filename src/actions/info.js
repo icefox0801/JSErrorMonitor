@@ -13,6 +13,13 @@ function getErrorDetail (json) {
   };
 }
 
+function getErrorDetailMore (json) {
+  return {
+    type: types.ERROR_DETAIL_MORE,
+    list: json.result.map(jsError => _.update(jsError, 'date', date => transformDate(date)))
+  };
+}
+
 function setErrorProps (json) {
   return {
     type: types.ERROR_UPDATE,
@@ -26,6 +33,15 @@ export function fetchErrorDetail (id) {
     return fetch(`/api/error/detail/${id}`)
       .then(response => response.json())
       .then(json => dispatch(getErrorDetail(json)));
+  }
+}
+
+export function fetchErrorDetailMore (id, skip) {
+  return dispatch => {
+    //dispatch(loadingShow);
+    return fetch(`/api/error/detail/${id}/${skip}`)
+      .then(response => response.json())
+      .then(json => dispatch(getErrorDetailMore(json)));
   }
 }
 

@@ -1,5 +1,6 @@
 'use strict';
 
+import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Glyphicon, Label, Button } from 'react-bootstrap'
@@ -22,6 +23,12 @@ class DetailComponent extends React.Component {
   updateStatus (status) {
     const { dispatch, routeParams } = this.props;
     dispatch(infoAction.updateErrorStatus(routeParams.archiveId, status));
+  }
+
+  loadMore () {
+    const { dispatch, routeParams, info } = this.props;
+    const skip = info.list.length;
+    dispatch(infoAction.fetchErrorDetailMore(routeParams.archiveId, skip));
   }
 
   render() {
@@ -69,7 +76,7 @@ class DetailComponent extends React.Component {
         </div>
         <hr/>
         <ListComponent list={list} />
-        <Button bsStyle="primary" bsSize="large" className="center-block">加载更多</Button>
+        <Button bsStyle="primary" bsSize="large" className="center-block" onClick={evt => this.loadMore()}>加载更多</Button>
       </div>
     );
   }

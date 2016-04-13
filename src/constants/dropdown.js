@@ -110,7 +110,7 @@ exports.timeRange = {
       value: '1个月'
     },
     {
-      key: 24 * 365,
+      key: 24 * 360,
       value: '1年'
     }
   ]
@@ -147,6 +147,25 @@ exports.business = {
     {
       key: 'extra',
       value: '其他'
+    }
+  ]
+};
+
+exports.status = {
+  title: '错误状态',
+  placeholder: '请选择错误状态',
+  list: [
+    {
+      key: 'open',
+      value: '未解决'
+    },
+    {
+      key: 'closed',
+      value: '已解决'
+    },
+    {
+      key: 'all',
+      value: '全部'
     }
   ]
 };

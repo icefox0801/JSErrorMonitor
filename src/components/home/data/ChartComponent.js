@@ -1,6 +1,8 @@
 'use strict';
 
 import React from 'react';
+import moment from 'moment'
+import Highcharts from 'highcharts';
 import { Panel } from 'react-bootstrap';
 import ReactHighcharts from 'react-highcharts';
 
@@ -27,8 +29,14 @@ class ChartComponent extends React.Component {
           text: '错误数量'
         }
       },
+      tooltip: {
+        headerFormat: '',
+        pointFormatter: function () {
+          return `<span style="font-size: 10px">${moment(this.x).format('MM-DD HH:mm')} 至 ${moment(this.x).add(data.meta.interval, 'ms').format('MM-DD HH:mm')}</span><br/><span style="color:${this.color}">\u25CF</span> ${this.series.name}: <b>${this.y}</b><br/>`;
+        }
+      },
       series: [{
-        name: 'JS错误',
+        name: '错误数量',
         showInLegend: false,
         data: data.plots,
         pointStart: data.meta.start,

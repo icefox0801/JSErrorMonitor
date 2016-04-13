@@ -25,7 +25,7 @@ class PieChartComponent extends React.Component {
   }
 
   render() {
-    const { data, title } = this.props;
+    const { data, title, chartTitle } = this.props;
     const dataStr = (this.state.showType === 'number' ? '{y}' : '{point.percentage:.1f}%');
     const header = (
       <div>
@@ -39,7 +39,7 @@ class PieChartComponent extends React.Component {
         height: 400
       },
       title: {
-        text: ''
+        text: chartTitle
       },
       tooltip: {
         pointFormat: '{series.name}: <b>' + dataStr + '</b>'
@@ -47,6 +47,7 @@ class PieChartComponent extends React.Component {
       plotOptions: {
         pie: {
           allowPointSelect: true,
+          size: 240,
           cursor: 'pointer',
           dataLabels: {
             enabled: true,
