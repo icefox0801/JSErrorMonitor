@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Panel } from 'react-bootstrap';
-import Highcharts from 'highcharts';
 import ReactHighcharts from 'react-highcharts';
 
 import PercentageToggleComponent from './PercentageToggleComponent';

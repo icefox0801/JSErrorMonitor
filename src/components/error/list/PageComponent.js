@@ -77,24 +77,24 @@ class PageComponent extends React.Component {
           <ListGroup fill>
             {!pages.list.length ?
               <ListGroupItem key={0} bsStyle="warning">没有符合条件的结果</ListGroupItem> :
-              pages.list.map(function (archive) {
+              pages.list.map(function (page, idx) {
                 return (
-                  <ListGroupItem key={archive._id}>
+                  <ListGroupItem key={idx}>
                     <Row>
                       <Col md={6}>
-                        <p><a href={archive.url || 'javascript:void(0)'} target="_blank">{archive.url || '无'}</a></p>
+                        <p><a href={page.url || 'javascript:void(0)'} target="_blank">{page.url || '无'}</a></p>
                       </Col>
                       <Col md={2}>
-                        <p className="text-muted">{archive.earliest}</p>
+                        <p className="text-muted">{page.earliest}</p>
                       </Col>
                       <Col md={2}>
-                        <p className="text-muted">{archive.latest}</p>
+                        <p className="text-muted">{page.latest}</p>
                       </Col>
                       <Col md={1}>
-                        <p><strong className="text-danger">{archive.archive}</strong></p>
+                        <p><strong className="text-danger">{page.archive}</strong></p>
                       </Col>
                       <Col md={1}>
-                        <p><strong className="text-danger">{archive.count}</strong></p>
+                        <p><strong className="text-danger">{page.count}</strong></p>
                       </Col>
                     </Row>
                   </ListGroupItem>

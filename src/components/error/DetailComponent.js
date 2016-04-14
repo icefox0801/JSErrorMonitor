@@ -1,6 +1,5 @@
 'use strict';
 
-import _ from 'lodash';
 import nprogress from 'nprogress';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -80,7 +79,7 @@ class DetailComponent extends React.Component {
         </div>
         <hr/>
         <ListComponent list={list} />
-        <Button bsStyle="primary" bsSize="large" className="center-block" onClick={evt => this.loadMore()}>加载更多</Button>
+        <Button bsStyle="primary" bsSize="large" className="center-block" onClick={() => this.loadMore()}>加载更多</Button>
       </div>
     );
   }

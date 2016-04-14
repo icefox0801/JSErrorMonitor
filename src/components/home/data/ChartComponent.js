@@ -2,7 +2,6 @@
 
 import React from 'react';
 import moment from 'moment'
-import Highcharts from 'highcharts';
 import { Panel } from 'react-bootstrap';
 import ReactHighcharts from 'react-highcharts';
 

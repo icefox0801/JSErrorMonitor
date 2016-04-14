@@ -13,7 +13,7 @@ class PercentageToggleComponent extends React.Component {
   }
 
   handleSelect (value) {
-    const { dispatch, params, handleChange } = this.props;
+    const { handleChange } = this.props;
     this.setState({
       active: value
     });

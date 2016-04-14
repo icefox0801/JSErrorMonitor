@@ -29,7 +29,7 @@ class MainComponent extends React.Component {
     var p1 = dispatch(chartAction.fetchErrorTrendChart());
     var p2 = dispatch(jsErrorAction.fetchMostErrorList());
     var p3 = dispatch(jsErrorAction.fetchLatestErrorList());
-    Promise.all([p1, p2, p3]).then(results => { nprogress.done(); });
+    Promise.all([p1, p2, p3]).then(() => { nprogress.done(); });
   }
 
   render() {
