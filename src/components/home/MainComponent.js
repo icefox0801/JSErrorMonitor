@@ -4,6 +4,7 @@ import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-bootstrap';
+import nprogress from 'nprogress';
 // 组件依赖
 import TopbarComponent from '../common/TopbarComponent';
 import ListComponent from './data/ListComponent';
@@ -24,9 +25,11 @@ class MainComponent extends React.Component {
 
   fetchData () {
     const { dispatch } = this.props;
-    dispatch(chartAction.fetchErrorTrendChart());
-    dispatch(jsErrorAction.fetchMostErrorList());
-    dispatch(jsErrorAction.fetchLatestErrorList());
+    nprogress.start();
+    var p1 = dispatch(chartAction.fetchErrorTrendChart());
+    var p2 = dispatch(jsErrorAction.fetchMostErrorList());
+    var p3 = dispatch(jsErrorAction.fetchLatestErrorList());
+    Promise.all([p1, p2, p3]).then(results => { nprogress.done(); });
   }
 
   render() {

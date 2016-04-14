@@ -75,6 +75,7 @@
     "lodash": "^4.6.1",
     "moment": "^2.12.0",
     "normalize.css": "^3.0.3",
+    "nprogress": "^0.2.0",
     "react": "^0.14.0",
     "react-bootstrap": "node_modules/react-bootstrap",
     "react-dom": "^0.14.0",

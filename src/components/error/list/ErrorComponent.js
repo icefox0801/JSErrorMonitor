@@ -1,6 +1,7 @@
 'use strict';
 
 import _ from 'lodash';
+import nprogress from 'nprogress';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Panel, ListGroup, ListGroupItem, Row, Col, Label } from 'react-bootstrap';
@@ -41,7 +42,8 @@ class ErrorComponent extends React.Component {
 
   fetchErrorList () {
     const { dispatch, params, filter, status } = this.props;
-    dispatch(jsErrorAction.fetchAllErrorList(Object.assign({}, params, filter, {status: status})));
+    nprogress.start();
+    dispatch(jsErrorAction.fetchAllErrorList(Object.assign({}, params, filter, {status: status}))).then(() => { nprogress.done() });
   }
 
   render () {

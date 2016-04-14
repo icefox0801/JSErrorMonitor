@@ -1,6 +1,7 @@
 'use strict';
 
 import _ from 'lodash';
+import nprogress from 'nprogress';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Glyphicon, Label, Button } from 'react-bootstrap'
@@ -17,18 +18,21 @@ class DetailComponent extends React.Component {
 
   componentDidMount () {
     const { dispatch, routeParams } = this.props;
-    dispatch(infoAction.fetchErrorDetail(routeParams.archiveId));
+    nprogress.start();
+    dispatch(infoAction.fetchErrorDetail(routeParams.archiveId)).then(() => { nprogress.done(); });
   }
 
   updateStatus (status) {
     const { dispatch, routeParams } = this.props;
-    dispatch(infoAction.updateErrorStatus(routeParams.archiveId, status));
+    nprogress.start();
+    dispatch(infoAction.updateErrorStatus(routeParams.archiveId, status)).then(() => { nprogress.done(); });
   }
 
   loadMore () {
     const { dispatch, routeParams, info } = this.props;
     const skip = info.list.length;
-    dispatch(infoAction.fetchErrorDetailMore(routeParams.archiveId, skip));
+    nprogress.start();
+    dispatch(infoAction.fetchErrorDetailMore(routeParams.archiveId, skip)).then( () => { nprogress.done(); });
   }
 
   render() {

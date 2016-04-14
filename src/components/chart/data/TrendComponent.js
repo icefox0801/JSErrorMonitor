@@ -1,6 +1,7 @@
 'use strict';
 
 import _ from 'lodash';
+import nprogress from 'nprogress';
 import React from 'react';
 import { connect } from 'react-redux';
 import { chartAction } from '../../../actions';
@@ -23,7 +24,8 @@ class TrendComponent extends React.Component {
 
   fetchData () {
     const { dispatch, status } = this.props;
-    dispatch(chartAction.fetchErrorTrendChart({ status }));
+    nprogress.start();
+    dispatch(chartAction.fetchErrorTrendChart({ status })).then(() => { nprogress.done(); });
   }
 
   render() {

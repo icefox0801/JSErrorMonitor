@@ -1,6 +1,7 @@
 'use strict';
 
 import _ from 'lodash';
+import nprogress from 'nprogress';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Panel, ListGroup, ListGroupItem, Row, Col, Accordion, Alert } from 'react-bootstrap';
@@ -26,7 +27,8 @@ class OsComponent extends React.Component {
 
   fetchErrorList () {
     const { dispatch, params, filter, status } = this.props;
-    dispatch(jsErrorAction.fetchOSErrorList(Object.assign({}, params, filter, {status: status})));
+    nprogress.start();
+    dispatch(jsErrorAction.fetchOSErrorList(Object.assign({}, params, filter, {status: status}))).then(() => { nprogress.done(); });
   }
 
   handleNavigate (os) {

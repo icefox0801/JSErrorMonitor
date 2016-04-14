@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import AppRouter from './components/Router';
 import Highcharts from 'highcharts';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'nprogress/nprogress.css';
 
 Highcharts.setOptions({
   global: {

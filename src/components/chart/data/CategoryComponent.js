@@ -1,6 +1,7 @@
 'use strict';
 
 import _ from 'lodash';
+import nprogress from 'nprogress';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-bootstrap';
@@ -25,10 +26,12 @@ class CategoryComponent extends React.Component {
 
   fetchData () {
     const { dispatch, status } = this.props;
-    dispatch(chartAction.fetchErrorBrowserChart({ status }));
-    dispatch(chartAction.fetchErrorOsChart({ status }));
-    dispatch(chartAction.fetchErrorBusinessChart({ status }));
-    dispatch(chartAction.fetchErrorPlatformChart({ status }));
+    nprogress.start();
+    var p1 = dispatch(chartAction.fetchErrorBrowserChart({ status }));
+    var p2 = dispatch(chartAction.fetchErrorOsChart({ status }));
+    var p3 = dispatch(chartAction.fetchErrorBusinessChart({ status }));
+    var p4 = dispatch(chartAction.fetchErrorPlatformChart({ status }));
+    Promise.all([p1, p2, p3, p4]).then(() => { nprogress.done(); });
   }
 
   render() {
