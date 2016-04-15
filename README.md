@@ -1,6 +1,9 @@
 # JSErrorMonitor
 页面javascript错误监控系统
 
+## 使用
+在页面中引用[JSErrorCollector](https://github.com/icefox0801/JSErrorMonitor)，并将错误上报的API地址修改为JSErrorMonitor的后台服务的地址，这样在页面报错时会将错误信息上传给错误监控系统JSErrorMonitor
+
 ## 用户界面：
 + 首页：
 ![首页](https://cloud.githubusercontent.com/assets/3138397/14552342/053260fe-0310-11e6-9527-17e2219ff56d.png)
@@ -17,7 +20,7 @@
 3. 项目是基于`generator-react-webpack`生成的，更多用法请参考[generator-react-webpack](https://github.com/newtriks/generator-react-webpack)
 
 ## 命令
-**本地开发调试需要后台API支持，请安装并启动[JSErrorMonitor-server]()或者自己实现，API代理转发配置在[cfg/base.js](https://github.com/icefox0801/JSErrorMonitor/blob/master/cfg/base.js)中**
+**本地开发调试需要后台API支持，请部署[JSErrorMonitor-server](https://github.com/icefox0801/JSErrorMonitor-server)或者自己实现，API代理转发配置在[cfg/base.js](https://github.com/icefox0801/JSErrorMonitor/blob/master/cfg/base.js)中**
 + `npm start`：在本地[http://localhost:8000/webpack-dev-server/](http://localhost:8000/webpack-dev-server/)启动项目
 
 ## 应用的框架和库
