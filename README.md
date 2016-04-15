@@ -2,7 +2,7 @@
 页面javascript错误监控系统
 
 ## 使用
-在页面中引用[JSErrorCollector](https://github.com/icefox0801/JSErrorMonitor)，并将错误上报的API地址修改为JSErrorMonitor的后台服务的地址，这样在页面报错时会将错误信息上传给错误监控系统JSErrorMonitor。  
+在页面中引用[JSErrorCollector](https://github.com/icefox0801/JSErrorCollector)，并将错误上报的API地址修改为JSErrorMonitor的后台服务的地址，这样在页面报错时会将错误信息上传给错误监控系统JSErrorMonitor。  
 **本地开发调试需要后台API支持，请部署[JSErrorMonitor-server](https://github.com/icefox0801/JSErrorMonitor-server)或者自己实现，API代理转发配置在[cfg/base.js](https://github.com/icefox0801/JSErrorMonitor/blob/master/cfg/base.js)中**
 
 ## 用户界面：
