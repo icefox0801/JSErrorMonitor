@@ -1,6 +1,16 @@
 # JSErrorMonitor
 页面javascript错误监控系统
 
+## 用户界面：
++ 首页：
+![首页](https://cloud.githubusercontent.com/assets/3138397/14552342/053260fe-0310-11e6-9527-17e2219ff56d.png)
++ 列表页：
+![列表页](https://cloud.githubusercontent.com/assets/3138397/14552358/2f640698-0310-11e6-94d4-9eb20fd8bb47.png)
++ 详情页：
+![详情页](https://cloud.githubusercontent.com/assets/3138397/14552374/52c30508-0310-11e6-9dc2-59dccd386b30.png)
++ 图表页：
+![图表页](https://cloud.githubusercontent.com/assets/3138397/14552391/728491ea-0310-11e6-8a8c-2d3257fbf54b.png)
+
 ## 安装
 1. 通过`npm install`安装所有依赖 
 2. 项目本地开发调试依赖于`webpack`和`yeoman`所以需要先全局安装二者
@@ -66,13 +76,3 @@
   5. 在react组件中通过`connect`和`mapStateToProps`方法映射store的state到组件的props
   6. 在组件生命周期方法（比如`componentDidUpdate`、`componentWillUpmount`、`componentDidUpdate`等）中通过`dispatch`派发action
   7. 通过action引起的对象属性更新，会经过reducer映射到store的state中，再经过`connect`和`mapStateToProps`引发组件的props更新，从而更新视图
-
-## 用户界面示例：
-+ 首页：
-![首页](https://cloud.githubusercontent.com/assets/3138397/14552342/053260fe-0310-11e6-9527-17e2219ff56d.png)
-+ 列表页：
-![列表页](https://cloud.githubusercontent.com/assets/3138397/14552358/2f640698-0310-11e6-94d4-9eb20fd8bb47.png)
-+ 详情页：
-![详情页](https://cloud.githubusercontent.com/assets/3138397/14552374/52c30508-0310-11e6-9dc2-59dccd386b30.png)
-+ 图表页：
-![图表页](https://cloud.githubusercontent.com/assets/3138397/14552391/728491ea-0310-11e6-8a8c-2d3257fbf54b.png)
