@@ -64,15 +64,15 @@
   3. 在`src/reducers`目录下新增reducer，并通过`src/reducers/index.js`暴露出来
   4. 在`src/stores/configureStore.js`配置新增的reducer和store的state映射关系
   5. 在react组件中通过`connect`和`mapStateToProps`方法映射store的state到组件的props
-  6. 在组件生命周期方法（比如`componentDidUpdate`、`componentWillUpmount`、`componentDidUpdate`等）通过`dispatch`派发action
+  6. 在组件生命周期方法（比如`componentDidUpdate`、`componentWillUpmount`、`componentDidUpdate`等）中通过`dispatch`派发action
   7. 通过action引起的对象属性更新，会经过reducer映射到store的state中，再经过`connect`和`mapStateToProps`引发组件的props更新，从而更新视图
 
 ## 用户界面示例：
 + 首页：
-localhost_8000_webpack-dev-server_.png
+![首页](https://cloud.githubusercontent.com/assets/3138397/14552342/053260fe-0310-11e6-9527-17e2219ff56d.png)
 + 列表页：
-localhost_8000_webpack-dev-server_.png
+![列表页](https://cloud.githubusercontent.com/assets/3138397/14552358/2f640698-0310-11e6-94d4-9eb20fd8bb47.png)
 + 详情页：
-localhost_8000_webpack-dev-server_.png
+![详情页](https://cloud.githubusercontent.com/assets/3138397/14552374/52c30508-0310-11e6-9dc2-59dccd386b30.png)
 + 图表页：
-localhost_8000_webpack-dev-server_.png
+![图表页](https://cloud.githubusercontent.com/assets/3138397/14552391/728491ea-0310-11e6-8a8c-2d3257fbf54b.png)
