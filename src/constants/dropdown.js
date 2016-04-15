@@ -36,6 +36,10 @@ exports.browser = {
       value: 'Google Chrome'
     },
     {
+      key: 'Chrome Mobile',
+      value: 'Chrome Mobile'
+    },
+    {
       key: 'Firefox',
       value: 'Mozilla Firefox'
     },
