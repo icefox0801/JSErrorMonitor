@@ -1,13 +1,16 @@
 # JSErrorMonitor
 页面javascript错误监控系统
+
 ## 安装
 1. 通过`npm install`安装所有依赖 
 2. 项目本地开发调试依赖于`webpack`和`yeoman`所以需要先全局安装二者
 3. 项目是基于`generator-react-webpack`生成的，更多用法请参考[generator-react-webpack](https://github.com/newtriks/generator-react-webpack)
+
 ## 命令
 **本地开发调试需要后台API支持，请安装并启动[JSErrorMonitor-server]()或者自己实现，API代理转发配置在[cfg/base.js](https://github.com/icefox0801/JSErrorMonitor/blob/master/cfg/base.js)中**
 + `npm start`：在本地[http://localhost:8000/webpack-dev-server/](http://localhost:8000/webpack-dev-server/)启动项目
-## 开发
+
+## 应用的框架和库
 + 项目底层是基于[react](https://facebook.github.io/react/)、[redux](https://github.com/reactjs/redux)和[react-redux](https://github.com/reactjs/react-redux)搭建
   + react-redux：通过`connect`和`<Provider>`将`react`和`redux`两者进行集成 
   + react的文档：[中文](http://reactjs.cn/react/docs/getting-started.html)、[English](http://reactjs.cn/react/docs/getting-started.html)
@@ -31,27 +34,45 @@
   + [react-highcharts](https://github.com/kirjs/react-highcharts)：将`react`和`Highcharts`两者进行集成
   
 ## src目录结构
-src
-├── actions：redux的actions目录
-├── components：react的组件目录
-├── config：开发配置目录
-├── constants：常量目录
-├── favicon.ico
-├── images：图片目录
-├── index.html：页面
-├── index.js：页面的入口js
-├── reducers：redux的reducers目录
-├── stores：redux的store目录
-├── styles：redux的样式目录
-└── utils：js工具方法目录
+`actions`：redux的actions目录  
+`components`：react的组件目录  
+`config`：开发配置目录  
+`constants`：常量目录  
+`favicon.ico`  
+`images`：图片目录  
+`index.html`：页面  
+`index.js`：页面的入口js  
+`reducers`：redux的reducers目录  
+`stores`：redux的store目录  
+`styles`：redux的样式目录  
+`utils`：js工具方法目录  
+
 ## ES6与JSX harmony语法
 项目默认开启ES6与JSX harmony语法支持
 + ES6教程：[深入浅出ES6](http://www.infoq.com/cn/minibooks/ES6-in-Depth?utm_campaign=rightbar_v2&utm_source=infoq&utm_medium=minibooks_link&utm_content=link_text)
 + 模块化：支持import语法，项目的`node_modules`目录会作为模块根目录
 
-## 系统示例：
-+ 首页：
+## 新建react组件
+运行`yo react-webapck:component path/to/name`，会生成
+  + `src/components/path/to/NameComponent.js`
+  + `src/styles/path/to/name.scss`
+  + `test/components/NameComponentTest.js`
 
+## redux开发：
+  1. 在`src/constants/actionType.js`新增action type
+  2. 在`src/actions`目录下新增action，并通过`src/actions/index.js`暴露出来
+  3. 在`src/reducers`目录下新增reducer，并通过`src/reducers/index.js`暴露出来
+  4. 在`src/stores/configureStore.js`配置新增的reducer和store的state映射关系
+  5. 在react组件中通过`connect`和`mapStateToProps`方法映射store的state到组件的props
+  6. 在组件生命周期方法（比如`componentDidUpdate`、`componentWillUpmount`、`componentDidUpdate`等）通过`dispatch`派发action
+  7. 通过action引起的对象属性更新，会经过reducer映射到store的state中，再经过`connect`和`mapStateToProps`引发组件的props更新，从而更新视图
+
+## 用户界面示例：
++ 首页：
+localhost_8000_webpack-dev-server_.png
 + 列表页：
+localhost_8000_webpack-dev-server_.png
 + 详情页：
+localhost_8000_webpack-dev-server_.png
 + 图表页：
+localhost_8000_webpack-dev-server_.png
