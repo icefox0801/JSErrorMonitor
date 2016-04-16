@@ -66,6 +66,7 @@ MainComponent.displayName = 'HomeMainComponent';
 // Uncomment properties you need
 // MainComponent.propTypes = {};
 MainComponent.defaultProps = {
+  chart: {},
   global: {
     timeRange: 24,
     business: 'all',

@@ -11,7 +11,7 @@ class RangeComponent extends React.Component {
     const startIndex = (current - 1) * pageSize + 1;
     const endIndex = _.min([startIndex + pageSize - 1, count]);
 
-    if(count == 0) return (
+    if(!count || count == 0) return (
       <small />
     );
 
