@@ -7,16 +7,16 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import TabsComponent from 'components/common/TabsComponent.js';
+import MainComponent from 'components/archive/MainComponent.js';
 
-describe('TabsComponent', () => {
+describe('MainComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(TabsComponent);
+    component = createComponent(MainComponent);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className).to.equal('tabs-component');
+    expect(component.props.className).to.equal('main-component');
   });
 });

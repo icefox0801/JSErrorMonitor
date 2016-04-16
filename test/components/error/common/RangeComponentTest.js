@@ -7,16 +7,16 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import ListComponent from 'components/error/data/ListComponent.js';
+import RangeComponent from 'components/error/common/RangeComponent.js';
 
-describe('ListComponent', () => {
+describe('RangeComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(ListComponent);
+    component = createComponent(RangeComponent);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className).to.equal('list-component');
+    expect(component.props.className).to.equal('range-component');
   });
 });

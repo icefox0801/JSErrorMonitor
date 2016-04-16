@@ -7,16 +7,16 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import TabComponent from 'components/common/TabComponent.js';
+import InfoComponent from 'components/archive/detail/InfoComponent.js';
 
-describe('TabComponent', () => {
+describe('InfoComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(TabComponent);
+    component = createComponent(InfoComponent);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className).to.equal('tab-component');
+    expect(component.props.className).to.equal('info-component');
   });
 });

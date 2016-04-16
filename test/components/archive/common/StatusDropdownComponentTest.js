@@ -7,16 +7,16 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import PieChartComponent from 'components/chart/data/PieChartComponent.js';
+import StatusDropdownComponent from 'components/archive/common/StatusDropdownComponent.js';
 
-describe('PieChartComponent', () => {
+describe('StatusDropdownComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(PieChartComponent);
+    component = createComponent(StatusDropdownComponent);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className).to.equal('piechart-component');
+    expect(component.props.className).to.equal('statusdropdown-component');
   });
 });

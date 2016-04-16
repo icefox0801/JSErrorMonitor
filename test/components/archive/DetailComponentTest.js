@@ -7,16 +7,16 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import ContentComponent from 'components/error/ContentComponent.js';
+import DetailComponent from 'components/archive/DetailComponent.js';
 
-describe('ContentComponent', () => {
+describe('DetailComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(ContentComponent);
+    component = createComponent(DetailComponent);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className).to.equal('content-component');
+    expect(component.props.className).to.equal('detail-component');
   });
 });

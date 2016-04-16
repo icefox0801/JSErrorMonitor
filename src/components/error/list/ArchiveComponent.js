@@ -52,11 +52,12 @@ class ArchiveComponent extends React.Component {
     const { params, filter } = this.props;
     const header = (
       <Row>
-        <Col md={5}>错误<RangeComponent meta={archives.meta} /></Col>
+        <Col md={4}>错误<RangeComponent meta={archives.meta} /></Col>
         <Col md={4}>地址</Col>
         <Col md={1}>最早</Col>
         <Col md={1}>最近</Col>
         <Col md={1}>数量</Col>
+        <Col md={1}>操作</Col>
       </Row>
     );
 
@@ -84,8 +85,8 @@ class ArchiveComponent extends React.Component {
                 return (
                   <ListGroupItem key={archive._id}>
                     <Row>
-                      <Col md={5}>
-                        <p>
+                      <Col md={4}>
+                        <p title={archive.message}>
                           <Link to={`/archive/detail/${archive._id}`} className={statusMap.textClassName[archive.status]}>
                             <strong>『{statusMap.text[archive.status]}』</strong>
                             <span>{archive.message}</span>
@@ -93,7 +94,7 @@ class ArchiveComponent extends React.Component {
                         </p>
                       </Col>
                       <Col md={4}>
-                        <p><a href={archive.url || 'javascript:void(0)'} target="_blank">{archive.url || '无'}</a></p>
+                        <p title={archive.url}><a href={archive.url || 'javascript:void(0)'} target="_blank">{archive.url || '无'}</a></p>
                       </Col>
                       <Col md={1}>
                         <p className="text-muted">{archive.earliest}</p>
@@ -103,6 +104,9 @@ class ArchiveComponent extends React.Component {
                       </Col>
                       <Col md={1}>
                         <p><strong className="text-danger">{archive.count}</strong></p>
+                      </Col>
+                      <Col md={1}>
+                        <a href="javascript:void(0)">关闭</a>
                       </Col>
                     </Row>
                   </ListGroupItem>

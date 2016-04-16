@@ -7,16 +7,16 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import RangeComponent from 'components/common/RangeComponent.js';
+import ChartComponent from 'components/home/ChartComponent.js';
 
-describe('RangeComponent', () => {
+describe('ChartComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(RangeComponent);
+    component = createComponent(ChartComponent);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className).to.equal('range-component');
+    expect(component.props.className).to.equal('chart-component');
   });
 });

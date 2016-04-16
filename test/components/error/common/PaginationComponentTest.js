@@ -7,16 +7,16 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import ChartComponent from 'components/error/data/ChartComponent.js';
+import PaginationComponent from 'components/error/common/PaginationComponent.js';
 
-describe('ChartComponent', () => {
+describe('PaginationComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(ChartComponent);
+    component = createComponent(PaginationComponent);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className).to.equal('chart-component');
+    expect(component.props.className).to.equal('pagination-component');
   });
 });
