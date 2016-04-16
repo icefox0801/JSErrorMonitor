@@ -57,10 +57,10 @@ class BrowserComponent extends React.Component {
                 <Panel header={header} eventKey={idx} bsStyle="default" key={`browser_${idx}`}>
                   <ListGroup fill>
                     {browser.versions && browser.versions.map((version, idx) => (
-                        <ListGroupItem key={version._id}>
+                        <ListGroupItem key={`browser_${idx}`}>
                           <Row>
                             <Col md={5}>
-                              <p><Link to='/error/list/all/1' className="text-primary" key={idx} onClick={evt => self.handleNavigate(version.family, evt)}>{version.family}</Link></p>
+                              <p><Link to='/error/list/all/1' className="text-primary" onClick={evt => self.handleNavigate(version.family, evt)}>{version.family}</Link></p>
                             </Col>
                             <Col md={5}>
                               <p className="text-muted">版本：{version.version}</p>

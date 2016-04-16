@@ -57,6 +57,12 @@ class ArchiveComponent extends React.Component {
   render () {
     const { archives } = this.props.jsError;
     const { params, filter, status } = this.props;
+    const rowChanged = function (status, archiveStatus) {
+
+      if(status === 'all') return '';
+
+      return (status !== archiveStatus) ? 'row-changed' : '';
+    };
     const header = (
       <Row>
         <Col md={4}>错误<RangeComponent meta={archives.meta} /></Col>
@@ -90,7 +96,7 @@ class ArchiveComponent extends React.Component {
               <ListGroupItem key={0} bsStyle="warning">没有符合条件的结果</ListGroupItem> :
               archives.list.map(archive => (
                 <ListGroupItem key={archive._id}>
-                  <Row className={(status === 'open' && archive.status === 'closed') ? 'row-changed' : ''}>
+                  <Row className={rowChanged(status, archive.status)}>
                     <Col md={4}>
                       <p title={archive.message}>
                         <Link to={`/archive/detail/${archive._id}`}

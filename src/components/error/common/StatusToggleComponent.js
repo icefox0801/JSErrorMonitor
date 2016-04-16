@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import * as statusMap from '../../../constants/statusMap';
 
 require('styles/error/common/StatusToggle.scss');
 
@@ -12,12 +13,9 @@ class StatusToggleComponent extends React.Component {
   }
 
   render () {
-    const { status, handleClick } = this.props;
-    const text = (status === 'open' ? '关闭' : '打开');
-    const className = (status === 'open' ? 'text-primary' : 'text-muted');
-    const nextStatus = (status === 'open' ? 'closed' : 'open');
+    const { status } = this.props;
     return (
-      <a href="javascript:void(0);" className={className} onClick={() => this.handleClick(nextStatus)}>{text}</a>
+      <a href="javascript:void(0);" className={statusMap.textClassName[status]} onClick={() => this.handleClick(statusMap.next[status])}>{statusMap.operation[status]}</a>
     );
   }
 }
