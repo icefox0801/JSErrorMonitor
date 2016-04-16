@@ -1,5 +1,6 @@
 'use strict';
 
+import _ from 'lodash';
 import { combineReducers } from 'redux';
 
 import * as types from '../constants/actionType';
@@ -46,6 +47,10 @@ function listArchiveError(state = { list: [], meta: {} }, action) {
         list: action.list,
         meta: action.meta
       });
+    case types.ARCHIVE_ERROR_UPDATE:
+      let list = _.clone(state.list);
+      _.merge(_.find(list, { _id: action.props.id }), _.omit(action.props, 'id'));
+      return Object.assign({}, state, { list });
     default:
       return state;
   }

@@ -11,6 +11,7 @@ import DropdownComponent from '../../common/DropdownComponent';
 import PaginationComponent from '../common/PaginationComponent';
 import RangeComponent from '../common/RangeComponent';
 import SearchComponent from '../common/SearchComponent';
+import StatusToggleComponent from '../common/StatusToggleComponent';
 import * as dropdown from '../../../constants/dropdown';
 import * as statusMap from '../../../constants/statusMap';
 import { jsErrorAction, filterAction } from '../../../actions';
@@ -41,6 +42,12 @@ class ArchiveComponent extends React.Component {
     dispatch(filterAction.setFilterProps(key, value));
   }
 
+  updateArchiveStatus (id, status) {
+    const { dispatch } = this.props;
+    nprogress.start();
+    dispatch(jsErrorAction.updateArchiveErrorStatus(id, status)).then(() => { nprogress.done(); });
+  }
+
   fetchErrorList () {
     const { dispatch, params, filter, status } = this.props;
     nprogress.start();
@@ -49,7 +56,7 @@ class ArchiveComponent extends React.Component {
 
   render () {
     const { archives } = this.props.jsError;
-    const { params, filter } = this.props;
+    const { params, filter, status } = this.props;
     const header = (
       <Row>
         <Col md={4}>错误<RangeComponent meta={archives.meta} /></Col>
@@ -81,37 +88,39 @@ class ArchiveComponent extends React.Component {
           <ListGroup fill>
             {!archives.list.length ?
               <ListGroupItem key={0} bsStyle="warning">没有符合条件的结果</ListGroupItem> :
-              archives.list.map(function (archive) {
-                return (
-                  <ListGroupItem key={archive._id}>
-                    <Row>
-                      <Col md={4}>
-                        <p title={archive.message}>
-                          <Link to={`/archive/detail/${archive._id}`} className={statusMap.textClassName[archive.status]}>
-                            <strong>『{statusMap.text[archive.status]}』</strong>
-                            <span>{archive.message}</span>
-                          </Link>
-                        </p>
-                      </Col>
-                      <Col md={4}>
-                        <p title={archive.url}><a href={archive.url || 'javascript:void(0)'} target="_blank">{archive.url || '无'}</a></p>
-                      </Col>
-                      <Col md={1}>
-                        <p className="text-muted">{archive.earliest}</p>
-                      </Col>
-                      <Col md={1}>
-                        <p className="text-muted">{archive.latest}</p>
-                      </Col>
-                      <Col md={1}>
-                        <p><strong className="text-danger">{archive.count}</strong></p>
-                      </Col>
-                      <Col md={1}>
-                        <a href="javascript:void(0)">关闭</a>
-                      </Col>
-                    </Row>
-                  </ListGroupItem>
-                );
-              })
+              archives.list.map(archive => (
+                <ListGroupItem key={archive._id}>
+                  <Row className={(status === 'open' && archive.status === 'closed') ? 'row-changed' : ''}>
+                    <Col md={4}>
+                      <p title={archive.message}>
+                        <Link to={`/archive/detail/${archive._id}`}
+                              className={statusMap.textClassName[archive.status]}>
+                          <strong>『{statusMap.text[archive.status]}』</strong>
+                          <span>{archive.message}</span>
+                        </Link>
+                      </p>
+                    </Col>
+                    <Col md={4}>
+                      <p title={archive.url}>
+                        <a href={archive.url || 'javascript:void(0)'} target="_blank">{archive.url || '无'}</a>
+                      </p>
+                    </Col>
+                    <Col md={1}>
+                      <p className="text-muted">{archive.earliest}</p>
+                    </Col>
+                    <Col md={1}>
+                      <p className="text-muted">{archive.latest}</p>
+                    </Col>
+                    <Col md={1}>
+                      <p><strong className="text-danger">{archive.count}</strong></p>
+                    </Col>
+                    <Col md={1}>
+                      <StatusToggleComponent status={archive.status}
+                                             handleUpdate={nextStatus => this.updateArchiveStatus(archive._id, nextStatus)}/>
+                    </Col>
+                  </Row>
+                </ListGroupItem>
+              ))
             }
           </ListGroup>
         </Panel>
@@ -142,7 +151,7 @@ ArchiveComponent.defaultProps = {
 
 function mapStateToProps(state) {
   const { jsError, filter, global, status } = state;
-  return { jsError, filter, global, status }
+  return { jsError, filter, global, status };
 }
 
 export default connect(mapStateToProps)(ArchiveComponent);

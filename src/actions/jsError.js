@@ -71,8 +71,11 @@ function listOSError (json) {
   };
 }
 
-function archiveErrorStatus (json) {
-
+function archiveErrorStatus (json, id) {
+  return {
+    type: types.ARCHIVE_ERROR_UPDATE,
+    props: Object.assign(json.result, { id })
+  };
 }
 
 export function fetchMostErrorList () {
@@ -145,15 +148,17 @@ export function fetchOSErrorList (params) {
   };
 }
 
-export function updateArchiveErrorStatus (archiveId, status) {
-  //dispatch(loadingShow);
-  return fetch(`/api/error/detail/${id}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({status})
-  })
-    .then(response => response.json())
-    .then(json => dispatch(setErrorProps(json)));
+export function updateArchiveErrorStatus (id, status) {
+  return dispatch => {
+    //dispatch(loadingShow);
+    return fetch(`/api/archive/update/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({status})
+    })
+      .then(response => response.json())
+      .then(json => dispatch(archiveErrorStatus(json, id)));
+  }
 }
