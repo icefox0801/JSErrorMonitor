@@ -11,52 +11,52 @@ import * as iconType from '../../constants/iconType';
 import ListComponent from './detail/ListComponent';
 import StatusDropdownComponent from './common/StatusDropdownComponent';
 
-require('styles/error/Detail.scss');
+require('styles/archive/Detail.scss');
 
 class DetailComponent extends React.Component {
 
   componentDidMount () {
     const { dispatch, routeParams } = this.props;
     nprogress.start();
-    dispatch(infoAction.fetchErrorDetail(routeParams.archiveId)).then(() => { nprogress.done(); });
+    dispatch(infoAction.fetchArchiveDetail(routeParams.archiveId)).then(() => { nprogress.done(); });
   }
 
   updateStatus (status) {
     const { dispatch, routeParams } = this.props;
     nprogress.start();
-    dispatch(infoAction.updateErrorStatus(routeParams.archiveId, status)).then(() => { nprogress.done(); });
+    dispatch(infoAction.updateArchiveStatus(routeParams.archiveId, status)).then(() => { nprogress.done(); });
   }
 
   loadMore () {
     const { dispatch, routeParams, info } = this.props;
     const skip = info.list.length;
     nprogress.start();
-    dispatch(infoAction.fetchErrorDetailMore(routeParams.archiveId, skip)).then( () => { nprogress.done(); });
+    dispatch(infoAction.fetchArchiveDetailMore(routeParams.archiveId, skip)).then( () => { nprogress.done(); });
   }
 
   render() {
     const { abstract, list } = this.props.info;
     return (
-      <div id="error-detail">
-        <div className="error-detail-header container-fluid">
+      <div id="archive-detail">
+        <div className="archive-detail-header container-fluid">
           <h4>
-            <span className="error-detail-status">
+            <span className="archive-detail-status">
               <StatusDropdownComponent status={abstract.status} handleSelect={status => this.updateStatus(status)} />
               <span>#{abstract.orderId}：</span></span>
             <span className={abstract.status === 'open' ? 'text-warning': 'text-muted'}>{abstract.message}</span>
           </h4>
           <p className="text-muted">
-            <Glyphicon glyph="eye-open" /><span className="error-detail-meta">共计：{abstract.count}次</span>
-            <Glyphicon glyph="time" /><span className="error-detail-meta">最近：{abstract.latest}</span>
-            <Glyphicon glyph="time" /><span className="error-detail-meta">最早：{abstract.earliest}</span>
+            <Glyphicon glyph="eye-open" /><span className="archive-detail-meta">共计：{abstract.count}次</span>
+            <Glyphicon glyph="time" /><span className="archive-detail-meta">最近：{abstract.latest}</span>
+            <Glyphicon glyph="time" /><span className="archive-detail-meta">最早：{abstract.earliest}</span>
           </p>
         </div>
         <div className="container-fluid">
-          <div className="error-detail-tags">
+          <div className="archive-detail-tags">
             <dl>
               <dt><span className="text-info">浏览器：</span></dt>
               <dd>
-                <ul className="error-detail-browsers">
+                <ul className="archive-detail-browsers">
                   <li>
                     {abstract.browsers.map(browser => (
                       <a href="javascript:void(0);">
@@ -85,7 +85,7 @@ class DetailComponent extends React.Component {
   }
 }
 
-DetailComponent.displayName = 'ErrorDetailComponent';
+DetailComponent.displayName = 'ArchiveDetailComponent';
 
 // Uncomment properties you need
 // DetailComponent.propTypes = {};

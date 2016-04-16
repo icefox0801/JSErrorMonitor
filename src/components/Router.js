@@ -16,7 +16,8 @@ import ErrorListError from './error/list/ErrorComponent';
 import ErrorListArchive from './error/list/ArchiveComponent';
 import ErrorListBrowser from './error/list/BrowserComponent';
 import ErrorListOS from './error/list/OsComponent';
-import ErrorDetail from './error/DetailComponent';
+import Archive from './archive/MainComponent';
+import ArchiveDetail from './archive/DetailComponent';
 import Live from './live/MainComponent';
 import Chart from './chart/MainComponent';
 import ChartTrend from './chart/data/TrendComponent';
@@ -52,7 +53,9 @@ let AppRouter = (
             <Route path="browser" component={ErrorListBrowser} />
             <Route path="os" component={ErrorListOS} />
           </Route>
-          <Route path="detail/:archiveId" component={ErrorDetail} />
+        </Route>
+        <Route path="archive" component={Archive}>
+          <Route path="detail/:archiveId" component={ArchiveDetail} />
         </Route>
         <Route path="live" component={Live} />
         <Route path="chart" component={Chart} >

@@ -1,9 +1,9 @@
 // 错误详情页样式
-#error-detail {
+#archive-detail {
 
   margin-bottom: 50px;
 
-  .error-detail-header {
+  .archive-detail-header {
 
     h4 {
       margin: 0;
@@ -16,7 +16,7 @@
     }
   }
 
-  .error-detail-status {
+  .archive-detail-status {
 
     .dropdown {
       margin-right: 5px;
@@ -39,7 +39,7 @@
     }
   }
 
-  .error-detail-tags {
+  .archive-detail-tags {
     overflow: hidden;
 
     dl {
@@ -70,11 +70,11 @@
     }
   }
 
-  .error-detail-meta {
+  .archive-detail-meta {
     margin-right: 10px;
   }
 
-  .error-detail-browsers {
+  .archive-detail-browsers {
     list-style-type: none;
     margin-bottom: 0;
     overflow: hidden;

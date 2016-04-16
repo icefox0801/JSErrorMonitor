@@ -5,50 +5,50 @@ import _ from 'lodash';
 import transformDate from '../utils/transformDate';
 import * as types from '../constants/actionType';
 
-function getErrorDetail (json) {
+function getArchiveDetail (json) {
   return {
-    type: types.ERROR_DETAIL,
+    type: types.ARCHIVE_DETAIL,
     list: json.result.map(jsError => _.update(jsError, 'date', date => transformDate(date))),
     abstract: _.chain(json.abstract).update('earliest', (date => transformDate(date))).update('latest', (date => transformDate(date))).value()
   };
 }
 
-function getErrorDetailMore (json) {
+function getArchiveDetailMore (json) {
   return {
-    type: types.ERROR_DETAIL_MORE,
+    type: types.ARCHIVE_DETAIL_MORE,
     list: json.result.map(jsError => _.update(jsError, 'date', date => transformDate(date)))
   };
 }
 
-function setErrorProps (json) {
+function setArchiveProps (json) {
   return {
-    type: types.ERROR_UPDATE,
+    type: types.ARCHIVE_UPDATE,
     props: json.result
   };
 }
 
-export function fetchErrorDetail (id) {
+export function fetchArchiveDetail (id) {
   return dispatch => {
     //dispatch(loadingShow);
-    return fetch(`/api/error/detail/${id}`)
+    return fetch(`/api/archive/detail/${id}`)
       .then(response => response.json())
-      .then(json => dispatch(getErrorDetail(json)));
+      .then(json => dispatch(getArchiveDetail(json)));
   }
 }
 
-export function fetchErrorDetailMore (id, skip) {
+export function fetchArchiveDetailMore (id, skip) {
   return dispatch => {
     //dispatch(loadingShow);
-    return fetch(`/api/error/detail/${id}/${skip}`)
+    return fetch(`/api/archive/detail/${id}/${skip}`)
       .then(response => response.json())
-      .then(json => dispatch(getErrorDetailMore(json)));
+      .then(json => dispatch(getArchiveDetailMore(json)));
   }
 }
 
-export function updateErrorStatus (id, status) {
+export function updateArchiveStatus (id, status) {
   return dispatch => {
     //dispatch(loadingShow);
-    return fetch(`/api/error/detail/${id}`, {
+    return fetch(`/api/archive/update/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -56,6 +56,6 @@ export function updateErrorStatus (id, status) {
       body: JSON.stringify({ status })
     })
       .then(response => response.json())
-      .then(json => dispatch(setErrorProps(json)));
+      .then(json => dispatch(setArchiveProps(json)));
   }
 }

@@ -71,6 +71,10 @@ function listOSError (json) {
   };
 }
 
+function archiveErrorStatus (json) {
+
+}
+
 export function fetchMostErrorList () {
   return dispatch => {
     //dispatch(loadingShow);
@@ -100,7 +104,6 @@ export function fetchAllErrorList (params) {
       .then(json => dispatch(listAllError(json)));
   };
 }
-
 
 export function fetchArchiveErrorList (params) {
   return dispatch => {
@@ -140,4 +143,17 @@ export function fetchOSErrorList (params) {
       .then(response => response.json())
       .then(json => dispatch(listOSError(json)));
   };
+}
+
+export function updateArchiveErrorStatus (archiveId, status) {
+  //dispatch(loadingShow);
+  return fetch(`/api/error/detail/${id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({status})
+  })
+    .then(response => response.json())
+    .then(json => dispatch(setErrorProps(json)));
 }

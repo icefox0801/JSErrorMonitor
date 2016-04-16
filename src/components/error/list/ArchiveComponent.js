@@ -86,7 +86,7 @@ class ArchiveComponent extends React.Component {
                     <Row>
                       <Col md={5}>
                         <p>
-                          <Link to={`/error/detail/${archive._id}`} className={statusMap.textClassName[archive.status]}>
+                          <Link to={`/archive/detail/${archive._id}`} className={statusMap.textClassName[archive.status]}>
                             <strong>『{statusMap.text[archive.status]}』</strong>
                             <span>{archive.message}</span>
                           </Link>

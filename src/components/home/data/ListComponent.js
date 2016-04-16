@@ -20,7 +20,7 @@ class ListComponent extends React.Component {
                 <ListGroupItem key={`${type}-${idx}`}>
                   <h4 className="list-group-item-heading">
                     <Glyphicon glyph="info-sign" className="text-danger"/>
-                    <Link to={`/error/detail/${archive._id}`} className="text-danger">{archive.message}</Link>
+                    <Link to={`/archive/detail/${archive._id}`} className="text-danger">{archive.message}</Link>
                     <span className="label label-warning pull-right">{archive.count}</span>
                   </h4>
                   <p className="list-group-item-text text-primary page-url">
