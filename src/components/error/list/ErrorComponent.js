@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { Panel, ListGroup, ListGroupItem, Row, Col, Label } from 'react-bootstrap';
 import { Link } from 'react-router';
 
+import LoadingComponent from '../../common/LoadingComponent';
 import DropdownComponent from '../../common/DropdownComponent';
 import RangeComponent from '../common/RangeComponent';
 import PaginationComponent from '../common/PaginationComponent';
@@ -18,6 +19,16 @@ import { jsErrorAction, filterAction } from '../../../actions';
 require('styles/error/list/Error.scss');
 
 class ErrorComponent extends React.Component {
+
+  constructor (props) {
+    super(props);
+    this.state = { loading: true };
+  }
+  // nextProps
+  componentWillReceiveProps () {
+    this.setState({ loading: false });
+  }
+
   componentDidMount () {
     this.fetchErrorList();
   }
@@ -49,6 +60,7 @@ class ErrorComponent extends React.Component {
   render () {
     const { all } = this.props.jsError;
     const { params, filter } = this.props;
+    const { loading } = this.state;
     const header = (
       <Row>
         <Col md={6}>错误<RangeComponent meta={all.meta} /></Col>
@@ -87,33 +99,32 @@ class ErrorComponent extends React.Component {
 
         <Panel header={header} id="error-list-error">
           <ListGroup fill>
-            {!all.list.length ?
+            {loading ? <LoadingComponent /> :
+              !all.list.length ?
               <ListGroupItem key={0} bsStyle="warning">没有符合条件的结果</ListGroupItem> :
-              all.list.map(function (error) {
-                return (
-                  <ListGroupItem key={error._id}>
-                    <Row>
-                      <Col md={6}>
-                        <p>
-                          <Link to={`/error/detail/${error._id}`} className={statusMap.textClassName[error.status]}>
-                            <strong>『{statusMap.text[error.status]}』</strong>
-                            <span>{error.message}</span>
-                          </Link>
-                        </p>
-                      </Col>
-                      <Col md={2}>
-                        <p><Label bsStyle="default">{error.browser.family}</Label></p>
-                      </Col>
-                      <Col md={2}>
-                        <p><Label bsStyle="info">{error.os.family}</Label></p>
-                      </Col>
-                      <Col md={2}>
-                        <p className="text-muted">{error.fromNow}</p>
-                      </Col>
-                    </Row>
-                  </ListGroupItem>
-                );
-              })
+              all.list.map(error => (
+                <ListGroupItem key={error._id}>
+                  <Row>
+                    <Col md={6}>
+                      <p>
+                        <Link to={`/error/detail/${error._id}`} className={statusMap.textClassName[error.status]}>
+                          <strong>『{statusMap.text[error.status]}』</strong>
+                          <span>{error.message}</span>
+                        </Link>
+                      </p>
+                    </Col>
+                    <Col md={2}>
+                      <p><Label bsStyle="default">{error.browser.family}</Label></p>
+                    </Col>
+                    <Col md={2}>
+                      <p><Label bsStyle="info">{error.os.family}</Label></p>
+                    </Col>
+                    <Col md={2}>
+                      <p className="text-muted">{error.fromNow}</p>
+                    </Col>
+                  </Row>
+                </ListGroupItem>
+              ))
             }
           </ListGroup>
         </Panel>

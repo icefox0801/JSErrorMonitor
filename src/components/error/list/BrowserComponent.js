@@ -9,9 +9,21 @@ import { Link } from 'react-router';
 
 import { jsErrorAction, filterAction } from '../../../actions';
 
+import LoadingComponent from '../../common/LoadingComponent';
+
 require('styles/error/list/Browser.scss');
 
 class BrowserComponent extends React.Component {
+
+  constructor (props) {
+    super(props);
+    this.state = { loading: true };
+  }
+  // nextProps
+  componentWillReceiveProps () {
+    this.setState({ loading: false });
+  }
+
   componentDidMount () {
     const { dispatch } = this.props;
     dispatch(filterAction.resetFilterProps());
@@ -38,11 +50,13 @@ class BrowserComponent extends React.Component {
 
   render () {
     const { browsers } = this.props.jsError;
+    const { loading } = this.state;
     var self = this;
     return (
       <div className="container-fluid" id="error-list-browser">
         <Accordion defaultActiveKey={0}>
-          {!browsers.list.length ?
+          {loading ? <LoadingComponent /> :
+            !browsers.list.length ?
             <Alert bsStyle="warning">没有符合条件的结果</Alert> :
             browsers.list.map(function (browser, idx) {
               var header = (

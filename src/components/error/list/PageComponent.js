@@ -6,6 +6,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Panel, ListGroup, ListGroupItem, Row, Col } from 'react-bootstrap';
 
+import LoadingComponent from '../../common/LoadingComponent';
 import DropdownComponent from '../../common/DropdownComponent';
 import PaginationComponent from '../common/PaginationComponent';
 import RangeComponent from '../common/RangeComponent';
@@ -16,6 +17,16 @@ import { jsErrorAction, filterAction } from '../../../actions';
 require('styles/error/list/Page.scss');
 
 class PageComponent extends React.Component {
+
+  constructor (props) {
+    super(props);
+    this.state = { loading: true };
+  }
+  // nextProps
+  componentWillReceiveProps () {
+    this.setState({ loading: false });
+  }
+
   componentDidMount () {
     this.fetchErrorList();
   }
@@ -47,6 +58,7 @@ class PageComponent extends React.Component {
   render () {
     const { pages } = this.props.jsError;
     const { params, filter } = this.props;
+    const { loading } = this.state;
     const header = (
       <Row>
         <Col md={6}>地址<RangeComponent meta={pages.meta} /></Col>
@@ -75,31 +87,30 @@ class PageComponent extends React.Component {
 
         <Panel header={header}>
           <ListGroup fill>
-            {!pages.list.length ?
+            {loading ? <LoadingComponent /> :
+              !pages.list.length ?
               <ListGroupItem key={0} bsStyle="warning">没有符合条件的结果</ListGroupItem> :
-              pages.list.map(function (page, idx) {
-                return (
-                  <ListGroupItem key={idx}>
-                    <Row>
-                      <Col md={6}>
-                        <p><a href={page.url || 'javascript:void(0)'} target="_blank">{page.url || '无'}</a></p>
-                      </Col>
-                      <Col md={2}>
-                        <p className="text-muted">{page.earliest}</p>
-                      </Col>
-                      <Col md={2}>
-                        <p className="text-muted">{page.latest}</p>
-                      </Col>
-                      <Col md={1}>
-                        <p><strong className="text-danger">{page.archive}</strong></p>
-                      </Col>
-                      <Col md={1}>
-                        <p><strong className="text-danger">{page.count}</strong></p>
-                      </Col>
-                    </Row>
-                  </ListGroupItem>
-                );
-              })
+              pages.list.map((page, idx) => (
+                <ListGroupItem key={idx}>
+                  <Row>
+                    <Col md={6}>
+                      <p><a href={page.url || 'javascript:void(0)'} target="_blank">{page.url || '无'}</a></p>
+                    </Col>
+                    <Col md={2}>
+                      <p className="text-muted">{page.earliest}</p>
+                    </Col>
+                    <Col md={2}>
+                      <p className="text-muted">{page.latest}</p>
+                    </Col>
+                    <Col md={1}>
+                      <p><strong className="text-danger">{page.archive}</strong></p>
+                    </Col>
+                    <Col md={1}>
+                      <p><strong className="text-danger">{page.count}</strong></p>
+                    </Col>
+                  </Row>
+                </ListGroupItem>
+              ))
             }
           </ListGroup>
         </Panel>

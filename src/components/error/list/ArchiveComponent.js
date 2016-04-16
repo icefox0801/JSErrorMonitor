@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { Panel, ListGroup, ListGroupItem, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router';
 
+import LoadingComponent from '../../common/LoadingComponent';
 import DropdownComponent from '../../common/DropdownComponent';
 import PaginationComponent from '../common/PaginationComponent';
 import RangeComponent from '../common/RangeComponent';
@@ -19,6 +20,15 @@ import { jsErrorAction, filterAction } from '../../../actions';
 require('styles/error/list/Archive.scss');
 
 class ArchiveComponent extends React.Component {
+
+  constructor (props) {
+    super(props);
+    this.state = { loading: true };
+  }
+  // nextProps
+  componentWillReceiveProps () {
+    this.setState({ loading: false });
+  }
 
   componentDidMount () {
     this.fetchErrorList();
@@ -56,6 +66,7 @@ class ArchiveComponent extends React.Component {
 
   render () {
     const { archives } = this.props.jsError;
+    const { loading } = this.state;
     const { params, filter, status } = this.props;
     const rowChanged = function (status, archiveStatus) {
 
@@ -92,7 +103,8 @@ class ArchiveComponent extends React.Component {
 
         <Panel header={header} >
           <ListGroup fill>
-            {!archives.list.length ?
+            {loading ? <LoadingComponent /> :
+              !archives.list.length ?
               <ListGroupItem key={0} bsStyle="warning">没有符合条件的结果</ListGroupItem> :
               archives.list.map(archive => (
                 <ListGroupItem key={archive._id}>

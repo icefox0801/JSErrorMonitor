@@ -15,6 +15,10 @@ import { chartAction, jsErrorAction } from '../../actions';
 require('styles/home/Main.scss');
 
 class MainComponent extends React.Component {
+  componentDidMount () {
+    this.fetchData();
+  }
+
   // prevProps, prevState
   componentDidUpdate (prevProps) {
     const { global } = this.props;

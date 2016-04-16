@@ -5,11 +5,24 @@ import { Panel } from 'react-bootstrap';
 import moment from 'moment';
 import ReactHighcharts from 'react-highcharts';
 
+import LoadingComponent from '../../common/LoadingComponent';
+
 require('styles/chart/common/LineChart.scss');
 
 class LineChartComponent extends React.Component {
+
+  constructor (props) {
+    super(props);
+    this.state = { loading: true };
+  }
+  // nextProps
+  componentWillReceiveProps () {
+    this.setState({ loading: false });
+  }
+
   render() {
     const { data } = this.props;
+    const { loading } = this.state;
     const config = {
       chart: {
         type: 'line',
@@ -46,7 +59,7 @@ class LineChartComponent extends React.Component {
     return (
       <Panel header={<p>近期页面错误趋势</p>}>
         <div>
-          <ReactHighcharts config={config} />
+          {loading ? <LoadingComponent type="bars" /> : <ReactHighcharts config={config} />}
         </div>
       </Panel>
     );

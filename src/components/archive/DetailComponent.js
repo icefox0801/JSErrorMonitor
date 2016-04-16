@@ -8,12 +8,22 @@ import { Glyphicon, Label, Button } from 'react-bootstrap'
 import { infoAction } from '../../actions';
 import * as iconType from '../../constants/iconType';
 
+import LoadingComponent from '../common/LoadingComponent';
 import ListComponent from './detail/ListComponent';
 import StatusDropdownComponent from './common/StatusDropdownComponent';
 
 require('styles/archive/Detail.scss');
 
 class DetailComponent extends React.Component {
+
+  constructor (props) {
+    super(props);
+    this.state = { loading: true };
+  }
+  // nextProps
+  componentWillReceiveProps () {
+    this.setState({ loading: false });
+  }
 
   componentDidMount () {
     const { dispatch, routeParams } = this.props;
@@ -36,7 +46,8 @@ class DetailComponent extends React.Component {
 
   render() {
     const { abstract, list } = this.props.info;
-    return (
+    const { loading } = this.state;
+    return loading ? <LoadingComponent type="bars" /> :
       <div id="archive-detail">
         <div className="archive-detail-header container-fluid">
           <h4>
@@ -81,7 +92,6 @@ class DetailComponent extends React.Component {
         <ListComponent list={list} />
         <Button bsStyle="primary" bsSize="large" className="center-block" onClick={() => this.loadMore()}>加载更多</Button>
       </div>
-    );
   }
 }
 

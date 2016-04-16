@@ -9,9 +9,21 @@ import { Link } from 'react-router';
 
 import { jsErrorAction, filterAction } from '../../../actions';
 
+import LoadingComponent from '../../common/LoadingComponent';
+
 require('styles/error/list/Os.scss');
 
 class OsComponent extends React.Component {
+
+  constructor (props) {
+    super(props);
+    this.state = { loading: true };
+  }
+  // nextProps
+  componentWillReceiveProps () {
+    this.setState({ loading: false });
+  }
+
   componentDidMount () {
     const { dispatch } = this.props;
     dispatch(filterAction.resetFilterProps());
@@ -38,13 +50,15 @@ class OsComponent extends React.Component {
 
   render () {
     const { os } = this.props.jsError;
+    const { loading } = this.state;
     var self = this;
     return (
       <div className="container-fluid" id="error-list-os">
         <Accordion defaultActiveKey={0}>
-          {!os.list.length ?
+          {loading ? <LoadingComponent /> :
+            !os.list.length ?
             <Alert bsStyle="warning">没有符合条件的结果</Alert> :
-            os.list.map(function (system, idx) {
+            os.list.map((system, idx) => {
               var header = (
                 <Row>
                   <Col md={5}>{system.family}</Col>

@@ -13,11 +13,6 @@ require('styles/common/Topbar.scss');
 
 class TopbarComponent extends React.Component {
 
-  componentDidMount () {
-    const { dispatch } = this.props;
-    dispatch(globalAction.getGlobalProps());
-  }
-
   handleSelect (key, value) {
     const { dispatch, params } = this.props;
     _.set(params, 'page', 1);

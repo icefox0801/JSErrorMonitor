@@ -4,6 +4,7 @@ import React from 'react';
 import { Panel } from 'react-bootstrap';
 import ReactHighcharts from 'react-highcharts';
 
+import LoadingComponent from '../../common/LoadingComponent';
 import PercentageToggleComponent from './PercentageToggleComponent';
 
 require('styles/chart/common/PieChart.scss');
@@ -13,7 +14,11 @@ class PieChartComponent extends React.Component {
   constructor (props) {
     super(props);
     const showType = 'percentage';
-    this.state = { showType };
+    this.state = { showType, loading: true };
+  }
+  // nextProps
+  componentWillReceiveProps () {
+    this.setState({ loading: false });
   }
 
   handleChange (value) {
@@ -25,7 +30,8 @@ class PieChartComponent extends React.Component {
 
   render() {
     const { data, title, chartTitle } = this.props;
-    const dataStr = (this.state.showType === 'number' ? '{y}' : '{point.percentage:.1f}%');
+    const { loading, showType } = this.state;
+    const dataStr = (showType === 'number' ? '{y}' : '{point.percentage:.1f}%');
     const header = (
       <div>
         <span>{title}</span>
@@ -64,7 +70,7 @@ class PieChartComponent extends React.Component {
     return (
       <Panel header={header}>
         <div>
-          <ReactHighcharts config={config} showType={this.state.showType} />
+          {loading ? <LoadingComponent type="bars" /> : <ReactHighcharts config={config} showType={showType} />}
         </div>
       </Panel>
     );
