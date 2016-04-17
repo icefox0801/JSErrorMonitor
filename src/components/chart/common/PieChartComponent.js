@@ -22,7 +22,6 @@ class PieChartComponent extends React.Component {
   }
 
   handleChange (value) {
-    debugger;
     this.setState({
       showType: value
     });
@@ -31,7 +30,7 @@ class PieChartComponent extends React.Component {
   render() {
     const { data, title, chartTitle } = this.props;
     const { loading, showType } = this.state;
-    const dataStr = (showType === 'number' ? '{y}' : '{point.percentage:.1f}%');
+    const dataStr = (showType === 'number' ? '{point.y}' : '{point.percentage:.1f}%');
     const header = (
       <div>
         <span>{title}</span>
@@ -52,7 +51,7 @@ class PieChartComponent extends React.Component {
       plotOptions: {
         pie: {
           allowPointSelect: true,
-          size: 240,
+          size: 180,
           cursor: 'pointer',
           dataLabels: {
             enabled: true,
@@ -61,7 +60,7 @@ class PieChartComponent extends React.Component {
         }
       },
       series: [{
-        name: '比例',
+        name: (showType === 'number' ? '数量' : '比例'),
         colorByPoint: true,
         data: data.plots
       }]
