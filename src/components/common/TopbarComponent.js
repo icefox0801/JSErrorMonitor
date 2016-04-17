@@ -27,7 +27,7 @@ class TopbarComponent extends React.Component {
         <Navbar inverse fluid>
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to="/home">PWS</Link>
+              <Link to="/home">页面错误监控平台</Link>
             </Navbar.Brand>
           </Navbar.Header>
           <Navbar.Collapse>
