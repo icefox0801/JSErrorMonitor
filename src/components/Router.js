@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRedirect, Redirect, browserHistory } from 'react-router';
+import { Router, Route, IndexRedirect, Redirect, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 import configureStore from '../stores/configureStore';
@@ -23,10 +23,10 @@ import Chart from './chart/MainComponent';
 import ChartTrend from './chart/data/TrendComponent';
 import ChartCategory from './chart/data/CategoryComponent';
 
-const store = configureStore(browserHistory);
+const store = configureStore(hashHistory);
 
 // Create an enhanced history that syncs navigation events with the store
-const history = syncHistoryWithStore(browserHistory, store);
+const history = syncHistoryWithStore(hashHistory, store);
 
 let AppRouter = (
   <Provider store={store}>
