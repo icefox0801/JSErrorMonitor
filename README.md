@@ -1,5 +1,5 @@
 # JSErrorMonitor
-页面javascript错误监控系统
+页面javascript错误监控系统：[http://status.flybyte.cn](http://status.flybyte.cn)
 
 ## 使用
 在页面中引用[JSErrorCollector](https://github.com/icefox0801/JSErrorCollector)，并将错误上报的API地址修改为[JSErrorMonitor-server](https://github.com/icefox0801/JSErrorMonitor-server)的后台服务的地址，这样在页面报错时会将错误信息上传给错误监控系统JSErrorMonitor。  
