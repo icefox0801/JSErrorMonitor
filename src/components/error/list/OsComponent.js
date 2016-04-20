@@ -61,9 +61,9 @@ class OsComponent extends React.Component {
             os.list.map((system, idx) => {
               var header = (
                 <Row>
-                  <Col md={5}>{system.family}</Col>
-                  <Col md={5}><small className="text-muted">版本范围：{system.min} - {system.max}</small></Col>
-                  <Col md={2}><strong className="text-danger">{system.count}</strong></Col>
+                  <Col xs={12} sm={5}>{system.family}</Col>
+                  <Col xs={10} sm={5}><small className="text-muted">版本范围：{system.min} - {system.max}</small></Col>
+                  <Col xs={10} sm={2}><strong className="text-danger">{system.count}</strong></Col>
                 </Row>
               );
 
@@ -73,13 +73,13 @@ class OsComponent extends React.Component {
                     {system.versions && system.versions.map((version, idx) => (
                       <ListGroupItem key={`os_${idx}`}>
                         <Row>
-                          <Col md={5}>
+                          <Col xs={12} sm={5}>
                             <p><Link to="/error/list/all/1" className="text-primary" onClick={evt => self.handleNavigate(version.family, evt)}>{version.family}</Link></p>
                           </Col>
-                          <Col md={5}>
+                          <Col xs={10} sm={5}>
                             <p className="text-muted">版本：{version.version}</p>
                           </Col>
-                          <Col md={2}>
+                          <Col xs={2} sm={2}>
                             <p><strong className="text-danger">{version.count}</strong></p>
                           </Col>
                         </Row>

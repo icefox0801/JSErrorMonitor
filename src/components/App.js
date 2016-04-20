@@ -4,6 +4,7 @@ require('styles/App.css');
 import React from 'react';
 import { connect } from 'react-redux';
 import SidenavComponent from './common/SidenavComponent';
+import FooterComponent from './common/FooterComponent';
 import { globalAction } from '../actions';
 import LoadingComponent from './common/LoadingComponent';
 
@@ -32,6 +33,7 @@ class AppComponent extends React.Component {
         <section className="main">
           {this.props.children}
         </section>
+        <FooterComponent />
       </div>
     ) : (
       <LoadingComponent />

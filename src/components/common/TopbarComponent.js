@@ -29,6 +29,7 @@ class TopbarComponent extends React.Component {
             <Navbar.Brand>
               <Link to="/home">页面错误监控平台</Link>
             </Navbar.Brand>
+            <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>

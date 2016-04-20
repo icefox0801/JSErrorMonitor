@@ -8,9 +8,16 @@ button:focus,a:focus {
 }
 
 .index {
+  padding-bottom: 80px;
   /*background: url(../images/double_lined.png) repeat;*/
 }
 
 .main {
   padding-left: 90px;
+}
+
+@media (max-width: 767px) {
+  .main {
+    padding-left: 0;
+  }
 }

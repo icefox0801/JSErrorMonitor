@@ -76,12 +76,12 @@ class ArchiveComponent extends React.Component {
     };
     const header = (
       <Row>
-        <Col md={4}>错误<RangeComponent meta={archives.meta} /></Col>
-        <Col md={4}>地址</Col>
-        <Col md={1}>最早</Col>
-        <Col md={1}>最近</Col>
-        <Col md={1}>数量</Col>
-        <Col md={1}>操作</Col>
+        <Col md={4} sm={6} xs={12}>错误<RangeComponent meta={archives.meta} /></Col>
+        <Col md={4} sm={6} xsHidden>地址</Col>
+        <Col md={1} xsHidden smHidden>最早</Col>
+        <Col md={1} xsHidden smHidden>最近</Col>
+        <Col md={1} xsHidden smHidden>数量</Col>
+        <Col md={1} xsHidden smHidden>操作</Col>
       </Row>
     );
 
@@ -109,7 +109,7 @@ class ArchiveComponent extends React.Component {
               archives.list.map(archive => (
                 <ListGroupItem key={archive._id}>
                   <Row className={rowChanged(status, archive.status)}>
-                    <Col md={4}>
+                    <Col md={4} sm={6} xs={12}>
                       <p title={archive.message}>
                         <Link to={`/archive/detail/${archive._id}`}
                               className={statusMap.textClassName[archive.status]}>
@@ -118,21 +118,22 @@ class ArchiveComponent extends React.Component {
                         </Link>
                       </p>
                     </Col>
-                    <Col md={4}>
+                    <Col md={4} sm={6} xs={12}>
                       <p title={archive.url}>
                         <a href={archive.url || 'javascript:void(0)'} target="_blank">{archive.url || '无'}</a>
                       </p>
                     </Col>
-                    <Col md={1}>
+                    <Col md={1} xsHidden smHidden>
                       <p className="text-muted">{archive.earliest}</p>
                     </Col>
-                    <Col md={1}>
+                    <Col md={1} xsHidden smHidden>
                       <p className="text-muted">{archive.latest}</p>
                     </Col>
-                    <Col md={1}>
+                    <Col xs={10} sm={6} mdHidden lgHidden>{archive.earliest} ~ {archive.latest}</Col>
+                    <Col xs={2} sm={3} md={1}>
                       <p><strong className="text-danger">{archive.count}</strong></p>
                     </Col>
-                    <Col md={1}>
+                    <Col xsHidden sm={3} md={1}>
                       <StatusToggleComponent status={archive.status}
                                              handleUpdate={nextStatus => this.updateArchiveStatus(archive._id, nextStatus)}/>
                     </Col>

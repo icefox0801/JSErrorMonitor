@@ -1,10 +1,13 @@
-#sidebar {
+#footer {
   position: fixed;
-  width: 90px;
-  height: 100%;
+  bottom: 0;
+  width: 100%;
   background: linear-gradient(to bottom,#443e4a 0,#110617 100%);
+  z-index: 200;
   ul {
     &>li {
+      display: inline-block;
+      width: 20%;
       &>a {
         text-align: center;
         font-size: 12px;
@@ -21,7 +24,7 @@
     &>.active {
       a {
         color: #fff;
-        border-left: 3px solid #fc6a00;
+        border-top: 3px solid #fc6a00;
         background: #222;
       }
     }

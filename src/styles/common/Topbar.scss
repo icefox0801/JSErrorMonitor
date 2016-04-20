@@ -28,3 +28,16 @@
     width: 0;
   }
 }
+
+@media (max-width: 767px) {
+  #topbar {
+
+    .active:after {
+      display: none;
+    }
+
+    .navbar-collapse {
+
+    }
+  }
+}

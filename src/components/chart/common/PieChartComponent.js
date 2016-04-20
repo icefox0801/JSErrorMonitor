@@ -54,9 +54,9 @@ class PieChartComponent extends React.Component {
           size: 180,
           cursor: 'pointer',
           dataLabels: {
-            enabled: true,
-            format: '<b>{point.name}</b>: ' + dataStr
-          }
+            enabled: false
+          },
+          showInLegend: true
         }
       },
       series: [{

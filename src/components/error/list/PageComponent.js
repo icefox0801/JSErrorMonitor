@@ -61,11 +61,11 @@ class PageComponent extends React.Component {
     const { loading } = this.state;
     const header = (
       <Row>
-        <Col md={6}>地址<RangeComponent meta={pages.meta} /></Col>
-        <Col md={2}>最早</Col>
-        <Col md={2}>最近</Col>
-        <Col md={1}>归档</Col>
-        <Col md={1}>数量</Col>
+        <Col sm={6} xs={12}>地址<RangeComponent meta={pages.meta} /></Col>
+        <Col sm={2} xsHidden>最早</Col>
+        <Col sm={2} xsHidden>最近</Col>
+        <Col md={1} xsHidden smHidden>归档</Col>
+        <Col md={1} xsHidden smHidden>数量</Col>
       </Row>
     );
 
@@ -93,20 +93,26 @@ class PageComponent extends React.Component {
               pages.list.map((page, idx) => (
                 <ListGroupItem key={idx}>
                   <Row>
-                    <Col md={6}>
+                    <Col sm={6} xs={12}>
                       <p><a href={page.url || 'javascript:void(0)'} target="_blank">{page.url || '无'}</a></p>
                     </Col>
-                    <Col md={2}>
+                    <Col sm={2} xsHidden>
                       <p className="text-muted">{page.earliest}</p>
                     </Col>
-                    <Col md={2}>
+                    <Col sm={2} xsHidden>
                       <p className="text-muted">{page.latest}</p>
                     </Col>
-                    <Col md={1}>
+                    <Col md={1} xsHidden smHidden>
                       <p><strong className="text-danger">{page.archive}</strong></p>
                     </Col>
-                    <Col md={1}>
+                    <Col md={1} xsHidden smHidden>
                       <p><strong className="text-danger">{page.count}</strong></p>
+                    </Col>
+                    <Col xs={8} smHidden mdHidden lgHidden>
+                      <p><strong className="text-danger">{page.earliest} ~ {page.latest}</strong></p>
+                    </Col>
+                    <Col xs={4} sm={2} mdHidden lgHidden>
+                      <p><strong className="text-danger">{page.count} / {page.archive}</strong></p>
                     </Col>
                   </Row>
                 </ListGroupItem>

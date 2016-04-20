@@ -63,10 +63,10 @@ class ErrorComponent extends React.Component {
     const { loading } = this.state;
     const header = (
       <Row>
-        <Col md={6}>错误<RangeComponent meta={all.meta} /></Col>
-        <Col md={2}>浏览器</Col>
-        <Col md={2}>操作系统</Col>
-        <Col md={2}>日期</Col>
+        <Col sm={6} xs={12}>错误<RangeComponent meta={all.meta} /></Col>
+        <Col sm={2} xsHidden>浏览器</Col>
+        <Col sm={2} xsHidden>操作系统</Col>
+        <Col sm={2} xsHidden>日期</Col>
       </Row>
     );
     return (
@@ -105,7 +105,7 @@ class ErrorComponent extends React.Component {
               all.list.map(error => (
                 <ListGroupItem key={error._id}>
                   <Row>
-                    <Col md={6}>
+                    <Col sm={6} xs={12}>
                       <p>
                         <Link to={`/error/detail/${error._id}`} className={statusMap.textClassName[error.status]}>
                           <strong>『{statusMap.text[error.status]}』</strong>
@@ -113,13 +113,20 @@ class ErrorComponent extends React.Component {
                         </Link>
                       </p>
                     </Col>
-                    <Col md={2}>
+                    <Col sm={2} xsHidden>
                       <p><Label bsStyle="default">{error.browser.family}</Label></p>
                     </Col>
-                    <Col md={2}>
+                    <Col sm={2} xsHidden>
                       <p><Label bsStyle="info">{error.os.family}</Label></p>
                     </Col>
-                    <Col md={2}>
+                    <Col xs={8} smHidden mdHidden lgHidden>
+                      <p>
+                        <Label bsStyle="default">{error.browser.family}</Label>
+                        <span>&nbsp;</span>
+                        <Label bsStyle="info">{error.os.family}</Label>
+                      </p>
+                    </Col>
+                    <Col sm={2} xs={4}>
                       <p className="text-muted">{error.fromNow}</p>
                     </Col>
                   </Row>

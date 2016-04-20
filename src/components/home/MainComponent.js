@@ -48,10 +48,10 @@ class MainComponent extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col md={6}>
+            <Col sm={6}>
               <ListComponent title="最多的错误" type="most" list={jsError.most} />
             </Col>
-            <Col md={6}>
+            <Col sm={6}>
               <ListComponent title="最近的错误" type="latest" list={jsError.latest} />
             </Col>
           </Row>
