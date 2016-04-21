@@ -16,7 +16,8 @@ const packOptions = function (params) {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(Object.assign({}, params || {}, globalParams))
+        body: JSON.stringify(Object.assign({}, params || {}, globalParams)),
+        credentials: 'same-origin'
       };
       resolve(options);
     } catch (err) {

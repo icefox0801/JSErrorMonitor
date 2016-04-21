@@ -156,7 +156,8 @@ export function updateArchiveErrorStatus (id, status) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({status})
+      body: JSON.stringify({status}),
+      credentials: 'same-origin'
     })
       .then(response => response.json())
       .then(json => dispatch(archiveErrorStatus(json, id)));

@@ -4,7 +4,6 @@ import _ from 'lodash';
 import React from 'react';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
-import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { timeRange, business } from '../../constants/dropdown';

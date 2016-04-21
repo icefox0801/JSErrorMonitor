@@ -12,7 +12,7 @@ require('styles/account/Login.scss');
 class LoginComponent extends React.Component {
 
   componentDidMount () {
-    const { account } = this.props;
+    const { dispatch, account } = this.props;
 
     if(account.isLogin) dispatch(push('/'));
   }
@@ -37,7 +37,7 @@ class LoginComponent extends React.Component {
       <Grid fluid id="login">
         <Row>
           <Col smOffset={4} sm={4} xs={12}>
-            <Panel id="login" header={'用户登录'}>
+            <Panel header={'用户登录'}>
               <form className="container-fluid">
                 <Input type="text" name="username" label="用户名：" ref="username" validationState={'error'} />
                 <Input type="password" name="password" label="密码：" ref="password" />

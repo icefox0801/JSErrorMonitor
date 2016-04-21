@@ -2,6 +2,7 @@
 
 export const ACCOUNT_LOGIN = 'ACCOUNT_LOGIN';
 export const ACCOUNT_LOGOUT = 'ACCOUNT_LOGOUT';
+export const ACCOUNT_AUTHENTICATED = 'ACCOUNT_AUTHENTICATED';
 
 export const GLOBAL_GET = 'GLOBAL_GET';
 export const GLOBAL_SET = 'GLOBAL_SET';
