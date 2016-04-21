@@ -143,16 +143,7 @@ class ErrorComponent extends React.Component {
   }
 }
 
-ErrorComponent.propTypes = {
-  dispatch: React.PropTypes.func.isRequired
-};
-
 ErrorComponent.displayName = 'ErrorListErrorComponent';
-
-function mapStateToProps(state) {
-  const { jsError, filter, global, status } = state;
-  return { jsError, filter, global, status }
-}
 
 // Uncomment properties you need
 ErrorComponent.propTypes = {};
@@ -170,5 +161,10 @@ ErrorComponent.defaultProps = {
     }
   }
 };
+
+function mapStateToProps(state) {
+  const { jsError, filter, global, status } = state;
+  return { jsError, filter, global, status }
+}
 
 export default connect(mapStateToProps)(ErrorComponent);

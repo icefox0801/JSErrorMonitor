@@ -17,6 +17,7 @@ export default function configureStore(history, initialState) {
   )(createStore);
 
   const reducer = combineReducers({
+    account: reducers.account,
     global: reducers.global,
     filter: reducers.filter,
     status: reducers.status,

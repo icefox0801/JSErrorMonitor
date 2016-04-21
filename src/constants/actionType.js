@@ -1,5 +1,8 @@
 'use strict';
 
+export const ACCOUNT_LOGIN = 'ACCOUNT_LOGIN';
+export const ACCOUNT_LOGOUT = 'ACCOUNT_LOGOUT';
+
 export const GLOBAL_GET = 'GLOBAL_GET';
 export const GLOBAL_SET = 'GLOBAL_SET';
 

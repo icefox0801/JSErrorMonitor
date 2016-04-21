@@ -8,6 +8,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import configureStore from '../stores/configureStore';
 
 import App from './App';
+import Login from './account/LoginComponent';
 import Home from './home/MainComponent';
 import Error from './error/MainComponent';
 import ErrorList from './error/ListComponent';
@@ -33,6 +34,7 @@ let AppRouter = (
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRedirect to="/home" />
+        <Route path="login" component={Login} />
         <Route path="home" component={Home} />
         <Route path="error" component={Error} >
           <IndexRedirect to="/error/list" />

@@ -22,7 +22,7 @@ export function getGlobalProps () {
     try {
       const timeRange = localStorage.getItem('timeRange') || 168;
       const business = localStorage.getItem('business') || 'all';
-      const platform = localStorage.getItem('platform') || 'pc';
+      const platform = localStorage.getItem('platform') || 'PC';
       resolve({ timeRange, business, platform })
     } catch (err) {
       reject(err);

@@ -2,12 +2,14 @@
 
 import _ from 'lodash';
 import React from 'react';
+import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { timeRange, business } from '../../constants/dropdown';
 import DropdownComponent from './DropdownComponent';
-import { globalAction } from '../../actions';
+import { accountAction, globalAction } from '../../actions';
 
 require('styles/common/Topbar.scss');
 
@@ -19,8 +21,18 @@ class TopbarComponent extends React.Component {
     dispatch(globalAction.setGlobalProps(key, value))
   }
 
+  goToLogin() {
+    const { dispatch } = this.props;
+    dispatch(push('/login'));
+  }
+
+  logout () {
+    const { dispatch } = this.props;
+    dispatch(accountAction.doLogoutAccount());
+  }
+
   render() {
-    const { global } = this.props;
+    const { global, account } = this.props;
 
     return (
       <nav id="topbar">
@@ -40,8 +52,9 @@ class TopbarComponent extends React.Component {
               <DropdownComponent type="nav" list={timeRange.list} id="dropdown-time-range" placeholder={timeRange.placeholder} selectKey={global.timeRange} handleSelect={key => this.handleSelect('timeRange', key)}/>
             </Nav>
             <Nav pullRight>
-              <NavDropdown title="用户" id="navDropDown">
-                <MenuItem>登录</MenuItem>
+              <NavDropdown title={account.username || '用户'} id="navDropDown">
+                <MenuItem onClick={() => this.goToLogin()}><Glyphicon glyph="log-in"/>&nbsp;登录</MenuItem>
+                <MenuItem onClick={() => this.logout()}><Glyphicon glyph="log-out"/>&nbsp;登出</MenuItem>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
@@ -64,8 +77,8 @@ TopbarComponent.defaultProps = {
 };
 
 function mapStateToProps(state) {
-  const { global, params } = state;
-  return { global, params };
+  const { global, params, account } = state;
+  return { global, params, account };
 }
 
 export default connect(mapStateToProps)(TopbarComponent);
