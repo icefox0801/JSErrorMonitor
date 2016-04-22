@@ -1,6 +1,6 @@
 {
   "name": "JSErrorMonitor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "页面javascript错误监控系统：http://status.flybyte.cn。",
   "main": "server.js",
   "scripts": {
