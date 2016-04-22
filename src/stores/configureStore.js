@@ -6,11 +6,11 @@ import createLogger from 'redux-logger';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import * as reducers from '../reducers';
 
-var middlewareList = [thunkMiddleware, routerMiddleware(history)];
-
-if(WEBPACK_ENV === 'development') middlewareList.push(createLogger());
-
 export default function configureStore(history, initialState) {
+
+  var middlewareList = [thunkMiddleware, routerMiddleware(history)];
+
+  if(WEBPACK_ENV === 'development') middlewareList.push(createLogger());
 
   const createStoreWithMiddleWare = compose(
     applyMiddleware(...middlewareList)
