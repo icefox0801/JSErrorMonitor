@@ -1,6 +1,6 @@
 {
   "name": "JSErrorMonitor",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "页面javascript错误监控系统：[http://status.flybyte.cn](http://status.flybyte.cn)。登录用户名`admin`，密码`admin`。",
   "main": "server.js",
   "scripts": {
@@ -20,7 +20,11 @@
     "deploy": "gzip -c ./dist/assets/app.js > ./dist/assets/app.js.gz && node scripts/deploy.js"
   },
   "repository": "git@github.com:icefox0801/JSErrorMonitor.git",
-  "keywords": ["javascript", "error", "monitor"],
+  "keywords": [
+    "javascript",
+    "error",
+    "monitor"
+  ],
   "author": "icefox0801",
   "devDependencies": {
     "autoprefixer": "^6.3.4",
