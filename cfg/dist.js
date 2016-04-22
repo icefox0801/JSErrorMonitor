@@ -18,6 +18,9 @@ let config = Object.assign({}, baseConfig, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     }),
+    new webpack.DefinePlugin({
+      'WEBPACK_ENV': '"production"'
+    }),
     new BowerWebpackPlugin({
       searchResolveModulesDirectories: false
     }),

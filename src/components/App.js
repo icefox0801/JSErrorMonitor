@@ -34,7 +34,7 @@ class AppComponent extends React.Component {
   }
 
   // prevProps, prevState
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate (prevProps) {
     const { accountReady } = this.state;
     const { dispatch, account } = this.props;
 

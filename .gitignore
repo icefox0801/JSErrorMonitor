@@ -34,3 +34,6 @@ bower_components/
 
 # distribution directory
 dist
+
+# authentication infomation
+cfg/secrets.js

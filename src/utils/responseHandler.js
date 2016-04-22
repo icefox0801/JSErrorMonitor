@@ -1,4 +1,6 @@
 'use strict';
+
+import nprogress from 'nprogress';
 import { push } from 'react-router-redux';
 
 export default dispatch => response => response.json()
@@ -6,6 +8,7 @@ export default dispatch => response => response.json()
     switch (response.status) {
       case 401:
         reject(new Error(json.message));
+        nprogress.done();
         dispatch(push('/login'));
         break;
       default:
