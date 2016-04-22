@@ -3,6 +3,7 @@
 import _ from 'lodash';
 import * as types  from '../constants/actionType';
 import packOptions from '../utils/packOptions';
+import responseHandler from '../utils/responseHandler';
 
 function errorTrendChart (json) {
   return {
@@ -45,7 +46,7 @@ export function fetchErrorTrendChart (params) {
   return dispatch => {
     return packOptions(params)
       .then(options => fetch('/api/chart/error/trend', options))
-      .then(response => response.json())
+      .then(responseHandler(dispatch))
       .then(json => dispatch(errorTrendChart(json)))
   }
 }
@@ -55,7 +56,7 @@ export function fetchErrorBrowserChart (params) {
   return dispatch => {
     return packOptions(params)
       .then(options => fetch('/api/chart/error/browser', options))
-      .then(response => response.json())
+      .then(responseHandler(dispatch))
       .then(json => dispatch(errorBrowserChart(json)))
   }
 }
@@ -65,7 +66,7 @@ export function fetchErrorOsChart (params) {
   return dispatch => {
     return packOptions(params)
       .then(options => fetch('/api/chart/error/os', options))
-      .then(response => response.json())
+      .then(responseHandler(dispatch))
       .then(json => dispatch(errorOsChart(json)))
   }
 }
@@ -75,7 +76,7 @@ export function fetchErrorBusinessChart (params) {
   return dispatch => {
     return packOptions(params)
       .then(options => fetch('/api/chart/error/business', options))
-      .then(response => response.json())
+      .then(responseHandler(dispatch))
       .then(json => dispatch(errorBusinessChart(json)))
   }
 }
@@ -85,7 +86,7 @@ export function fetchErrorPlatformChart (params) {
   return dispatch => {
     return packOptions(params)
       .then(options => fetch('/api/chart/error/platform', options))
-      .then(response => response.json())
+      .then(responseHandler(dispatch))
       .then(json => dispatch(errorPlatformChart(json)))
   }
 }
