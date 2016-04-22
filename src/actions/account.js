@@ -7,7 +7,8 @@ function loginAccount (json) {
     type: types.ACCOUNT_LOGIN,
     account: {
       username: json.result.username,
-      isLogin: json.message === 'ok'
+      isLogin: json.message === 'ok',
+      errMsg: json.message !== 'ok' ? json.message : ''
     }
   };
 }
@@ -65,7 +66,7 @@ export function isAuthenticated () {
     return fetch('/api/account/authenticated/', {
       credentials: 'same-origin'
     })
-      .then(response => response.json(), response => response.json())
+      .then(response => response.json())
       .then(json => dispatch(authenticated(json)));
   };
 }

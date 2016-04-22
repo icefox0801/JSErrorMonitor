@@ -2,7 +2,7 @@
 
 import * as types from '../constants/actionType';
 
-function accountReducer (state = { username: '', isLogin: false }, action) {
+function accountReducer (state = { username: '', isLogin: false, errMsg: '' }, action) {
   switch(action.type) {
     case types.ACCOUNT_LOGIN:
     case types.ACCOUNT_LOGOUT:
