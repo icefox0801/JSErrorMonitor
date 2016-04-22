@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import nprogress from 'nprogress';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { Panel, Grid, Row, Col, Input, Button } from 'react-bootstrap';
@@ -29,7 +30,8 @@ class LoginComponent extends React.Component {
     const username = this.refs['username'].getValue();
     const password = this.refs['password'].getValue();
     const { dispatch } = this.props;
-    dispatch(accountAction.doLoginAccount({ username, password }));
+    nprogress.start();
+    dispatch(accountAction.doLoginAccount({ username, password })).then(() => { nprogress.done() });
   }
 
   render () {

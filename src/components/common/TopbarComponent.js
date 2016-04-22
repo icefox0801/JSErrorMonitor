@@ -6,6 +6,7 @@ import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
+import nprogress from 'nprogress';
 import { timeRange, business } from '../../constants/dropdown';
 import DropdownComponent from './DropdownComponent';
 import { accountAction, globalAction } from '../../actions';
@@ -27,7 +28,8 @@ class TopbarComponent extends React.Component {
 
   logout () {
     const { dispatch } = this.props;
-    dispatch(accountAction.doLogoutAccount());
+    nprogress.start();
+    dispatch(accountAction.doLogoutAccount()).then(() => { nprogress.done(); });
   }
 
   render() {
@@ -52,8 +54,8 @@ class TopbarComponent extends React.Component {
             </Nav>
             <Nav pullRight>
               <NavDropdown title={account.username || '用户'} id="navDropDown">
-                <MenuItem onClick={() => this.goToLogin()}><Glyphicon glyph="log-in"/>&nbsp;登录</MenuItem>
-                <MenuItem onClick={() => this.logout()}><Glyphicon glyph="log-out"/>&nbsp;登出</MenuItem>
+                {account.isLogin ? <MenuItem onClick={() => this.logout()}><Glyphicon glyph="log-out"/>&nbsp;登出</MenuItem> :
+                  <MenuItem onClick={() => this.goToLogin()}><Glyphicon glyph="log-in"/>&nbsp;登录</MenuItem>}
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

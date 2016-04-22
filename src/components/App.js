@@ -1,7 +1,6 @@
 require('normalize.css');
 require('styles/App.css');
 
-import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
@@ -26,20 +25,22 @@ class AppComponent extends React.Component {
         this.setState({ ready: true })
       });
     dispatch(accountAction.isAuthenticated())
-      .then(() => {
+      .then((json) => {
+
+        if(!json.account.isLogin) dispatch(push('/login'));
+
         this.setState({ accountReady: true })
       });
   }
 
   // prevProps, prevState
   componentDidUpdate (prevProps, prevState) {
-    // 深度遍历对象是否相等
-    const { dispatch, account } = this.props;
     const { accountReady } = this.state;
+    const { dispatch, account } = this.props;
 
-    if( _.isEqual(accountReady, prevState.accountReady) && _.isEqual(account.isLogin, prevProps.account.isLogin)) return false;
-
-    if(!account.isLogin) dispatch(push('/login'));
+    if(accountReady && prevProps.account.isLogin && !account.isLogin) {
+      dispatch(push('/login'));
+    }
 
   }
 
@@ -48,11 +49,11 @@ class AppComponent extends React.Component {
     const { account } = this.props;
     return ready && accountReady ? (
       <div className="index">
-        <SidenavComponent />
-        <section className="main">
+        {account.isLogin ? <SidenavComponent /> : ''}
+        <section className={account.isLogin ? 'main' : ''}>
           {this.props.children}
         </section>
-        <FooterComponent />
+        {account.isLogin ? <FooterComponent /> : ''}
       </div>
     ) : (
       <LoadingComponent />
@@ -61,6 +62,10 @@ class AppComponent extends React.Component {
 }
 
 AppComponent.defaultProps = {
+  account: {
+    isLogin: false,
+    username: ''
+  }
 };
 
 function mapStateToProps(state) {
