@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import transformDate from '../utils/transformDate';
 import * as types from '../constants/actionType';
+import responseHandler from '../utils/responseHandler';
 
 function getArchiveDetail (json) {
   return {
@@ -30,8 +31,14 @@ function setArchiveProps (json) {
 export function fetchArchiveDetail (id) {
   return dispatch => {
     //dispatch(loadingShow);
-    return fetch(`/api/archive/detail/${id}`)
-      .then(response => response.json())
+    return fetch(`/api/archive/detail/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin'
+    })
+      .then(responseHandler(dispatch))
       .then(json => dispatch(getArchiveDetail(json)));
   }
 }
@@ -39,8 +46,14 @@ export function fetchArchiveDetail (id) {
 export function fetchArchiveDetailMore (id, skip) {
   return dispatch => {
     //dispatch(loadingShow);
-    return fetch(`/api/archive/detail/${id}/${skip}`)
-      .then(response => response.json())
+    return fetch(`/api/archive/detail/${id}/${skip}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin'
+    })
+      .then(responseHandler(dispatch))
       .then(json => dispatch(getArchiveDetailMore(json)));
   }
 }
@@ -53,9 +66,10 @@ export function updateArchiveStatus (id, status) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ status })
+      body: JSON.stringify({ status }),
+      credentials: 'same-origin'
     })
-      .then(response => response.json())
+      .then(responseHandler(dispatch))
       .then(json => dispatch(setArchiveProps(json)));
   }
 }

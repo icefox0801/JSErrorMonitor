@@ -1,3 +1,5 @@
+'use strict';
+
 import 'core-js/fn/object/assign';
 import ReactDOM from 'react-dom';
 import AppRouter from './components/Router';

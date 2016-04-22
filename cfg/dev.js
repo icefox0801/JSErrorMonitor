@@ -24,6 +24,9 @@ let config = Object.assign({}, baseConfig, {
     }),
     new webpack.DefinePlugin({
       'WEBPACK_ENV': '"development"'
+    }),
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     })
   ],
   module: defaultSettings.getDefaultModules()

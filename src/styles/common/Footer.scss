@@ -4,6 +4,13 @@
   width: 100%;
   background: linear-gradient(to bottom,#443e4a 0,#110617 100%);
   z-index: 200;
+  transition: all 0.2s ease-in;
+  transform: translate3D(0, 0, 0);
+
+  &.collapsed {
+    transform: translateY(69px);
+  }
+
   ul {
     &>li {
       display: inline-block;
