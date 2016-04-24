@@ -22,6 +22,8 @@
 
 ## 命令
 + `npm start`：在本地[http://localhost:8000/webpack-dev-server/](http://localhost:8000/webpack-dev-server/)启动项目
++ `npm run dist`：在项目的`dist`目录生成用于部署生产环境的文件
++ `npm run deploy`：将`dist`目录下的文件部署到生产环境（需配置`cfg/secrets.js`文件）
 
 ## 应用的框架和库
 + 项目底层是基于[react](https://facebook.github.io/react/)、[redux](https://github.com/reactjs/redux)和[react-redux](https://github.com/reactjs/react-redux)搭建
