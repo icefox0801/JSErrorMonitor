@@ -74,10 +74,10 @@
   + `test/components/NameComponentTest.js`
 
 ## redux开发：
-  1. 在`src/constants/actionType.js`新增action type
-  2. 在`src/actions`目录下新增action，并通过`src/actions/index.js`暴露出来
-  3. 在`src/reducers`目录下新增reducer，并通过`src/reducers/index.js`暴露出来
-  4. 在`src/stores/configureStore.js`配置新增的reducer和store的state映射关系
-  5. 在react组件中通过`connect`和`mapStateToProps`方法映射store的state到组件的props
-  6. 在组件生命周期方法（比如`componentDidUpdate`、`componentWillUpmount`、`componentDidUpdate`等）中通过`dispatch`派发action
-  7. 通过action引起的对象属性更新，会经过reducer映射到store的state中，再经过`connect`和`mapStateToProps`引发组件的props更新，从而更新视图
+  1. 在`src/constants/actionType.js`新增`action type`
+  2. 在`src/actions`目录下新增`action`，并通过`src/actions/index.js`暴露出来
+  3. 在`src/reducers`目录下新增`reducer`，并通过`src/reducers/index.js`暴露出来
+  4. 在`src/stores/configureStore.js`配置新增的`reducer`和`store`的`state`映射关系
+  5. 在react组件中通过`connect`和`mapStateToProps`方法映射`store`的`state`到组件的props
+  6. 在组件生命周期方法（比如`componentDidUpdate`、`componentWillUpmount`、`componentDidUpdate`等）中通过`dispatch`派发`action`
+  7. 通过`action`引起的对象属性更新，会经过`reducer`映射到`store`的`state`中，再经过`connect`和`mapStateToProps`引发组件的`props`更新，从而更新视图
